@@ -1,6 +1,6 @@
 ---
 import HeaderLink from "./HeaderLink.astro";
-import { SITE_TITLE } from "../consts";
+import "../styles/global.css";
 const pathname = Astro.url.pathname.replace(import.meta.env.BASE_URL, "");
 const isRootPage = pathname === '';
 ---
@@ -10,7 +10,7 @@ const isRootPage = pathname === '';
   class={`transition-colors duration-300
     ${isRootPage
       ? "fixed top-0 left-0 w-full z-50 bg-transparent"
-      : "static bg-white bg-opacity-100 shadow-md"}`
+      : "static bg-cream bg-opacity-100 shadow-md"}`
   }
 >
 	<nav class="flex items-center justify-between px-6 py-4">
@@ -73,7 +73,7 @@ const isRootPage = pathname === '';
 				if (entry.isIntersecting) {
 					// Cuando el sentinel está visible: header totalmente transparente
 					header.classList.remove(
-						"bg-white",
+						"bg-cream",
 						"bg-opacity-90",
 						"backdrop-blur-md",
 						"shadow-md",
@@ -81,7 +81,7 @@ const isRootPage = pathname === '';
 				} else {
 					// Cuando pasas el sentinel: header semitransparente con fondo blanco
 					header.classList.add(
-						"bg-white",
+						"bg-cream",
 						"bg-opacity-90",
 						"backdrop-blur-md",
 						"shadow-md",

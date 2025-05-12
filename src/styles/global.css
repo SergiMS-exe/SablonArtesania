@@ -6,6 +6,17 @@
 
 @import "tailwindcss";
 
+@theme {
+	--font-title: 'Cormorant Upright', sans-serif;
+
+	--color-cream: #FAF3E0;
+	--color-wood-light: #D7B49E;
+    --color-leather: #5D4037;
+	--color-terra-cotta: #A35F38;
+	--color-moss-green: #4A5D23;
+	--color-walnut-deep: #3E2723;
+}
+
 :root {
 	--accent: #2337ff;
 	--accent-dark: #000d8a;
@@ -79,13 +90,14 @@ h5 {
 strong,
 b {
 	font-weight: 700;
-} */
+} 
 a {
 	color: var(--accent);
 }
 a:hover {
 	color: var(--accent);
 }
+*/
 p {
 	margin-bottom: 1em;
 }

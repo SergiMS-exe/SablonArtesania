@@ -3,6 +3,7 @@ import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import "../styles/global.css";
 ---
 
 <!doctype html>
@@ -13,19 +14,22 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 	<body>
 		<Header />
 		<main>
-			<div class="relative">
-				<img
-					src="/sablon.jpg"
-					alt="Sablon"
-					class="w-full rounded-b-xl"
-				/>
-				<div id="header-sentinel" class="w-full h-px absolute " style="top: 10%;"></div>
+			<div
+				class="h-screen bg-cover bg-center bg-no-repeat"
+				style="background-image: url('/sablon.jpg');"
+			>
+				<div
+					id="header-sentinel"
+					class="w-full h-px absolute"
+					style="top: 10%;"
+				>
+				</div>
 
 				<div class="absolute inset-0 pointer-events-none">
 					<!-- “El Sablon” gigante -->
 					<h1
-						class="absolute text-9xl leading-none font-artesanal text-yellow-300"
-						style="top: 30%; right: 25%; font-family: 'Cormorant Upright';"
+						class="absolute text-9xl leading-none font-artesanal text-yellow-300 font-title"
+						style="text-shadow: 2px 4px 4px rgba(0, 0, 0, 0.6); top: 30%; right: 25%; "
 					>
 						El Sablón
 					</h1>
@@ -33,12 +37,23 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 					<!-- “Artesanía” debajo, más a la derecha -->
 					<h3
 						class="absolute text-6xl font-medium text-white"
-						style="top: 45%; right: 20%; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"
+						style="text-shadow: 2px 4px 4px rgba(0, 0, 0, 0.6); top: 45%; right: 20%; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"
 					>
 						Artesanía
 					</h3>
+					<a class="absolute right-0 bottom-10 left-0 m-auto w-[fit-content] rounded-2xl border bg-black p-3 text-white" href="#conocenos">
+						Conócenos
+					</a>
 				</div>
 			</div>
+			<section id="conocenos" class="bg-cream text-leather py-20 px-6">
+				<h2 class="text-4xl font-artesanal mb-4">Sobre Nosotros</h2>
+				<p class="max-w-2xl">
+					Somos una tienda de artesanía especializada en cuero y
+					madera con raíces profundas en la tradición asturiana...
+				</p>
+			</section>
+
 			<p>
 				Welcome to the official <a href="https://astro.build/">Astro</a>
 				blog starter template. This template serves as a lightweight, minimally-styled
