@@ -2,16 +2,17 @@
 import HeaderLink from "./HeaderLink.astro";
 import "../styles/global.css";
 const pathname = Astro.url.pathname.replace(import.meta.env.BASE_URL, "");
-const isRootPage = pathname === '';
+const isRootPage = pathname === "";
 ---
 
 <header
-  id="site-header"
-  class={`transition-colors duration-300
-    ${isRootPage
-      ? "fixed top-0 left-0 w-full z-50 bg-transparent"
-      : "static bg-cream bg-opacity-100 shadow-md"}`
-  }
+	id="site-header"
+	class={`transition-colors duration-300
+    ${
+		isRootPage
+			? "fixed top-0 left-0 w-full z-50"// bg-transparent"
+			: "static bg-cream bg-opacity-100 shadow-md"
+	}`}
 >
 	<nav class="flex items-center justify-between px-6 py-4">
 		<div></div>
@@ -57,45 +58,43 @@ const isRootPage = pathname === '';
 		</div>
 	</nav>
 	<script type="module" define:vars={{ pathname, isRootPage }}>
-		// Esperamos a que el DOM esté cargado
 		document.addEventListener("DOMContentLoaded", () => {
 			const header = document.getElementById("site-header");
+			const sentinel = document.getElementById("header-sentinel");
 			if (!header) return;
 
-			// Opciones del observer: sin root (viewport), threshold 0
-			const options = {
-				root: null,
-				threshold: 0,
-			};
+			// Si no es la página raíz, ya le damos fondo fijo
+			if (!isRootPage) {
+				header.classList.add("bg-cream/100", "shadow-md");
+				return;
+			}
 
-			// Callback que se ejecuta al entrar/salir del sentinel
-			const onIntersect = ([entry]) => {
-				if (entry.isIntersecting) {
-					// Cuando el sentinel está visible: header totalmente transparente
-					header.classList.remove(
-						"bg-cream",
-						"bg-opacity-90",
-						"backdrop-blur-md",
-						"shadow-md",
-					);
-				} else {
-					// Cuando pasas el sentinel: header semitransparente con fondo blanco
-					header.classList.add(
-						"bg-cream",
-						"bg-opacity-90",
-						"backdrop-blur-md",
-						"shadow-md",
-					);
-				}
-			};
+			// Para la raíz, usamos IntersectionObserver
+			const observer = new IntersectionObserver(
+				([entry]) => {
+					if (entry.isIntersecting) {
+						// header transparente
+						header.classList.remove(
+							"bg-cream",
+							"bg-transparent",
+							"backdrop-blur-md",
+							"shadow-md",
+							"z-50"
+						);
+					} else {
+						// fondo crema semitransparente + blur + sombra
+						header.classList.add(
+							"bg-cream",
+							"shadow-md",
+							"z-50",
+							"backdrop-blur-md"
+						);
+					}
+				},
+				{ root: null, threshold: 0 },
+			);
 
-			// Creamos el observer
-			const observer = new IntersectionObserver(onIntersect, options);
-
-			// Observamos el sentinel (un elemento <div id="header-sentinel"> justo bajo el hero)
-			const sentinel = document.getElementById("header-sentinel");
-			console.log({ pathname }, { isRootPage });
-			if (sentinel && { isRootPage }) observer.observe(sentinel);
+			if (sentinel) observer.observe(sentinel);
 		});
 	</script>
 </header>
@@ -115,7 +114,7 @@ const isRootPage = pathname === '';
 		justify-content: space-between;
 	}
 	nav a {
-		padding: 1em 0.5em;
+		padding: 1em 1em 0.25em 0.5em;
 		color: var(--black);
 		border-bottom: 4px solid transparent;
 		text-decoration: none;

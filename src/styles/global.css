@@ -8,17 +8,19 @@
 
 @theme {
 	--font-title: 'Cormorant Upright', sans-serif;
+	--font-display: 'Roboto', sans-serif;
 
 	--color-cream: #FAF3E0;
-	--color-wood-light: #D7B49E;
+	--color-wood-light: #d3b58d;
     --color-leather: #5D4037;
 	--color-terra-cotta: #A35F38;
 	--color-moss-green: #4A5D23;
 	--color-walnut-deep: #3E2723;
+	--color-dark-brown: #220B06;
 }
 
 :root {
-	--accent: #2337ff;
+	--accent: #9E6240;
 	--accent-dark: #000d8a;
 	--black: 15, 18, 25;
 	--gray: 96, 115, 159;
@@ -91,13 +93,14 @@ strong,
 b {
 	font-weight: 700;
 } 
-a {
-	color: var(--accent);
-}
 a:hover {
 	color: var(--accent);
+	}
+	*/
+a {
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+	text-decoration: none;
 }
-*/
 p {
 	margin-bottom: 1em;
 }
