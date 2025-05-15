@@ -20,7 +20,7 @@ const isRootPage = pathname === "";
 			<HeaderLink href="/blog">Porductos</HeaderLink>
 			<HeaderLink href="/about">Donde Encontrarnos</HeaderLink>
 		</div>
-		<div class="social-links hidden absolute md:flex right-0 top-5 gap-4 mr-5">
+		<div class="social-links absolute hidden md:flex right-0 top-5 gap-4 mr-5">
 			<a href="https://twitter.com/astrodotbuild" target="_blank">
 				<span class="sr-only">Follow Astro on Twitter</span>
 				<svg
@@ -112,14 +112,5 @@ const isRootPage = pathname === "";
 	nav a.active {
 		text-decoration: none;
 		border-bottom-color: var(--accent);
-	}
-	.social-links,
-	.social-links a {
-		display: flex;
-	}
-	@media (max-width: 720px) {
-		.social-links {
-			display: none;
-		}
 	}
 </style>
