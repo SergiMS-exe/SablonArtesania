@@ -14,17 +14,13 @@ const isRootPage = pathname === "";
 			: "static bg-cream bg-opacity-100 shadow-md"
 	}`}
 >
-	<nav class="flex items-center justify-between px-6 py-4">
-		<div></div>
-		<!-- <h2 class="text-lg font-bold">
-			<a href="/" class="text-black no-underline">{SITE_TITLE}</a>
-		</h2> -->
+	<nav class="flex items-center justify-center px-6 py-5">
 		<div class="internal-links flex gap-6">
 			<HeaderLink href="/">Inicio</HeaderLink>
 			<HeaderLink href="/blog">Porductos</HeaderLink>
 			<HeaderLink href="/about">Donde Encontrarnos</HeaderLink>
 		</div>
-		<div class="social-links hidden md:flex gap-4">
+		<div class="social-links hidden absolute md:flex right-0 top-5 gap-4 mr-5">
 			<a href="https://twitter.com/astrodotbuild" target="_blank">
 				<span class="sr-only">Follow Astro on Twitter</span>
 				<svg
@@ -108,13 +104,7 @@ const isRootPage = pathname === "";
 	h2 a.active {
 		text-decoration: none;
 	}
-	nav {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-	}
 	nav a {
-		padding: 1em 1em 0.25em 0.5em;
 		color: var(--black);
 		border-bottom: 4px solid transparent;
 		text-decoration: none;
