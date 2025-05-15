@@ -7,7 +7,7 @@ import "../styles/global.css";
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
@@ -25,10 +25,10 @@ import "../styles/global.css";
 				>
 				</div>
 
-				<div class="absolute inset-0 top-50 right-10 w-[90%] text-right">
+				<div class="absolute inset-0 sm:top-50 top-70 right-10 w-[90%] text-right">
 					<!-- “El Sablon” gigante -->
 					<h1
-						class="text-9xl leading-none font-artesanal mr-20 text-yellow-300 font-title"
+						class="sm:text-9xl text-7xl leading-none font-artesanal sm:mr-20 mr-10 text-yellow-300 font-title"
 						style="text-shadow: 2px 4px 4px rgba(0, 0, 0, 0.6);"
 					>
 						El Sablón
@@ -36,7 +36,7 @@ import "../styles/global.css";
 
 					<!-- “Artesanía” debajo, más a la derecha -->
 					<h3
-						class="text-6xl font-medium text-white"
+						class="sm:text-6xl text-4xl font-medium text-white"
 						style="text-shadow: 2px 4px 4px rgba(0, 0, 0, 0.6); font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"
 					>
 						Artesanía
@@ -45,15 +45,15 @@ import "../styles/global.css";
 				<a
 					class="absolute right-0 bottom-10 left-0 m-auto w-[fit-content] rounded-full border bg-leather p-3 text-cream hover:bg-wood-light transition-colors"
 					href="#conocenos"
-				>
+				> 
 					Conócenos
 				</a>
 			</div>
 			<section
 				id="conocenos"
-				class="scroll-mt-24 bg-wood-light text-black-900 py-20 px-6"
+				class="sm:scroll-mt-19 scroll-mt-18 bg-wood-light text-black-900 py-20 px-6"
 			>
-				<div class="max-w-7xl mx-64">
+				<div class="max-w-7xl md:mx-64">
 					<h2 class="text-6xl font-title font-extrabold mb-4">Sobre Nosotros</h2>
 					<p class="max-w-2xl text-3xl font-body">
 						Somos una tienda de artesanía especializada en cuero y
