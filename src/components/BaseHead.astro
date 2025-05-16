@@ -49,18 +49,14 @@ const { title, description, image = "/blog-placeholder-1.jpg" } = Astro.props;
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
 	href="https://fonts.googleapis.com/css2?family=Cormorant+Upright:wght@300;400;500;600;700&display=swap"
-	rel="stylesheet"
-	defer
-/>
+	rel="preload" as="font" fetchpriority="low" onload="this.onload=null;this.rel='stylesheet';" />
 
 <!-- Fuente de display -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
 	href="https://fonts.googleapis.com/css2?family=Cormorant+Upright:wght@300;400;500;600;700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-	rel="stylesheet"
-	defer
-/>
+	rel="preload" as="font" fetchpriority="low" onload="this.onload=null;this.rel='stylesheet';" />
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
