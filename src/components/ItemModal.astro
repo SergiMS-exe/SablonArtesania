@@ -1,0 +1,66 @@
+---
+// src/components/Modal.astro
+---
+
+<!-- Componente modal separado --><!-- Overlay con fondo semitransparente mostrando fondo y con blur -->
+<div
+    id="modal-overlay"
+    class="fixed inset-0 bg-black/20 backdrop-blur-sm hidden z-40"
+>
+</div>
+
+<!-- Panel modal deslizable desde abajo -->
+<div
+    id="modal"
+    class="fixed inset-x-0 bottom-0 bg-cream rounded-t-2xl shadow-xl max-h-full h-5/6 transform translate-y-full transition-transform duration-300 overflow-auto z-50"
+>
+    <button
+        id="modal-close"
+        class="absolute top-4 right-4 text-2xl font-bold text-dark-brown"
+        >×</button
+    >
+    <div id="modal-content" class="p-6 font-[--font-display] text-dark-brown">
+        <!-- Contenido dinámico -->
+    </div>
+</div>
+
+<script type="module">
+    // Control de la modal mediante custom events
+    document.addEventListener("openModal", (event) => {
+        const overlay = document.getElementById("modal-overlay");
+        const modal = document.getElementById("modal");
+        const content = document.getElementById("modal-content");
+        const closeBtn = document.getElementById("modal-close");
+
+        if (!overlay || !modal || !content || !closeBtn) return;
+
+        const producto = event.detail;
+        // Rellenamos el contenido dinámico
+        content.innerHTML = `
+            <h2 class=\"text-3xl font-bold font-[--font-title] mb-4\">${producto.title}</h2>
+            <div class=\"space-y-2 mb-4\">
+                ${producto.images
+                    .map(
+                        (img) =>
+                            `<img src=\"${img}\" alt=\"${producto.title}\" class=\"w-full object-cover rounded-lg shadow-sm\">`,
+                    )
+                    .join("")}
+            </div>
+            <p class=\"text-[--color-walnut-deep] leading-relaxed text-lg\">${producto.longDescription}</p>
+        `;
+
+        // Mostrar overlay y modal
+        overlay.classList.remove("hidden");
+        modal.classList.remove("translate-y-full");
+
+        // Función para cerrar modal
+        const closeModal = () => {
+            modal.classList.add("translate-y-full");
+            overlay.classList.add("hidden");
+        };
+
+        // Cerrar al pulsar el botón o el overlay
+        closeBtn.onclick = closeModal;
+        overlay.onclick = closeModal;
+    });
+</script>

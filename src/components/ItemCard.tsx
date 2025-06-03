@@ -13,14 +13,14 @@ export default function ItemCard({ id, title, description, images, longDescripti
     const event = new CustomEvent("openModal", {
       detail: { id, title, longDescription, images },
     });
-    window.dispatchEvent(event);
+    document.dispatchEvent(event);
   };
 
   return (
     <article
       onClick={handleClick}
-      className="relative rounded-2xl overflow-hidden shadow-md cursor-pointer group"
-    >
+      className="relative rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-200 cursor-pointer group"
+      >
       <img src={images[0]} alt={title} className="w-full h-60 object-cover" />
       <div className="absolute inset-0 bg-gradient-to-t from-walnut-deep via-transparent to-transparent p-6 flex flex-col justify-end transition-all">
         <div className="flex justify-between items-end">
