@@ -2,8 +2,8 @@
 import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
-import ItemCard from "../components/ItemCard.tsx";
-import ItemModal from "../components/ItemModal.astro";
+import ItemCard from "../components/ItemCard";
+import ModalCarousel from "../components/ModalCarousel";
 import products from "../data/products.json";
 ---
 
@@ -11,18 +11,18 @@ import products from "../data/products.json";
   <head>
     <BaseHead title="Productos" description="Nuestros productos" />
   </head>
-  <body class="bg-cream">
+  <body class="bg-wood-light">
     <main>
       <Header />
       <!-- Grid responsivo: 1 columna en móvil, 2 en pantallas md en adelante -->
       <div
-        class="max-w-screen-2xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 p-4 md:px-8 lg:px-12"
+        class="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 p-4 md:px-8 lg:px-12"
       >
         {products.map((producto) => <ItemCard {...producto} client:load />)}
       </div>
 
-      <ItemModal /> 
-      
+      <ModalCarousel client:only="react" />
+
       <Footer />
     </main>
   </body>

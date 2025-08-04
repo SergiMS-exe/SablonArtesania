@@ -4,7 +4,7 @@
         "title": "Product A",
         "description": "Description of Product A",
         "longDescription": "Lorem ipsum dolor items",
-        "images": ["/blog-placeholder-1.jpg"]
+        "images": ["/blog-placeholder-1.jpg", "/blog-placeholder-2.jpg", "/blog-placeholder-3.jpg", "/blog-placeholder-4.jpg"]
     },
     {
         "id": 2,
