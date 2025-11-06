@@ -2,18 +2,356 @@
 import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
-
 ---
 
 <html lang="es">
     <head>
-        <BaseHead title="Talleres" description="Nuestros talleres" />
+        <BaseHead title="Talleres de Artesanía - El Sablón" description="Aprende el arte de trabajar el cuero" />
     </head>
-    <body class="bg-cream">
+    <body class="bg-gradient-to-b from-wood-light to-cream">
         <main>
-        <Header />
-        
-        <Footer />
+            <Header />
+            
+            <!-- Hero Section -->
+            <section class="relative h-[60vh] min-h-[500px] bg-cover bg-center flex items-center justify-center" style="background-image: linear-gradient(rgba(62, 39, 35, 0.7), rgba(62, 39, 35, 0.7)), url('/sablon.webp');">
+                <div class="text-center text-cream px-6">
+                    <h1 class="text-6xl md:text-7xl font-title font-extrabold mb-6 drop-shadow-2xl">
+                        Talleres de Artesanía
+                    </h1>
+                    <p class="text-2xl md:text-3xl font-light max-w-3xl mx-auto drop-shadow-lg">
+                        Aprende el arte milenario de trabajar el cuero
+                    </p>
+                </div>
+            </section>
+
+            <!-- Introducción -->
+            <section class="max-w-5xl mx-auto py-16 px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl md:text-5xl font-title font-bold text-walnut-deep mb-6">
+                        Conecta con la Tradición
+                    </h2>
+                    <div class="w-32 h-1 bg-gradient-to-r from-terra-cotta via-leather to-terra-cotta mx-auto rounded-full mb-8"></div>
+                    <p class="text-xl text-dark-brown/80 leading-relaxed max-w-3xl mx-auto">
+                        En nuestros talleres no solo aprendes una técnica, vives una experiencia. 
+                        Descubre el placer de crear con tus propias manos, guiado por artesanos 
+                        con décadas de experiencia que comparten sus conocimientos con pasión.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Tipos de Talleres -->
+            <section class="max-w-6xl mx-auto px-6 mb-16">
+                <div class="grid md:grid-cols-3 gap-8">
+                    
+                    <!-- Taller Iniciación -->
+                    <article class="bg-cream rounded-3xl shadow-2xl overflow-hidden transform hover:scale-105 transition-all duration-300">
+                        <div class="bg-gradient-to-br from-terra-cotta to-leather p-6 text-cream">
+                            <div class="text-5xl mb-4">🎓</div>
+                            <h3 class="text-2xl font-title font-bold">Iniciación</h3>
+                            <p class="text-cream/90 text-sm mt-2">Perfecto para principiantes</p>
+                        </div>
+                        
+                        <div class="p-6">
+                            <div class="mb-4">
+                                <span class="bg-terra-cotta/10 text-terra-cotta px-3 py-1 rounded-full text-sm font-semibold">
+                                    4 horas
+                                </span>
+                            </div>
+                            
+                            <h4 class="font-bold text-walnut-deep mb-3">¿Qué aprenderás?</h4>
+                            <ul class="space-y-2 text-dark-brown/80 mb-6">
+                                <li class="flex items-start gap-2">
+                                    <span class="text-terra-cotta">✓</span>
+                                    <span>Tipos de cuero y herramientas básicas</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="text-terra-cotta">✓</span>
+                                    <span>Técnicas de corte y preparación</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="text-terra-cotta">✓</span>
+                                    <span>Costura a mano básica</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="text-terra-cotta">✓</span>
+                                    <span>Crea tu primera pieza: llavero o pulsera</span>
+                                </li>
+                            </ul>
+
+                            <div class="bg-terra-cotta/5 p-4 rounded-xl mb-4">
+                                <p class="text-sm text-dark-brown/80">
+                                    <span class="font-semibold text-walnut-deep">Incluye:</span> 
+                                    Todos los materiales y herramientas. Te llevas tu pieza a casa.
+                                </p>
+                            </div>
+
+                            <div class="text-center">
+                                <p class="text-3xl font-bold text-walnut-deep mb-2">45€</p>
+                                <p class="text-sm text-dark-brown/60">por persona</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Taller Intermedio -->
+                    <article class="bg-cream rounded-3xl shadow-2xl overflow-hidden transform hover:scale-105 transition-all duration-300 border-4 border-leather">
+                        <div class="bg-leather p-2 text-cream text-center text-sm font-bold">
+                            ⭐ MÁS POPULAR
+                        </div>
+                        <div class="bg-gradient-to-br from-moss-green to-walnut-deep p-6 text-cream">
+                            <div class="text-5xl mb-4">🛠️</div>
+                            <h3 class="text-2xl font-title font-bold">Intermedio</h3>
+                            <p class="text-cream/90 text-sm mt-2">Para quien ya tiene nociones</p>
+                        </div>
+                        
+                        <div class="p-6">
+                            <div class="mb-4">
+                                <span class="bg-moss-green/10 text-moss-green px-3 py-1 rounded-full text-sm font-semibold">
+                                    8 horas (2 sesiones)
+                                </span>
+                            </div>
+                            
+                            <h4 class="font-bold text-walnut-deep mb-3">¿Qué aprenderás?</h4>
+                            <ul class="space-y-2 text-dark-brown/80 mb-6">
+                                <li class="flex items-start gap-2">
+                                    <span class="text-moss-green">✓</span>
+                                    <span>Técnicas de repujado y decoración</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="text-moss-green">✓</span>
+                                    <span>Costura avanzada y remachado</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="text-moss-green">✓</span>
+                                    <span>Teñido y acabados profesionales</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="text-moss-green">✓</span>
+                                    <span>Crea tu proyecto: cartera o bolso pequeño</span>
+                                </li>
+                            </ul>
+
+                            <div class="bg-moss-green/5 p-4 rounded-xl mb-4">
+                                <p class="text-sm text-dark-brown/80">
+                                    <span class="font-semibold text-walnut-deep">Incluye:</span> 
+                                    Todos los materiales, herramientas y merienda en el taller.
+                                </p>
+                            </div>
+
+                            <div class="text-center">
+                                <p class="text-3xl font-bold text-walnut-deep mb-2">120€</p>
+                                <p class="text-sm text-dark-brown/60">por persona</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Taller Personalizado -->
+                    <article class="bg-cream rounded-3xl shadow-2xl overflow-hidden transform hover:scale-105 transition-all duration-300">
+                        <div class="bg-gradient-to-br from-walnut-deep to-dark-brown p-6 text-cream">
+                            <div class="text-5xl mb-4">👨‍🎨</div>
+                            <h3 class="text-2xl font-title font-bold">Personalizado</h3>
+                            <p class="text-cream/90 text-sm mt-2">Tu proyecto, tu ritmo</p>
+                        </div>
+                        
+                        <div class="p-6">
+                            <div class="mb-4">
+                                <span class="bg-walnut-deep/10 text-walnut-deep px-3 py-1 rounded-full text-sm font-semibold">
+                                    Flexible
+                                </span>
+                            </div>
+                            
+                            <h4 class="font-bold text-walnut-deep mb-3">¿En qué consiste?</h4>
+                            <ul class="space-y-2 text-dark-brown/80 mb-6">
+                                <li class="flex items-start gap-2">
+                                    <span class="text-walnut-deep">✓</span>
+                                    <span>Elige tu proyecto (cinturón, bolso, etc.)</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="text-walnut-deep">✓</span>
+                                    <span>Atención individual o grupos reducidos</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="text-walnut-deep">✓</span>
+                                    <span>Adaptado a tu nivel</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="text-walnut-deep">✓</span>
+                                    <span>Ideal para regalos o eventos especiales</span>
+                                </li>
+                            </ul>
+
+                            <div class="bg-walnut-deep/5 p-4 rounded-xl mb-4">
+                                <p class="text-sm text-dark-brown/80">
+                                    <span class="font-semibold text-walnut-deep">Perfecto para:</span> 
+                                    Despedidas, team building, regalos de empresa o grupos de amigos.
+                                </p>
+                            </div>
+
+                            <div class="text-center">
+                                <p class="text-2xl font-bold text-walnut-deep mb-2">A consultar</p>
+                                <p class="text-sm text-dark-brown/60">Según proyecto y duración</p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <!-- ¿Por qué nuestros talleres? -->
+            <section class="bg-leather/5 py-16">
+                <div class="max-w-5xl mx-auto px-6">
+                    <h2 class="text-4xl font-title font-bold text-walnut-deep mb-12 text-center">
+                        ¿Por qué elegir nuestros talleres?
+                    </h2>
+                    
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="bg-cream p-6 rounded-2xl text-center shadow-lg">
+                            <div class="text-5xl mb-4">👴</div>
+                            <h3 class="font-bold text-walnut-deep mb-2">40 años de experiencia</h3>
+                            <p class="text-sm text-dark-brown/80">
+                                Aprende de maestros artesanos con décadas de oficio
+                            </p>
+                        </div>
+
+                        <div class="bg-cream p-6 rounded-2xl text-center shadow-lg">
+                            <div class="text-5xl mb-4">👥</div>
+                            <h3 class="font-bold text-walnut-deep mb-2">Grupos reducidos</h3>
+                            <p class="text-sm text-dark-brown/80">
+                                Máximo 6 personas por taller para atención personalizada
+                            </p>
+                        </div>
+
+                        <div class="bg-cream p-6 rounded-2xl text-center shadow-lg">
+                            <div class="text-5xl mb-4">🎁</div>
+                            <h3 class="font-bold text-walnut-deep mb-2">Tu pieza única</h3>
+                            <p class="text-sm text-dark-brown/80">
+                                Te llevas a casa lo que has creado con tus manos
+                            </p>
+                        </div>
+
+                        <div class="bg-cream p-6 rounded-2xl text-center shadow-lg">
+                            <div class="text-5xl mb-4">☕</div>
+                            <h3 class="font-bold text-walnut-deep mb-2">Ambiente acogedor</h3>
+                            <p class="text-sm text-dark-brown/80">
+                                Taller familiar con café, galletas y buenas conversaciones
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Galería / Testimonios -->
+            <section class="max-w-5xl mx-auto py-16 px-6">
+                <h2 class="text-4xl font-title font-bold text-walnut-deep mb-12 text-center">
+                    Lo que dicen nuestros alumnos
+                </h2>
+                
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-cream p-6 rounded-2xl shadow-lg">
+                        <div class="flex items-center gap-2 mb-4">
+                            <div class="text-3xl">⭐⭐⭐⭐⭐</div>
+                        </div>
+                        <p class="text-dark-brown/80 italic mb-4">
+                            "Una experiencia increíble. Aprendí muchísimo y me llevé una cartera preciosa que hice yo misma. ¡Volveré seguro!"
+                        </p>
+                        <p class="font-semibold text-walnut-deep">- María G.</p>
+                    </div>
+
+                    <div class="bg-cream p-6 rounded-2xl shadow-lg">
+                        <div class="flex items-center gap-2 mb-4">
+                            <div class="text-3xl">⭐⭐⭐⭐⭐</div>
+                        </div>
+                        <p class="text-dark-brown/80 italic mb-4">
+                            "El maestro tiene una paciencia infinita y se nota que ama lo que hace. Un taller 100% recomendable."
+                        </p>
+                        <p class="font-semibold text-walnut-deep">- Carlos R.</p>
+                    </div>
+
+                    <div class="bg-cream p-6 rounded-2xl shadow-lg">
+                        <div class="flex items-center gap-2 mb-4">
+                            <div class="text-3xl">⭐⭐⭐⭐⭐</div>
+                        </div>
+                        <p class="text-dark-brown/80 italic mb-4">
+                            "Lo regalé para una despedida y fue un éxito total. Todos disfrutamos muchísimo creando nuestras piezas."
+                        </p>
+                        <p class="font-semibold text-walnut-deep">- Laura M.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Información práctica -->
+            <section class="max-w-4xl mx-auto px-6 mb-16">
+                <div class="bg-gradient-to-br from-wood-light to-cream p-8 rounded-3xl shadow-2xl">
+                    <h2 class="text-3xl font-title font-bold text-walnut-deep mb-8 text-center">
+                        📋 Información Práctica
+                    </h2>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h3 class="font-bold text-walnut-deep mb-3 flex items-center gap-2">
+                                <span>📍</span> Ubicación
+                            </h3>
+                            <p class="text-dark-brown/80 mb-6">
+                                Los talleres se realizan en nuestro taller de Asturias. 
+                                Te daremos la ubicación exacta al confirmar tu reserva.
+                            </p>
+
+                            <h3 class="font-bold text-walnut-deep mb-3 flex items-center gap-2">
+                                <span>👕</span> ¿Qué necesito?
+                            </h3>
+                            <p class="text-dark-brown/80 mb-6">
+                                Solo ganas de aprender y ropa cómoda. Nosotros ponemos 
+                                todo lo demás: materiales, herramientas y delantal.
+                            </p>
+                        </div>
+
+                        <div>
+                            <h3 class="font-bold text-walnut-deep mb-3 flex items-center gap-2">
+                                <span>📅</span> Fechas
+                            </h3>
+                            <p class="text-dark-brown/80 mb-6">
+                                Organizamos talleres cada mes. Consúltanos disponibilidad 
+                                o reserva para grupos privados en la fecha que prefieras.
+                            </p>
+
+                            <h3 class="font-bold text-walnut-deep mb-3 flex items-center gap-2">
+                                <span>🎫</span> Reservas
+                            </h3>
+                            <p class="text-dark-brown/80">
+                                Es necesario reservar con al menos una semana de antelación. 
+                                Plazas limitadas para garantizar calidad.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA Final -->
+            <section class="max-w-4xl mx-auto px-6 mb-16">
+                <div class="bg-gradient-to-r from-leather to-walnut-deep text-cream p-12 rounded-3xl shadow-2xl text-center">
+                    <h2 class="text-4xl font-title font-bold mb-4">
+                        ¿Listo para crear tu primera pieza?
+                    </h2>
+                    <p class="text-xl mb-8 text-cream/90 max-w-2xl mx-auto">
+                        Reserva tu plaza en el próximo taller o consúltanos 
+                        para organizar una sesión privada para tu grupo.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a
+                            href="/contacto"
+                            class="inline-block bg-cream text-walnut-deep px-10 py-4 rounded-xl font-bold text-lg hover:bg-wood-light transition-colors duration-300 shadow-lg"
+                        >
+                            Reservar Taller
+                        </a>
+                        <a
+                            href="/contacto"
+                            class="inline-block bg-transparent border-2 border-cream text-cream px-10 py-4 rounded-xl font-bold text-lg hover:bg-cream/10 transition-colors duration-300"
+                        >
+                            Más Información
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <Footer />
         </main>
-    </body>    
+    </body>
 </html>

@@ -6,125 +6,300 @@ import Header from "../components/Header.astro";
 
 <html lang="es">
     <head>
-        <BaseHead title="Encuéntranos" description="Dónde encontrarnos" />
+        <BaseHead title="Dónde Encontrarnos - El Sablón" description="Visítanos en los mercados artesanales de Asturias" />
     </head>
-    <body class="bg-cream">
+    <body class="bg-gradient-to-b from-wood-light to-cream">
         <main>
             <Header />
-            <section class="max-w-xl mx-auto my-10 p-6 bg-white rounded shadow">
-                <h2 class="text-2xl font-bold mb-4">Oviñana</h2>
-                <p class="mb-4">
-                    Solemos estar el <strong>primer domingo de cada mes</strong>
-                    en la <strong>plaza de Oviñana</strong>. Es un punto de
-                    encuentro donde podrás ver y tocar nuestros productos,
-                    charlar con nosotros y conocer de cerca nuestro trabajo
-                    artesanal.
+            
+            <!-- Hero Section -->
+            <section class="max-w-6xl mx-auto pt-16 pb-8 px-6 text-center">
+                <h1 class="text-5xl md:text-6xl font-title font-extrabold text-walnut-deep mb-4">
+                    Encuéntranos
+                </h1>
+                <div class="w-32 h-1 bg-gradient-to-r from-terra-cotta via-leather to-terra-cotta mx-auto rounded-full mb-6"></div>
+                <p class="text-xl text-dark-brown/80 max-w-3xl mx-auto leading-relaxed">
+                    Cada mes nos instalamos en diferentes mercados artesanales de Asturias. 
+                    Ven a vernos, toca nuestros productos, conoce el proceso artesanal y 
+                    descubre piezas únicas hechas a mano.
                 </p>
-                <p class="mb-4">
-                    El ambiente en la plaza es muy especial, con otros artesanos
-                    y productores locales, música y buen ambiente. Si quieres
-                    pasar una mañana diferente, ¡acércate y disfruta de la
-                    experiencia! Además, estaremos encantados de resolver
-                    cualquier duda o encargo personalizado que tengas.
-                </p>
-                <img
-                    src="/oviñana-plaza.jpg"
-                    alt="Plaza de Oviñana"
-                    class="mb-4 rounded shadow"
-                    style="max-width:100%;height:auto;"
-                />
-                <div class="mb-4">
-                    <a
-                        href="https://www.google.com/maps/place/Plaza+de+Oviñana,+33156+Oviñana,+Asturias"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="inline-flex items-center px-4 py-2 bg-green-700 text-white rounded hover:bg-green-800 transition"
-                    >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="h-5 w-5 mr-2"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M17.657 16.657L13.414 12.414a4 4 0 10-5.657 5.657l4.243 4.243a8 8 0 1011.314-11.314l-4.243 4.243z"
-                            ></path>
-                        </svg>
-                        Ver en Google Maps
-                    </a>
-                </div>
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2922.393314583816!2d-6.237123684528927!3d43.56922197912327!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd36f7e7e6b2b8e1%3A0x7e2e6e6e6e6e6e6e!2sPlaza%20de%20Ovi%C3%B1ana%2C%2033156%20Ovi%C3%B1ana%2C%20Asturias!5e0!3m2!1ses!2ses!4v1686754321000!5m2!1ses!2ses"
-                    width="100%"
-                    height="300"
-                    style="border:0;"
-                    allowfullscreen=""
-                    loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"
-                    class="rounded shadow"></iframe>
             </section>
 
-            <section class="max-w-xl mx-auto my-10 p-6 bg-white rounded shadow">
-                <h2 class="text-2xl font-bold mb-4">Somao</h2>
-                <p class="mb-4">
-                    También puedes encontrarnos el <strong
-                        >tercer domingo de cada mes</strong
-                    > en <strong>Somao</strong>. Nos instalamos en la plaza
-                    principal del pueblo, donde llevamos nuestras creaciones
-                    artesanas y compartimos espacio con otros productores y
-                    artesanos de la zona.
-                </p>
-                <p class="mb-4">
-                    Es una oportunidad perfecta para descubrir el encanto de
-                    Somao, disfrutar de un ambiente cercano y familiar, y
-                    conocer de primera mano el trabajo artesanal local. Si te
-                    apetece pasar una mañana diferente, ¡te esperamos en Somao!
-                </p>
-                <img
-                    src="/somao-plaza.jpg"
-                    alt="Plaza de Somao"
-                    class="mb-4 rounded shadow"
-                    style="max-width:100%;height:auto;"
-                />
-                <div class="mb-4">
+            <!-- Calendario Visual -->
+            <section class="max-w-6xl mx-auto px-6 mb-12">
+                <div class="bg-cream p-8 rounded-3xl shadow-2xl">
+                    <h2 class="text-3xl font-title font-bold text-walnut-deep mb-8 text-center">
+                        📅 Calendario de Mercados
+                    </h2>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <!-- Primer domingo -->
+                        <div class="bg-gradient-to-br from-terra-cotta/10 to-leather/10 p-6 rounded-2xl border-2 border-terra-cotta/30">
+                            <div class="flex items-center gap-4 mb-4">
+                                <div class="bg-terra-cotta text-cream w-16 h-16 rounded-xl flex flex-col items-center justify-center font-bold shadow-lg">
+                                    <span class="text-xs">1er</span>
+                                    <span class="text-2xl">D</span>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-dark-brown/60 font-semibold">Primer Domingo</p>
+                                    <p class="text-2xl font-title font-bold text-walnut-deep">Oviñana</p>
+                                </div>
+                            </div>
+                            <p class="text-dark-brown/80 mb-2">
+                                Un mercado familiar en pleno corazón de Asturias, perfecto para 
+                                disfrutar de la mañana con productos locales y artesanía tradicional.
+                            </p>
+                        </div>
+
+                        <!-- Tercer domingo -->
+                        <div class="bg-gradient-to-br from-moss-green/10 to-walnut-deep/10 p-6 rounded-2xl border-2 border-moss-green/30">
+                            <div class="flex items-center gap-4 mb-4">
+                                <div class="bg-moss-green text-cream w-16 h-16 rounded-xl flex flex-col items-center justify-center font-bold shadow-lg">
+                                    <span class="text-xs">3er</span>
+                                    <span class="text-2xl">D</span>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-dark-brown/60 font-semibold">Tercer Domingo</p>
+                                    <p class="text-2xl font-title font-bold text-walnut-deep">Somao</p>
+                                </div>
+                            </div>
+                            <p class="text-dark-brown/80 mb-2">
+                                El encanto de un pueblo asturiano con ambiente acogedor. 
+                                Ideal para pasar una mañana entre artesanos y productores locales.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Horario -->
+                    <div class="mt-8 text-center bg-white p-6 rounded-2xl">
+                        <p class="text-lg text-dark-brown/80">
+                            <span class="font-bold text-walnut-deep">⏰ Horario:</span> 
+                            Normalmente de 10:00h a 14:00h
+                        </p>
+                        <p class="text-sm text-dark-brown/60 mt-2">
+                            * Confirma siempre en nuestras redes sociales por posibles cambios
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Ubicaciones Detalladas -->
+            <div class="max-w-6xl mx-auto px-6 mb-12 grid md:grid-cols-2 gap-8">
+                
+                <!-- Oviñana -->
+                <article class="bg-cream rounded-3xl shadow-2xl overflow-hidden">
+                    <div class="bg-gradient-to-r from-terra-cotta to-leather p-6 text-cream">
+                        <h2 class="text-3xl font-title font-bold mb-2">Oviñana</h2>
+                        <p class="text-cream/90">Primer domingo de cada mes</p>
+                    </div>
+                    
+                    <div class="p-6">
+                        <img
+                            src="/oviñana-plaza.jpg"
+                            alt="Plaza de Oviñana"
+                            class="w-full h-64 object-cover rounded-2xl shadow-lg mb-6"
+                        />
+                        
+                        <div class="space-y-4 mb-6">
+                            <div class="flex items-start gap-3">
+                                <span class="text-2xl">📍</span>
+                                <div>
+                                    <p class="font-semibold text-walnut-deep">Ubicación</p>
+                                    <p class="text-dark-brown/80">Plaza principal de Oviñana</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start gap-3">
+                                <span class="text-2xl">🎪</span>
+                                <div>
+                                    <p class="font-semibold text-walnut-deep">Ambiente</p>
+                                    <p class="text-dark-brown/80">
+                                        Mercado artesanal con música en vivo, productos locales 
+                                        y ambiente muy familiar. Perfecto para toda la familia.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-3">
+                                <span class="text-2xl">🚗</span>
+                                <div>
+                                    <p class="font-semibold text-walnut-deep">Cómo llegar</p>
+                                    <p class="text-dark-brown/80">
+                                        Aparcamiento gratuito cerca de la plaza. 
+                                        Bien comunicado por carretera.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-3">
+                            <a
+                                href="https://www.google.com/maps/place/Plaza+de+Oviñana,+33156+Oviñana,+Asturias"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="block w-full bg-terra-cotta hover:bg-terra-cotta/90 text-cream py-3 rounded-xl font-semibold text-center transition-all duration-300 shadow-md hover:shadow-xl"
+                            >
+                                📍 Ver en Google Maps
+                            </a>
+                            
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2922.393314583816!2d-6.237123684528927!3d43.56922197912327!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd36f7e7e6b2b8e1%3A0x7e2e6e6e6e6e6e6e!2sPlaza%20de%20Ovi%C3%B1ana%2C%2033156%20Ovi%C3%B1ana%2C%20Asturias!5e0!3m2!1ses!2ses!4v1686754321000!5m2!1ses!2ses"
+                                width="100%"
+                                height="250"
+                                style="border:0;"
+                                allowfullscreen=""
+                                loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"
+                                class="rounded-2xl shadow-lg mt-4"
+                            ></iframe>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Somao -->
+                <article class="bg-cream rounded-3xl shadow-2xl overflow-hidden">
+                    <div class="bg-gradient-to-r from-moss-green to-walnut-deep p-6 text-cream">
+                        <h2 class="text-3xl font-title font-bold mb-2">Somao</h2>
+                        <p class="text-cream/90">Tercer domingo de cada mes</p>
+                    </div>
+                    
+                    <div class="p-6">
+                        <img
+                            src="/somao-plaza.jpg"
+                            alt="Plaza de Somao"
+                            class="w-full h-64 object-cover rounded-2xl shadow-lg mb-6"
+                        />
+                        
+                        <div class="space-y-4 mb-6">
+                            <div class="flex items-start gap-3">
+                                <span class="text-2xl">📍</span>
+                                <div>
+                                    <p class="font-semibold text-walnut-deep">Ubicación</p>
+                                    <p class="text-dark-brown/80">Plaza principal de Somao</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start gap-3">
+                                <span class="text-2xl">🎪</span>
+                                <div>
+                                    <p class="font-semibold text-walnut-deep">Ambiente</p>
+                                    <p class="text-dark-brown/80">
+                                        Mercado acogedor en un pueblo con encanto. 
+                                        Artesanos locales y productores de la zona.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-3">
+                                <span class="text-2xl">🚗</span>
+                                <div>
+                                    <p class="font-semibold text-walnut-deep">Cómo llegar</p>
+                                    <p class="text-dark-brown/80">
+                                        Fácil acceso desde Gijón y Avilés. 
+                                        Parking disponible en el pueblo.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-3">
+                            <a
+                                href="https://www.google.com/maps/place/Somao,+33139,+Asturias"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="block w-full bg-moss-green hover:bg-moss-green/90 text-cream py-3 rounded-xl font-semibold text-center transition-all duration-300 shadow-md hover:shadow-xl"
+                            >
+                                📍 Ver en Google Maps
+                            </a>
+                            
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2923.036457769463!2d-6.181370684529326!3d43.5816249791227!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd36f7e2b7e6b8e1%3A0x7e2e6e6e6e6e6e6e!2sSomao%2C%2033139%20Pravia%2C%20Asturias!5e0!3m2!1ses!2ses!4v1686754321001!5m2!1ses!2ses"
+                                width="100%"
+                                height="250"
+                                style="border:0;"
+                                allowfullscreen=""
+                                loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"
+                                class="rounded-2xl shadow-lg mt-4"
+                            ></iframe>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Consejos para visitantes -->
+            <section class="max-w-4xl mx-auto px-6 mb-16">
+                <div class="bg-gradient-to-br from-leather/10 to-walnut-deep/10 p-8 rounded-3xl border-2 border-leather/20">
+                    <h2 class="text-3xl font-title font-bold text-walnut-deep mb-6 text-center">
+                        💡 Consejos para tu visita
+                    </h2>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="flex items-start gap-3">
+                            <span class="text-3xl">🕐</span>
+                            <div>
+                                <p class="font-semibold text-walnut-deep mb-1">Llega temprano</p>
+                                <p class="text-dark-brown/80 text-sm">
+                                    Las mejores piezas se van rápido. Te recomendamos venir 
+                                    entre las 10:00 y las 11:00.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3">
+                            <span class="text-3xl">💰</span>
+                            <div>
+                                <p class="font-semibold text-walnut-deep mb-1">Efectivo</p>
+                                <p class="text-dark-brown/80 text-sm">
+                                    Aunque aceptamos Bizum, es útil llevar efectivo 
+                                    para agilizar las compras.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3">
+                            <span class="text-3xl">🎨</span>
+                            <div>
+                                <p class="font-semibold text-walnut-deep mb-1">Encargos personalizados</p>
+                                <p class="text-dark-brown/80 text-sm">
+                                    ¿Quieres algo especial? Podemos hacer piezas a medida. 
+                                    Coméntanos tu idea.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3">
+                            <span class="text-3xl">📱</span>
+                            <div>
+                                <p class="font-semibold text-walnut-deep mb-1">Síguenos en redes</p>
+                                <p class="text-dark-brown/80 text-sm">
+                                    Publicamos cada viernes si estaremos el domingo. 
+                                    ¡No te pierdas las novedades!
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Call to action -->
+            <section class="max-w-4xl mx-auto px-6 mb-16">
+                <div class="bg-gradient-to-r from-leather to-walnut-deep text-cream p-12 rounded-3xl shadow-2xl text-center">
+                    <h2 class="text-4xl font-title font-bold mb-4">
+                        ¿No puedes venir al mercado?
+                    </h2>
+                    <p class="text-xl mb-8 text-cream/90">
+                        Contacta con nosotros para coordinar una visita al taller 
+                        o consultar disponibilidad de productos.
+                    </p>
                     <a
-                        href="https://www.google.com/maps/place/Somao,+33139,+Asturias"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="inline-flex items-center px-4 py-2 bg-green-700 text-white rounded hover:bg-green-800 transition"
+                        href="/contacto"
+                        class="inline-block bg-cream text-walnut-deep px-10 py-4 rounded-xl font-bold text-lg hover:bg-wood-light transition-colors duration-300 shadow-lg"
                     >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="h-5 w-5 mr-2"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M17.657 16.657L13.414 12.414a4 4 0 10-5.657 5.657l4.243 4.243a8 8 0 1011.314-11.314l-4.243 4.243z"
-                            ></path>
-                        </svg>
-                        Ver en Google Maps
+                        Contáctanos →
                     </a>
                 </div>
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2923.036457769463!2d-6.181370684529326!3d43.5816249791227!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd36f7e2b7e6b8e1%3A0x7e2e6e6e6e6e6e6e!2sSomao%2C%2033139%20Pravia%2C%20Asturias!5e0!3m2!1ses!2ses!4v1686754321001!5m2!1ses!2ses"
-                    width="100%"
-                    height="300"
-                    style="border:0;"
-                    allowfullscreen=""
-                    loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"
-                    class="rounded shadow"></iframe>
             </section>
-            ...
 
             <Footer />
         </main>

@@ -25,7 +25,9 @@ import "../styles/global.css";
 				>
 				</div>
 
-				<div class="absolute sm:top-50 top-70 sm:right-[10%] sm:left-10 right-4 left-4 ">
+				<div
+					class="absolute sm:top-50 top-70 sm:right-[10%] sm:left-10 right-4 left-4"
+				>
 					<!-- “El Sablon” gigante -->
 					<h1
 						class="sm:text-9xl text-[75px] leading-none font-artesanal sm:mr-20 mr-10 text-yellow-300 font-title sm:text-right text-left"
@@ -45,20 +47,227 @@ import "../styles/global.css";
 				<a
 					class="absolute right-0 bottom-10 left-0 m-auto w-[fit-content] rounded-full border bg-leather p-3 text-cream hover:bg-wood-light transition-colors"
 					href="#conocenos"
-				> 
+				>
 					Conócenos
 				</a>
 			</div>
+			<!-- Sección Conócenos -->
 			<section
 				id="conocenos"
-				class="sm:scroll-mt-19 scroll-mt-18 bg-wood-light text-black-900 py-20 px-6"
+				class="scroll-mt-18 py-20 px-6 bg-gradient-to-b from-wood-light to-cream"
 			>
-				<div class="max-w-7xl md:mx-64">
-					<h2 class="text-6xl font-title font-extrabold mb-4">Sobre Nosotros</h2>
-					<p class="max-w-2xl text-3xl font-body">
-						Somos una tienda de artesanía especializada en cuero y
-						madera con raíces profundas en la tradición asturiana...
-					</p>
+				<div class="max-w-5xl mx-auto">
+					<!-- Encabezado -->
+					<div class="text-center mb-16">
+						<h2
+							class="text-5xl md:text-6xl font-title font-extrabold text-walnut-deep mb-4"
+						>
+							Sobre Nosotros
+						</h2>
+						<div
+							class="w-32 h-1 bg-gradient-to-r from-terra-cotta via-leather to-terra-cotta mx-auto rounded-full"
+						>
+						</div>
+					</div>
+
+					<!-- Contenido principal -->
+					<div class="grid md:grid-cols-2 gap-12 items-center mb-16">
+						<!-- Texto -->
+						<div class="space-y-6 font-body">
+							<p
+								class="text-2xl leading-relaxed text-walnut-deep"
+							>
+								En <span class="font-bold text-leather"
+									>El Sablón</span
+								>, cada pieza cuenta una historia. Una historia
+								de tradición, paciencia y amor por el trabajo
+								bien hecho.
+							</p>
+
+							<p
+								class="text-lg leading-relaxed text-dark-brown/80"
+							>
+								Nuestro taller es un lugar donde el tiempo se
+								toma con calma, donde las manos experimentadas
+								de artesanos asturianos transforman el cuero y
+								la madera en objetos únicos, llenos de carácter
+								y durabilidad.
+							</p>
+
+							<p
+								class="text-lg leading-relaxed text-dark-brown/80"
+							>
+								No fabricamos en serie. Cada cinturón, cada
+								bolso, cada pieza decorativa nace del cuidado
+								minucioso y la dedicación de quien conoce su
+								oficio desde hace décadas. Utilizamos técnicas
+								ancestrales combinadas con diseños
+								contemporáneos, respetando siempre la esencia de
+								la artesanía tradicional.
+							</p>
+
+							<div
+								class="bg-leather/10 border-l-4 border-leather p-6 rounded-r-xl"
+							>
+								<p
+									class="text-lg italic text-walnut-deep font-medium"
+								>
+									"Lo que hacemos no es solo artesanía, es
+									preservar un legado, mantener vivas las
+									técnicas que nuestros abuelos nos enseñaron,
+									y crear piezas que puedan acompañarte toda
+									la vida."
+								</p>
+							</div>
+						</div>
+
+						<!-- Imagen ilustrativa -->
+						<div class="relative">
+							<div
+								class="absolute -inset-4 bg-gradient-to-r from-terra-cotta to-leather rounded-3xl opacity-20 blur-2xl"
+							>
+							</div>
+							<div
+								class="relative bg-cream p-8 rounded-3xl shadow-2xl"
+							>
+								<div
+									class="aspect-square bg-gradient-to-br from-wood-light to-cream rounded-2xl flex items-center justify-center"
+								>
+									<div class="text-center">
+										<div class="text-8xl mb-4">🔨</div>
+										<p
+											class="text-xl font-title font-bold text-walnut-deep"
+										>
+											Artesanía
+										</p>
+										<p
+											class="text-lg font-title text-leather"
+										>
+											Asturiana
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Valores -->
+					<div class="grid md:grid-cols-3 gap-8 mb-16">
+						<div
+							class="bg-cream p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
+						>
+							<div class="text-5xl mb-4">🌿</div>
+							<h3
+								class="text-2xl font-title font-bold text-walnut-deep mb-3"
+							>
+								Sostenibilidad
+							</h3>
+							<p class="text-dark-brown/80 leading-relaxed">
+								Trabajamos con materiales naturales y
+								sostenibles. El cuero que utilizamos proviene de
+								curtidurías responsables, y la madera de bosques
+								gestionados.
+							</p>
+						</div>
+
+						<div
+							class="bg-cream p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
+						>
+							<div class="text-5xl mb-4">👐</div>
+							<h3
+								class="text-2xl font-title font-bold text-walnut-deep mb-3"
+							>
+								Hecho a Mano
+							</h3>
+							<p class="text-dark-brown/80 leading-relaxed">
+								Cada pieza es única porque está hecha con las
+								manos, no con máquinas. El proceso artesanal
+								garantiza calidad, atención al detalle y
+								personalidad.
+							</p>
+						</div>
+
+						<div
+							class="bg-cream p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
+						>
+							<div class="text-5xl mb-4">❤️</div>
+							<h3
+								class="text-2xl font-title font-bold text-walnut-deep mb-3"
+							>
+								Tradición
+							</h3>
+							<p class="text-dark-brown/80 leading-relaxed">
+								Mantenemos vivas las técnicas tradicionales
+								asturianas, transmitiéndolas en nuestros
+								talleres para que las nuevas generaciones puedan
+								continuar el legado.
+							</p>
+						</div>
+					</div>
+
+					<!-- Talleres -->
+					<div
+						class="bg-gradient-to-br from-leather to-walnut-deep text-cream p-12 rounded-3xl shadow-2xl"
+					>
+						<div class="grid md:grid-cols-2 gap-8 items-center">
+							<div>
+								<h3 class="text-4xl font-title font-bold mb-4">
+									Aprende el Oficio
+								</h3>
+								<p class="text-xl leading-relaxed mb-6">
+									¿Te gustaría aprender a trabajar el cuero?
+									Ofrecemos talleres donde enseñamos las
+									técnicas básicas de la marroquinería
+									tradicional. Una experiencia única para
+									conectar con la artesanía.
+								</p>
+								<a
+									href="/talleres"
+									class="inline-block bg-cream text-walnut-deep px-8 py-4 rounded-xl font-bold text-lg hover:bg-wood-light transition-colors duration-300 shadow-lg"
+								>
+									Ver Talleres →
+								</a>
+							</div>
+							<div class="text-6xl text-center">🎨✂️🧵</div>
+						</div>
+					</div>
+
+					<!-- Ubicación -->
+					<div class="mt-16 text-center">
+						<p class="text-xl text-dark-brown mb-6">
+							Nos encontrarás en <span
+								class="font-bold text-leather">Oviñana</span
+							> (primer domingo de mes) y <span
+								class="font-bold text-leather">Somao</span
+							> (tercer domingo de mes)
+						</p>
+						<a
+							href="/encuentranos"
+							class="inline-flex items-center gap-2 text-leather font-bold text-lg hover:gap-4 transition-all duration-300"
+						>
+							<span>Ver dónde estamos</span>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								class="w-6 h-6"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M17.657 16.657L13.414 12.414a8 8 0 1 0-1.414 1.414l4.243 4.243a2 2 0 0 0 2.828 0l.707-.707a2 2 0 0 0 0-2.828z"
+								></path>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M15 11a4 4 0 1 1-8 0 4 4 0 0 1 8 0z"
+								></path>
+							</svg>
+						</a>
+					</div>
 				</div>
 			</section>
 			<Footer />
