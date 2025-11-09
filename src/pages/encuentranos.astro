@@ -7,65 +7,98 @@ import Title from "../components/Title.astro";
 
 <html lang="es">
     <head>
-        <BaseHead title="Dónde Encontrarnos - El Sablón" description="Visítanos en los mercados artesanales de Asturias" />
+        <BaseHead
+            title="Dónde Encontrarnos - El Sablón"
+            description="Visítanos en los mercados artesanales de Asturias"
+        />
     </head>
     <body class="bg-gradient-to-b from-wood-light to-cream">
         <main>
             <Header />
-            
+
             <!-- Hero Section -->
             <section class="max-w-6xl mx-auto pt-16 pb-8 px-6 text-center">
-                <Title 
-                    title="Dónde Encontrarnos" 
-                    description="Cada mes nos instalamos en diferentes mercados artesanales de Asturias. 
-                    Ven a vernos, toca nuestros productos, conoce el proceso artesanal y 
-                    descubre piezas únicas hechas a mano."
-                />
+                <Title title="Dónde Encontrarnos">
+                    Cada mes nos instalamos en diferentes mercados artesanales
+                    de Asturias. Ven a vernos, toca nuestros productos, conoce
+                    el proceso artesanal y descubre piezas únicas hechas a mano.
+                </Title>
             </section>
 
             <!-- Calendario Visual -->
             <section class="max-w-6xl mx-auto px-6 mb-12">
                 <div class="bg-cream p-8 rounded-3xl shadow-2xl">
-                    <h2 class="text-3xl font-title font-bold text-walnut-deep mb-8 text-center">
+                    <h2
+                        class="text-3xl font-title font-bold text-walnut-deep mb-8 text-center"
+                    >
                         📅 Calendario de Mercados
                     </h2>
-                    
+
                     <div class="grid md:grid-cols-2 gap-6">
                         <!-- Primer domingo -->
-                        <div class="bg-gradient-to-br from-terra-cotta/10 to-leather/10 p-6 rounded-2xl border-2 border-terra-cotta/30">
+                        <div
+                            class="bg-gradient-to-br from-terra-cotta/10 to-leather/10 p-6 rounded-2xl border-2 border-terra-cotta/30"
+                        >
                             <div class="flex items-center gap-4 mb-4">
-                                <div class="bg-terra-cotta text-cream w-16 h-16 rounded-xl flex flex-col items-center justify-center font-bold shadow-lg">
+                                <div
+                                    class="bg-terra-cotta text-cream w-16 h-16 rounded-xl flex flex-col items-center justify-center font-bold shadow-lg"
+                                >
                                     <span class="text-xs">1er</span>
                                     <span class="text-2xl">D</span>
                                 </div>
                                 <div>
-                                    <p class="text-sm text-dark-brown/60 font-semibold">Primer Domingo</p>
-                                    <p class="text-2xl font-title font-bold text-walnut-deep">Oviñana</p>
+                                    <p
+                                        class="text-sm text-dark-brown/60 font-semibold"
+                                    >
+                                        Primer Domingo
+                                    </p>
+                                    <p
+                                        class="text-2xl font-title font-bold text-walnut-deep"
+                                    >
+                                        Oviñana
+                                    </p>
                                 </div>
                             </div>
                             <p class="text-dark-brown/80 mb-2">
-                                Un mercado familiar en pleno corazón de Asturias, perfecto para 
-                                disfrutar de la mañana con productos locales y artesanía tradicional
-                                en un entorno cerca del mar con unas vistas impresionantes a la costa asturiana.
+                                Un mercado familiar en pleno corazón de
+                                Asturias, perfecto para disfrutar de la mañana
+                                con productos locales y artesanía tradicional en
+                                un entorno cerca del mar con unas vistas
+                                impresionantes a la costa asturiana.
                             </p>
                         </div>
 
                         <!-- Tercer domingo -->
-                        <div class="bg-gradient-to-br from-moss-green/10 to-walnut-deep/10 p-6 rounded-2xl border-2 border-moss-green/30">
+                        <div
+                            class="bg-gradient-to-br from-moss-green/10 to-walnut-deep/10 p-6 rounded-2xl border-2 border-moss-green/30"
+                        >
                             <div class="flex items-center gap-4 mb-4">
-                                <div class="bg-moss-green text-cream w-16 h-16 rounded-xl flex flex-col items-center justify-center font-bold shadow-lg">
+                                <div
+                                    class="bg-moss-green text-cream w-16 h-16 rounded-xl flex flex-col items-center justify-center font-bold shadow-lg"
+                                >
                                     <span class="text-xs">3er</span>
                                     <span class="text-2xl">D</span>
                                 </div>
                                 <div>
-                                    <p class="text-sm text-dark-brown/60 font-semibold">Tercer Domingo</p>
-                                    <p class="text-2xl font-title font-bold text-walnut-deep">Somao</p>
+                                    <p
+                                        class="text-sm text-dark-brown/60 font-semibold"
+                                    >
+                                        Tercer Domingo
+                                    </p>
+                                    <p
+                                        class="text-2xl font-title font-bold text-walnut-deep"
+                                    >
+                                        Somao
+                                    </p>
                                 </div>
                             </div>
                             <p class="text-dark-brown/80 mb-2">
-                                El encanto de un pueblo asturiano repleto de casas de indianos con ambiente acogedor.
-                                Este pueblo conmemorado con el premio al Pueblo Ejemplar de Asturias alberga un mercado 
-                                ideal para pasar una mañana entre artesanos, productores locales y música en directo.
+                                El encanto de un pueblo asturiano repleto de
+                                casas de indianos con ambiente acogedor. Este
+                                pueblo conmemorado con el premio al Pueblo
+                                Ejemplar de Asturias alberga un mercado ideal
+                                para pasar una mañana entre artesanos,
+                                productores locales y música en directo.
                             </p>
                         </div>
                     </div>
@@ -73,11 +106,14 @@ import Title from "../components/Title.astro";
                     <!-- Horario -->
                     <div class="mt-8 text-center bg-white p-6 rounded-2xl">
                         <p class="text-lg text-dark-brown/80">
-                            <span class="font-bold text-walnut-deep">⏰ Horario:</span> 
+                            <span class="font-bold text-walnut-deep"
+                                >⏰ Horario:</span
+                            >
                             Normalmente de 11:00h a 15:00h
                         </p>
                         <p class="text-sm text-dark-brown/60 mt-2">
-                            * Confirma siempre en nuestras redes sociales por posibles cambios
+                            * Confirma siempre en nuestras redes sociales por
+                            posibles cambios
                         </p>
                     </div>
                 </div>
@@ -85,37 +121,49 @@ import Title from "../components/Title.astro";
 
             <!-- Ubicaciones Detalladas -->
             <div class="max-w-6xl mx-auto px-6 mb-12 grid md:grid-cols-2 gap-8">
-                
                 <!-- Oviñana -->
-                <article class="bg-cream rounded-3xl shadow-2xl overflow-hidden">
-                    <div class="bg-gradient-to-r from-terra-cotta to-leather p-6 text-cream">
-                        <h2 class="text-3xl font-title font-bold mb-2">Oviñana</h2>
+                <article
+                    class="bg-cream rounded-3xl shadow-2xl overflow-hidden"
+                >
+                    <div
+                        class="bg-gradient-to-r from-terra-cotta to-leather p-6 text-cream"
+                    >
+                        <h2 class="text-3xl font-title font-bold mb-2">
+                            Oviñana
+                        </h2>
                         <p class="text-cream/90">Primer domingo de cada mes</p>
                     </div>
-                    
+
                     <div class="p-6">
                         <img
                             src="/oviñana-plaza.jpg"
                             alt="Plaza de Oviñana"
                             class="w-full h-64 object-cover rounded-2xl shadow-lg mb-6"
                         />
-                        
+
                         <div class="space-y-4 mb-6">
                             <div class="flex items-start gap-3">
                                 <span class="text-2xl">📍</span>
                                 <div>
-                                    <p class="font-semibold text-walnut-deep">Ubicación</p>
-                                    <p class="text-dark-brown/80">Plaza principal de Oviñana</p>
+                                    <p class="font-semibold text-walnut-deep">
+                                        Ubicación
+                                    </p>
+                                    <p class="text-dark-brown/80">
+                                        Plaza principal de Oviñana
+                                    </p>
                                 </div>
                             </div>
-                            
+
                             <div class="flex items-start gap-3">
                                 <span class="text-2xl">🎪</span>
                                 <div>
-                                    <p class="font-semibold text-walnut-deep">Ambiente</p>
+                                    <p class="font-semibold text-walnut-deep">
+                                        Ambiente
+                                    </p>
                                     <p class="text-dark-brown/80">
-                                        Mercado artesanal con productos locales 
-                                        y ambiente muy familiar. Perfecto para toda la familia.
+                                        Mercado artesanal con productos locales
+                                        y ambiente muy familiar. Perfecto para
+                                        toda la familia.
                                     </p>
                                 </div>
                             </div>
@@ -123,9 +171,11 @@ import Title from "../components/Title.astro";
                             <div class="flex items-start gap-3">
                                 <span class="text-2xl">🚗</span>
                                 <div>
-                                    <p class="font-semibold text-walnut-deep">Cómo llegar</p>
+                                    <p class="font-semibold text-walnut-deep">
+                                        Cómo llegar
+                                    </p>
                                     <p class="text-dark-brown/80">
-                                        Aparcamiento gratuito cerca de la plaza. 
+                                        Aparcamiento gratuito cerca de la plaza.
                                         Bien comunicado por carretera.
                                     </p>
                                 </div>
@@ -141,7 +191,7 @@ import Title from "../components/Title.astro";
                             >
                                 📍 Ver en Google Maps
                             </a>
-                            
+
                             <iframe
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2922.393314583816!2d-6.237123684528927!3d43.56922197912327!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd36f7e7e6b2b8e1%3A0x7e2e6e6e6e6e6e6e!2sPlaza%20de%20Ovi%C3%B1ana%2C%2033156%20Ovi%C3%B1ana%2C%20Asturias!5e0!3m2!1ses!2ses!4v1686754321000!5m2!1ses!2ses"
                                 width="100%"
@@ -150,42 +200,54 @@ import Title from "../components/Title.astro";
                                 allowfullscreen=""
                                 loading="lazy"
                                 referrerpolicy="no-referrer-when-downgrade"
-                                class="rounded-2xl shadow-lg mt-4"
-                            ></iframe>
+                                class="rounded-2xl shadow-lg mt-4"></iframe>
                         </div>
                     </div>
                 </article>
 
                 <!-- Somao -->
-                <article class="bg-cream rounded-3xl shadow-2xl overflow-hidden">
-                    <div class="bg-gradient-to-r from-moss-green to-walnut-deep p-6 text-cream">
-                        <h2 class="text-3xl font-title font-bold mb-2">Somao</h2>
+                <article
+                    class="bg-cream rounded-3xl shadow-2xl overflow-hidden"
+                >
+                    <div
+                        class="bg-gradient-to-r from-moss-green to-walnut-deep p-6 text-cream"
+                    >
+                        <h2 class="text-3xl font-title font-bold mb-2">
+                            Somao
+                        </h2>
                         <p class="text-cream/90">Tercer domingo de cada mes</p>
                     </div>
-                    
+
                     <div class="p-6">
                         <img
                             src="/somao-plaza.jpg"
                             alt="Plaza de Somao"
                             class="w-full h-64 object-cover rounded-2xl shadow-lg mb-6"
                         />
-                        
+
                         <div class="space-y-4 mb-6">
                             <div class="flex items-start gap-3">
                                 <span class="text-2xl">📍</span>
                                 <div>
-                                    <p class="font-semibold text-walnut-deep">Ubicación</p>
-                                    <p class="text-dark-brown/80">Plaza principal de Somao</p>
+                                    <p class="font-semibold text-walnut-deep">
+                                        Ubicación
+                                    </p>
+                                    <p class="text-dark-brown/80">
+                                        Plaza principal de Somao
+                                    </p>
                                 </div>
                             </div>
-                            
+
                             <div class="flex items-start gap-3">
                                 <span class="text-2xl">🎪</span>
                                 <div>
-                                    <p class="font-semibold text-walnut-deep">Ambiente</p>
+                                    <p class="font-semibold text-walnut-deep">
+                                        Ambiente
+                                    </p>
                                     <p class="text-dark-brown/80">
-                                        Mercado acogedor en un pueblo con encanto. 
-                                        Artesanos locales, productores de la zona y música en vivo.
+                                        Mercado acogedor en un pueblo con
+                                        encanto. Artesanos locales, productores
+                                        de la zona y música en vivo.
                                     </p>
                                 </div>
                             </div>
@@ -193,9 +255,11 @@ import Title from "../components/Title.astro";
                             <div class="flex items-start gap-3">
                                 <span class="text-2xl">🚗</span>
                                 <div>
-                                    <p class="font-semibold text-walnut-deep">Cómo llegar</p>
+                                    <p class="font-semibold text-walnut-deep">
+                                        Cómo llegar
+                                    </p>
                                     <p class="text-dark-brown/80">
-                                        Fácil acceso desde Gijón y Avilés. 
+                                        Fácil acceso desde Gijón y Avilés.
                                         Parking disponible en el pueblo.
                                     </p>
                                 </div>
@@ -211,7 +275,7 @@ import Title from "../components/Title.astro";
                             >
                                 📍 Ver en Google Maps
                             </a>
-                            
+
                             <iframe
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2923.036457769463!2d-6.181370684529326!3d43.5816249791227!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd36f7e2b7e6b8e1%3A0x7e2e6e6e6e6e6e6e!2sSomao%2C%2033139%20Pravia%2C%20Asturias!5e0!3m2!1ses!2ses!4v1686754321001!5m2!1ses!2ses"
                                 width="100%"
@@ -220,8 +284,7 @@ import Title from "../components/Title.astro";
                                 allowfullscreen=""
                                 loading="lazy"
                                 referrerpolicy="no-referrer-when-downgrade"
-                                class="rounded-2xl shadow-lg mt-4"
-                            ></iframe>
+                                class="rounded-2xl shadow-lg mt-4"></iframe>
                         </div>
                     </div>
                 </article>
@@ -229,13 +292,15 @@ import Title from "../components/Title.astro";
 
             <!-- Call to action -->
             <section class="max-w-4xl mx-auto px-6 mb-16">
-                <div class="bg-gradient-to-r from-leather to-walnut-deep text-cream p-12 rounded-3xl shadow-2xl text-center">
+                <div
+                    class="bg-gradient-to-r from-leather to-walnut-deep text-cream p-12 rounded-3xl shadow-2xl text-center"
+                >
                     <h2 class="text-4xl font-title font-bold mb-4">
                         ¿No puedes venir al mercado?
                     </h2>
                     <p class="text-xl mb-8 text-cream/90">
-                        Contacta con nosotros para coordinar una visita al taller 
-                        o consultar disponibilidad de productos.
+                        Contacta con nosotros para coordinar una visita al
+                        taller o consultar disponibilidad de productos.
                     </p>
                     <a
                         href="/contacto"

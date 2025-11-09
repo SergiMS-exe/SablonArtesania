@@ -1,5 +1,5 @@
 ---
-const { title, description } = Astro.props;
+const { title } = Astro.props;
 ---
 
 <h1
@@ -11,6 +11,10 @@ const { title, description } = Astro.props;
     class="w-32 h-1 bg-gradient-to-r from-terra-cotta via-leather to-terra-cotta mx-auto rounded-full mb-6"
 >
 </div>
-<p class="text-xl text-dark-brown/80 max-w-3xl mx-auto leading-relaxed">
-    {description}
-</p>
+{
+    Astro.slots.default && (
+        <p class="text-xl text-dark-brown/80 max-w-3xl mx-auto leading-relaxed">
+            <slot />
+        </p>
+    )
+}
