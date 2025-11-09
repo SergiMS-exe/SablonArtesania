@@ -11,11 +11,11 @@ import "../styles/global.css";
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
-	<body>
+	<body class="home-page">
 		<Header />
 		<main>
 			<div
-				class="h-screen bg-cover bg-center bg-no-repeat"
+				class="h-screen bg-cover bg-center bg-no-repeat relative"
 				style="background-image: url('/sablon.webp');"
 			>
 				<div
@@ -26,9 +26,9 @@ import "../styles/global.css";
 				</div>
 
 				<div
-					class="absolute sm:top-50 top-70 sm:right-[10%] sm:left-10 right-4 left-4"
+					class="absolute sm:top-50 top-70 sm:right-[10%] sm:left-10 right-4 left-4 z-10"
 				>
-					<!-- “El Sablon” gigante -->
+					<!-- "El Sablon" gigante -->
 					<h1
 						class="sm:text-9xl text-[75px] leading-none font-artesanal sm:mr-20 mr-10 text-yellow-300 font-title sm:text-right text-left"
 						style="text-shadow: 2px 4px 4px rgba(0, 0, 0, 0.6);"
@@ -36,7 +36,7 @@ import "../styles/global.css";
 						El Sablón
 					</h1>
 
-					<!-- “Artesanía” debajo, más a la derecha -->
+					<!-- "Artesanía" debajo, más a la derecha -->
 					<h3
 						class="sm:text-6xl text-5xl font-medium text-white text-right"
 						style="text-shadow: 2px 4px 4px rgba(0, 0, 0, 0.6); font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"
@@ -45,7 +45,7 @@ import "../styles/global.css";
 					</h3>
 				</div>
 				<a
-					class="absolute right-0 bottom-10 left-0 m-auto w-[fit-content] rounded-full border bg-leather p-3 text-cream hover:bg-wood-light transition-colors"
+					class="absolute right-0 bottom-10 left-0 m-auto w-[fit-content] rounded-full border bg-leather p-3 text-cream hover:bg-wood-light transition-colors z-10"
 					href="#conocenos"
 				>
 					Conócenos
@@ -89,21 +89,22 @@ import "../styles/global.css";
 							>
 								Nuestro taller es un lugar donde el tiempo se
 								toma con calma, donde las manos experimentadas
-								de artesanos asturianos transforman los materiales básicos
-								en objetos únicos, llenos de carácter
-								y calidad.
+								de artesanos asturianos transforman los
+								materiales básicos en objetos únicos, llenos de
+								carácter y calidad.
 							</p>
 
 							<p
 								class="text-lg leading-relaxed text-dark-brown/80"
 							>
-								No fabricamos en serie, cada pieza es un modelo único y exclusivo. 
-								Cada cinturón, cada bolso, cada pieza decorativa nace del cuidado
-								minucioso y la dedicación de quien conoce su
-								oficio desde hace décadas. Utilizamos técnicas
-								ancestrales combinadas con diseños
-								contemporáneos, respetando siempre la esencia de
-								la artesanía tradicional.
+								No fabricamos en serie, cada pieza es un modelo
+								único y exclusivo. Cada cinturón, cada bolso,
+								cada pieza decorativa nace del cuidado minucioso
+								y la dedicación de quien conoce su oficio desde
+								hace décadas. Utilizamos técnicas ancestrales
+								combinadas con diseños contemporáneos,
+								respetando siempre la esencia de la artesanía
+								tradicional.
 							</p>
 
 							<div
@@ -115,8 +116,8 @@ import "../styles/global.css";
 									"Lo que hacemos no es solo artesanía, es
 									preservar un legado, mantener vivas las
 									técnicas que nuestros abuelos nos enseñaron,
-									y crear piezas únicas que puedan acompañarte toda
-									la vida."
+									y crear piezas únicas que puedan acompañarte
+									toda la vida."
 								</p>
 							</div>
 						</div>
@@ -164,8 +165,9 @@ import "../styles/global.css";
 							</h3>
 							<p class="text-dark-brown/80 leading-relaxed">
 								Trabajamos con materiales naturales y
-								sostenibles. La materia prima que utilizamos proviene de
-								empresas locales responsables con el medio ambiente.
+								sostenibles. La materia prima que utilizamos
+								proviene de empresas locales responsables con el
+								medio ambiente.
 							</p>
 						</div>
 
@@ -201,33 +203,6 @@ import "../styles/global.css";
 								talleres para que las nuevas generaciones puedan
 								continuar el legado.
 							</p>
-						</div>
-					</div>
-
-					<!-- Talleres -->
-					<div
-						class="bg-gradient-to-br from-leather to-walnut-deep text-cream p-12 rounded-3xl shadow-2xl"
-					>
-						<div class="grid md:grid-cols-2 gap-8 items-center">
-							<div>
-								<h3 class="text-4xl font-title font-bold mb-4">
-									Aprende el Oficio
-								</h3>
-								<p class="text-xl leading-relaxed mb-6">
-									¿Te gustaría aprender a trabajar el cuero?
-									Ofrecemos talleres donde enseñamos las
-									técnicas básicas de la marroquinería
-									tradicional. Una experiencia única para
-									conectar con la artesanía.
-								</p>
-								<a
-									href="/talleres"
-									class="inline-block bg-cream text-walnut-deep px-8 py-4 rounded-xl font-bold text-lg hover:bg-wood-light transition-colors duration-300 shadow-lg"
-								>
-									Ver Talleres →
-								</a>
-							</div>
-							<div class="text-6xl text-center">🎨✂️🧵</div>
 						</div>
 					</div>
 

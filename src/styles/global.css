@@ -54,6 +54,16 @@ body {
 	padding: 0;
 }
 
+/* Padding top para compensar el header fijo en todas las páginas excepto la home */
+body:not(.home-page) main {
+	padding-top: 80px;
+}
+
+/* Para la home page, el hero ya ocupa toda la pantalla */
+body.home-page main {
+	padding-top: 0;
+}
+
 /* text-align: left;
 	background: linear-gradient(var(--gray-gradient)) no-repeat;
 	background-size: 100% 600px;

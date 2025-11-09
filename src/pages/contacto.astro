@@ -2,6 +2,7 @@
 import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
+import Title from "../components/Title.astro";
 ---
 
 <html lang="es">
@@ -15,14 +16,11 @@ import Header from "../components/Header.astro";
             <section class="max-w-4xl mx-auto py-16 px-6">
                 <!-- Encabezado -->
                 <div class="text-center mb-12">
-                    <h1 class="text-5xl md:text-6xl font-title font-extrabold text-walnut-deep mb-4">
-                        Contacta con Nosotros
-                    </h1>
-                    <div class="w-32 h-1 bg-gradient-to-r from-terra-cotta via-leather to-terra-cotta mx-auto rounded-full mb-6"></div>
-                    <p class="text-xl text-dark-brown/80 max-w-2xl mx-auto">
-                        ¿Te interesa alguna de nuestras piezas? ¿Quieres hacer un encargo personalizado? 
-                        Rellena el formulario y nos pondremos en contacto contigo lo antes posible.
-                    </p>
+                    <Title 
+                       title="Contacta con Nosotros" 
+                       description="¿Te interesa alguna de nuestras piezas? ¿Quieres hacer un encargo personalizado? 
+                       Rellena el formulario y nos pondremos en contacto contigo lo antes posible."
+                   />
                 </div>
 
                 <div class="grid md:grid-cols-2 gap-8">
