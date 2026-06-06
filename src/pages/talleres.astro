@@ -8,229 +8,279 @@ import Header from "../components/Header.astro";
     <head>
         <BaseHead title="Talleres de Artesanía - El Sablón" description="Aprende el arte de trabajar el cuero" />
     </head>
-    <body class="bg-gradient-to-b from-wood-light to-cream">
+    <body class="bg-surface-low">
         <main>
             <Header />
-            
-            <!-- Hero Section -->
-            <section class="relative h-[60vh] min-h-[500px] bg-cover bg-center flex items-center justify-center" style="background-image: linear-gradient(rgba(62, 39, 35, 0.7), rgba(62, 39, 35, 0.7)), url('/sablon.webp');">
+
+            <!-- Hero -->
+            <section class="relative h-[55vh] min-h-[440px] bg-cover bg-center flex items-center justify-center" style="background-image: linear-gradient(rgba(62, 39, 35, 0.72), rgba(62, 39, 35, 0.72)), url('/sablon.webp');">
                 <div class="text-center text-cream px-6">
-                    <h1 class="text-6xl md:text-7xl font-title font-extrabold mb-6 drop-shadow-2xl">
+                    <h1 class="text-5xl md:text-7xl font-title font-extrabold mb-4 drop-shadow-lg">
                         Talleres de Artesanía
                     </h1>
-                    <p class="text-2xl md:text-3xl font-light max-w-3xl mx-auto drop-shadow-lg">
+                    <p class="text-xl md:text-2xl font-light max-w-2xl mx-auto text-cream/90">
                         Aprende el arte milenario de trabajar el cuero
                     </p>
                 </div>
             </section>
 
             <!-- Introducción -->
-            <section class="max-w-5xl mx-auto py-16 px-6">
-                <div class="text-center mb-12">
-                    <h2 class="text-4xl md:text-5xl font-title font-bold text-walnut-deep mb-6">
-                        Conecta con la Tradición
-                    </h2>
-                    <div class="w-32 h-1 bg-gradient-to-r from-terra-cotta via-leather to-terra-cotta mx-auto rounded-full mb-8"></div>
-                    <p class="text-xl text-dark-brown/80 leading-relaxed max-w-3xl mx-auto">
-                        En nuestros talleres no solo aprendes una técnica, vives una experiencia. 
-                        Descubre el placer de crear con tus propias manos, guiado por artesanos 
-                        con décadas de experiencia que comparten sus conocimientos con pasión.
-                    </p>
-                </div>
+            <section class="max-w-3xl mx-auto py-16 px-6 text-center">
+                <h2 class="text-4xl md:text-5xl font-title font-bold text-walnut-deep mb-4">
+                    Conecta con la Tradición
+                </h2>
+                <div class="w-12 h-0.5 bg-leather mx-auto mb-8"></div>
+                <p class="text-lg text-dark-brown/80 leading-relaxed">
+                    En nuestros talleres no solo aprendes una técnica, vives una experiencia.
+                    Descubre el placer de crear con tus propias manos, guiado por artesanos
+                    con décadas de experiencia.
+                </p>
             </section>
 
-            <!-- Tipos de Talleres -->
+            <!-- Tarjetas de talleres -->
             <section class="max-w-6xl mx-auto px-6 mb-16">
-                <div class="grid md:grid-cols-3 gap-8">
-                    
+                <div class="grid md:grid-cols-3 gap-6">
+
                     <!-- Taller Iniciación -->
-                    <article class="bg-cream rounded-3xl shadow-2xl overflow-hidden transform hover:scale-105 transition-all duration-300">
-                        <div class="bg-gradient-to-br from-terra-cotta to-leather p-6 text-cream">
-                            <div class="text-5xl mb-4">🎓</div>
-                            <h3 class="text-2xl font-title font-bold">Iniciación</h3>
-                            <p class="text-cream/90 text-sm mt-2">Perfecto para principiantes</p>
-                        </div>
-                        
-                        <div class="p-6">
-                            <div class="mb-4">
-                                <span class="bg-terra-cotta/10 text-terra-cotta px-3 py-1 rounded-full text-sm font-semibold">
-                                    4 horas
-                                </span>
+                    <article class="bg-cream rounded-2xl shadow overflow-hidden hover:shadow-md transition-shadow duration-200">
+                        <div class="relative h-44 overflow-hidden">
+                            <img src="/plaza_ovinana.webp" alt="Taller de iniciación en cuero" class="w-full h-full object-cover" />
+                            <div class="absolute inset-0 bg-terra-cotta/65 flex flex-col justify-end p-6">
+                                <div class="flex items-center gap-2 mb-2 text-cream/80">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="10"/>
+                                        <polyline points="12 6 12 12 16 14"/>
+                                    </svg>
+                                    <span class="text-sm">4 horas</span>
+                                </div>
+                                <h3 class="text-2xl font-title font-bold text-cream">Iniciación</h3>
+                                <p class="text-cream/80 text-sm">Perfecto para principiantes</p>
                             </div>
-                            
-                            <h4 class="font-bold text-walnut-deep mb-3">¿Qué aprenderás?</h4>
-                            <ul class="space-y-2 text-dark-brown/80 mb-6">
-                                <li class="flex items-start gap-2">
-                                    <span class="text-terra-cotta">✓</span>
-                                    <span>Tipos de cuero y herramientas básicas</span>
+                        </div>
+
+                        <div class="p-6">
+                            <h4 class="font-semibold text-walnut-deep mb-3 text-sm uppercase tracking-wide">Aprenderás</h4>
+                            <ul class="space-y-2.5 text-dark-brown/80 mb-6">
+                                <li class="flex items-start gap-2.5">
+                                    <span class="text-terra-cotta mt-0.5 flex-shrink-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                    </span>
+                                    <span class="text-sm">Tipos de cuero y herramientas básicas</span>
                                 </li>
-                                <li class="flex items-start gap-2">
-                                    <span class="text-terra-cotta">✓</span>
-                                    <span>Técnicas de corte y preparación</span>
+                                <li class="flex items-start gap-2.5">
+                                    <span class="text-terra-cotta mt-0.5 flex-shrink-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                    </span>
+                                    <span class="text-sm">Técnicas de corte y preparación</span>
                                 </li>
-                                <li class="flex items-start gap-2">
-                                    <span class="text-terra-cotta">✓</span>
-                                    <span>Costura a mano básica</span>
+                                <li class="flex items-start gap-2.5">
+                                    <span class="text-terra-cotta mt-0.5 flex-shrink-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                    </span>
+                                    <span class="text-sm">Costura a mano básica</span>
                                 </li>
-                                <li class="flex items-start gap-2">
-                                    <span class="text-terra-cotta">✓</span>
-                                    <span>Crea tu primera pieza: llavero o pulsera</span>
+                                <li class="flex items-start gap-2.5">
+                                    <span class="text-terra-cotta mt-0.5 flex-shrink-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                    </span>
+                                    <span class="text-sm">Crea tu primera pieza: llavero o pulsera</span>
                                 </li>
                             </ul>
 
-                            <div class="bg-terra-cotta/5 p-4 rounded-xl mb-4">
-                                <p class="text-sm text-dark-brown/80">
-                                    <span class="font-semibold text-walnut-deep">Incluye:</span> 
-                                    Todos los materiales y herramientas. Te llevas tu pieza a casa.
-                                </p>
+                            <div class="bg-surface-low p-4 rounded-xl mb-5 text-sm text-dark-brown/70">
+                                <span class="font-semibold text-walnut-deep">Incluye:</span>
+                                todos los materiales y herramientas. Te llevas tu pieza a casa.
                             </div>
 
-                            <div class="text-center">
-                                <p class="text-3xl font-bold text-walnut-deep mb-2">45€</p>
-                                <p class="text-sm text-dark-brown/60">por persona</p>
+                            <div class="flex items-baseline gap-1">
+                                <span class="text-3xl font-bold text-walnut-deep">45€</span>
+                                <span class="text-sm text-dark-brown/60">/ persona</span>
                             </div>
                         </div>
                     </article>
 
                     <!-- Taller Intermedio -->
-                    <article class="bg-cream rounded-3xl shadow-2xl overflow-hidden transform hover:scale-105 transition-all duration-300 border-4 border-leather">
-                        <div class="bg-leather p-2 text-cream text-center text-sm font-bold">
-                            ⭐ MÁS POPULAR
+                    <article class="bg-cream rounded-2xl shadow overflow-hidden hover:shadow-md transition-shadow duration-200 ring-2 ring-leather">
+                        <div class="bg-leather px-4 py-1.5 text-cream text-xs font-bold tracking-widest uppercase text-center">
+                            Más Popular
                         </div>
-                        <div class="bg-gradient-to-br from-moss-green to-walnut-deep p-6 text-cream">
-                            <div class="text-5xl mb-4">🛠️</div>
-                            <h3 class="text-2xl font-title font-bold">Intermedio</h3>
-                            <p class="text-cream/90 text-sm mt-2">Para quien ya tiene nociones</p>
-                        </div>
-                        
-                        <div class="p-6">
-                            <div class="mb-4">
-                                <span class="bg-moss-green/10 text-moss-green px-3 py-1 rounded-full text-sm font-semibold">
-                                    8 horas (2 sesiones)
-                                </span>
+                        <div class="relative h-44 overflow-hidden">
+                            <img src="/plaza_somao.webp" alt="Taller intermedio de cuero" class="w-full h-full object-cover" />
+                            <div class="absolute inset-0 bg-moss-green/65 flex flex-col justify-end p-6">
+                                <div class="flex items-center gap-2 mb-2 text-cream/80">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="10"/>
+                                        <polyline points="12 6 12 12 16 14"/>
+                                    </svg>
+                                    <span class="text-sm">8 horas · 2 sesiones</span>
+                                </div>
+                                <h3 class="text-2xl font-title font-bold text-cream">Intermedio</h3>
+                                <p class="text-cream/80 text-sm">Para quien ya tiene nociones</p>
                             </div>
-                            
-                            <h4 class="font-bold text-walnut-deep mb-3">¿Qué aprenderás?</h4>
-                            <ul class="space-y-2 text-dark-brown/80 mb-6">
-                                <li class="flex items-start gap-2">
-                                    <span class="text-moss-green">✓</span>
-                                    <span>Técnicas de repujado y decoración</span>
+                        </div>
+
+                        <div class="p-6">
+                            <h4 class="font-semibold text-walnut-deep mb-3 text-sm uppercase tracking-wide">Aprenderás</h4>
+                            <ul class="space-y-2.5 text-dark-brown/80 mb-6">
+                                <li class="flex items-start gap-2.5">
+                                    <span class="text-moss-green mt-0.5 flex-shrink-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                    </span>
+                                    <span class="text-sm">Técnicas de repujado y decoración</span>
                                 </li>
-                                <li class="flex items-start gap-2">
-                                    <span class="text-moss-green">✓</span>
-                                    <span>Costura avanzada y remachado</span>
+                                <li class="flex items-start gap-2.5">
+                                    <span class="text-moss-green mt-0.5 flex-shrink-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                    </span>
+                                    <span class="text-sm">Costura avanzada y remachado</span>
                                 </li>
-                                <li class="flex items-start gap-2">
-                                    <span class="text-moss-green">✓</span>
-                                    <span>Teñido y acabados profesionales</span>
+                                <li class="flex items-start gap-2.5">
+                                    <span class="text-moss-green mt-0.5 flex-shrink-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                    </span>
+                                    <span class="text-sm">Teñido y acabados profesionales</span>
                                 </li>
-                                <li class="flex items-start gap-2">
-                                    <span class="text-moss-green">✓</span>
-                                    <span>Crea tu proyecto: cartera o bolso pequeño</span>
+                                <li class="flex items-start gap-2.5">
+                                    <span class="text-moss-green mt-0.5 flex-shrink-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                    </span>
+                                    <span class="text-sm">Crea tu proyecto: cartera o bolso pequeño</span>
                                 </li>
                             </ul>
 
-                            <div class="bg-moss-green/5 p-4 rounded-xl mb-4">
-                                <p class="text-sm text-dark-brown/80">
-                                    <span class="font-semibold text-walnut-deep">Incluye:</span> 
-                                    Todos los materiales, herramientas y merienda en el taller.
-                                </p>
+                            <div class="bg-surface-low p-4 rounded-xl mb-5 text-sm text-dark-brown/70">
+                                <span class="font-semibold text-walnut-deep">Incluye:</span>
+                                materiales, herramientas y merienda en el taller.
                             </div>
 
-                            <div class="text-center">
-                                <p class="text-3xl font-bold text-walnut-deep mb-2">120€</p>
-                                <p class="text-sm text-dark-brown/60">por persona</p>
+                            <div class="flex items-baseline gap-1">
+                                <span class="text-3xl font-bold text-walnut-deep">120€</span>
+                                <span class="text-sm text-dark-brown/60">/ persona</span>
                             </div>
                         </div>
                     </article>
 
                     <!-- Taller Personalizado -->
-                    <article class="bg-cream rounded-3xl shadow-2xl overflow-hidden transform hover:scale-105 transition-all duration-300">
-                        <div class="bg-gradient-to-br from-walnut-deep to-dark-brown p-6 text-cream">
-                            <div class="text-5xl mb-4">👨‍🎨</div>
-                            <h3 class="text-2xl font-title font-bold">Personalizado</h3>
-                            <p class="text-cream/90 text-sm mt-2">Tu proyecto, tu ritmo</p>
-                        </div>
-                        
-                        <div class="p-6">
-                            <div class="mb-4">
-                                <span class="bg-walnut-deep/10 text-walnut-deep px-3 py-1 rounded-full text-sm font-semibold">
-                                    Flexible
-                                </span>
+                    <article class="bg-cream rounded-2xl shadow overflow-hidden hover:shadow-md transition-shadow duration-200">
+                        <div class="relative h-44 overflow-hidden">
+                            <img src="/sablon.webp" alt="Taller personalizado de artesanía" class="w-full h-full object-cover" />
+                            <div class="absolute inset-0 bg-walnut-deep/70 flex flex-col justify-end p-6">
+                                <div class="flex items-center gap-2 mb-2 text-cream/80">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                        <line x1="16" y1="2" x2="16" y2="6"/>
+                                        <line x1="8" y1="2" x2="8" y2="6"/>
+                                        <line x1="3" y1="10" x2="21" y2="10"/>
+                                    </svg>
+                                    <span class="text-sm">Duración flexible</span>
+                                </div>
+                                <h3 class="text-2xl font-title font-bold text-cream">Personalizado</h3>
+                                <p class="text-cream/80 text-sm">Tu proyecto, tu ritmo</p>
                             </div>
-                            
-                            <h4 class="font-bold text-walnut-deep mb-3">¿En qué consiste?</h4>
-                            <ul class="space-y-2 text-dark-brown/80 mb-6">
-                                <li class="flex items-start gap-2">
-                                    <span class="text-walnut-deep">✓</span>
-                                    <span>Elige tu proyecto (cinturón, bolso, etc.)</span>
+                        </div>
+
+                        <div class="p-6">
+                            <h4 class="font-semibold text-walnut-deep mb-3 text-sm uppercase tracking-wide">En qué consiste</h4>
+                            <ul class="space-y-2.5 text-dark-brown/80 mb-6">
+                                <li class="flex items-start gap-2.5">
+                                    <span class="text-walnut-deep mt-0.5 flex-shrink-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                    </span>
+                                    <span class="text-sm">Elige tu proyecto (cinturón, bolso…)</span>
                                 </li>
-                                <li class="flex items-start gap-2">
-                                    <span class="text-walnut-deep">✓</span>
-                                    <span>Atención individual o grupos reducidos</span>
+                                <li class="flex items-start gap-2.5">
+                                    <span class="text-walnut-deep mt-0.5 flex-shrink-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                    </span>
+                                    <span class="text-sm">Atención individual o grupos reducidos</span>
                                 </li>
-                                <li class="flex items-start gap-2">
-                                    <span class="text-walnut-deep">✓</span>
-                                    <span>Adaptado a tu nivel</span>
+                                <li class="flex items-start gap-2.5">
+                                    <span class="text-walnut-deep mt-0.5 flex-shrink-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                    </span>
+                                    <span class="text-sm">Adaptado a tu nivel</span>
                                 </li>
-                                <li class="flex items-start gap-2">
-                                    <span class="text-walnut-deep">✓</span>
-                                    <span>Ideal para regalos o eventos especiales</span>
+                                <li class="flex items-start gap-2.5">
+                                    <span class="text-walnut-deep mt-0.5 flex-shrink-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                    </span>
+                                    <span class="text-sm">Ideal para regalos o eventos especiales</span>
                                 </li>
                             </ul>
 
-                            <div class="bg-walnut-deep/5 p-4 rounded-xl mb-4">
-                                <p class="text-sm text-dark-brown/80">
-                                    <span class="font-semibold text-walnut-deep">Perfecto para:</span> 
-                                    Despedidas, team building, regalos de empresa o grupos de amigos.
-                                </p>
+                            <div class="bg-surface-low p-4 rounded-xl mb-5 text-sm text-dark-brown/70">
+                                <span class="font-semibold text-walnut-deep">Perfecto para:</span>
+                                despedidas, team building, grupos de amigos o empresa.
                             </div>
 
-                            <div class="text-center">
-                                <p class="text-2xl font-bold text-walnut-deep mb-2">A consultar</p>
-                                <p class="text-sm text-dark-brown/60">Según proyecto y duración</p>
+                            <div class="flex items-baseline gap-1">
+                                <span class="text-2xl font-bold text-walnut-deep">A consultar</span>
                             </div>
                         </div>
                     </article>
                 </div>
             </section>
 
-            <!-- ¿Por qué nuestros talleres? -->
-            <section class="bg-leather/5 py-16">
+            <!-- Por qué elegirnos -->
+            <section class="bg-cream py-16">
                 <div class="max-w-5xl mx-auto px-6">
-                    <h2 class="text-4xl font-title font-bold text-walnut-deep mb-12 text-center">
-                        ¿Por qué elegir nuestros talleres?
+                    <h2 class="text-3xl font-title font-bold text-walnut-deep mb-12 text-center">
+                        Por qué elegir nuestros talleres
                     </h2>
-                    
-                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        <div class="bg-cream p-6 rounded-2xl text-center shadow-lg">
-                            <div class="text-5xl mb-4">👴</div>
-                            <h3 class="font-bold text-walnut-deep mb-2">40 años de experiencia</h3>
-                            <p class="text-sm text-dark-brown/80">
+
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+                        <div class="p-6 rounded-2xl bg-surface-low">
+                            <div class="w-10 h-10 bg-leather/10 rounded-xl flex items-center justify-center mb-4 text-leather">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                    <polyline points="9 12 11 14 15 10"/>
+                                </svg>
+                            </div>
+                            <h3 class="font-bold text-walnut-deep mb-2 text-sm">40 años de experiencia</h3>
+                            <p class="text-xs text-dark-brown/70 leading-relaxed">
                                 Aprende de maestros artesanos con décadas de oficio
                             </p>
                         </div>
 
-                        <div class="bg-cream p-6 rounded-2xl text-center shadow-lg">
-                            <div class="text-5xl mb-4">👥</div>
-                            <h3 class="font-bold text-walnut-deep mb-2">Grupos reducidos</h3>
-                            <p class="text-sm text-dark-brown/80">
+                        <div class="p-6 rounded-2xl bg-surface-low">
+                            <div class="w-10 h-10 bg-leather/10 rounded-xl flex items-center justify-center mb-4 text-leather">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                    <circle cx="9" cy="7" r="4"/>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                                </svg>
+                            </div>
+                            <h3 class="font-bold text-walnut-deep mb-2 text-sm">Grupos reducidos</h3>
+                            <p class="text-xs text-dark-brown/70 leading-relaxed">
                                 Máximo 6 personas por taller para atención personalizada
                             </p>
                         </div>
 
-                        <div class="bg-cream p-6 rounded-2xl text-center shadow-lg">
-                            <div class="text-5xl mb-4">🎁</div>
-                            <h3 class="font-bold text-walnut-deep mb-2">Tu pieza única</h3>
-                            <p class="text-sm text-dark-brown/80">
+                        <div class="p-6 rounded-2xl bg-surface-low">
+                            <div class="w-10 h-10 bg-leather/10 rounded-xl flex items-center justify-center mb-4 text-leather">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="16.5" y1="9.4" x2="7.55" y2="4.24"/>
+                                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                                    <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                                    <line x1="12" y1="22.08" x2="12" y2="12"/>
+                                </svg>
+                            </div>
+                            <h3 class="font-bold text-walnut-deep mb-2 text-sm">Tu pieza única</h3>
+                            <p class="text-xs text-dark-brown/70 leading-relaxed">
                                 Te llevas a casa lo que has creado con tus manos
                             </p>
                         </div>
 
-                        <div class="bg-cream p-6 rounded-2xl text-center shadow-lg">
-                            <div class="text-5xl mb-4">☕</div>
-                            <h3 class="font-bold text-walnut-deep mb-2">Ambiente acogedor</h3>
-                            <p class="text-sm text-dark-brown/80">
+                        <div class="p-6 rounded-2xl bg-surface-low">
+                            <div class="w-10 h-10 bg-leather/10 rounded-xl flex items-center justify-center mb-4 text-leather">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                                    <polyline points="9 22 9 12 15 12 15 22"/>
+                                </svg>
+                            </div>
+                            <h3 class="font-bold text-walnut-deep mb-2 text-sm">Ambiente acogedor</h3>
+                            <p class="text-xs text-dark-brown/70 leading-relaxed">
                                 Taller familiar con café, galletas y buenas conversaciones
                             </p>
                         </div>
@@ -238,87 +288,115 @@ import Header from "../components/Header.astro";
                 </div>
             </section>
 
-            <!-- Galería / Testimonios -->
+            <!-- Testimonios -->
             <section class="max-w-5xl mx-auto py-16 px-6">
-                <h2 class="text-4xl font-title font-bold text-walnut-deep mb-12 text-center">
+                <h2 class="text-3xl font-title font-bold text-walnut-deep mb-12 text-center">
                     Lo que dicen nuestros alumnos
                 </h2>
-                
+
                 <div class="grid md:grid-cols-3 gap-6">
-                    <div class="bg-cream p-6 rounded-2xl shadow-lg">
-                        <div class="flex items-center gap-2 mb-4">
-                            <div class="text-3xl">⭐⭐⭐⭐⭐</div>
-                        </div>
-                        <p class="text-dark-brown/80 italic mb-4">
-                            "Una experiencia increíble. Aprendí muchísimo y me llevé una cartera preciosa que hice yo misma. ¡Volveré seguro!"
+                    <div class="bg-cream p-8 rounded-2xl shadow">
+                        <div class="text-5xl font-title text-leather/20 leading-none -mt-2 mb-3 select-none">"</div>
+                        <p class="text-dark-brown/80 italic leading-relaxed mb-5">
+                            Una experiencia increíble. Aprendí muchísimo y me llevé una cartera preciosa que hice yo misma. ¡Volveré seguro!
                         </p>
-                        <p class="font-semibold text-walnut-deep">- María G.</p>
+                        <p class="text-sm font-semibold text-walnut-deep">— María G.</p>
                     </div>
 
-                    <div class="bg-cream p-6 rounded-2xl shadow-lg">
-                        <div class="flex items-center gap-2 mb-4">
-                            <div class="text-3xl">⭐⭐⭐⭐⭐</div>
-                        </div>
-                        <p class="text-dark-brown/80 italic mb-4">
-                            "El maestro tiene una paciencia infinita y se nota que ama lo que hace. Un taller 100% recomendable."
+                    <div class="bg-cream p-8 rounded-2xl shadow">
+                        <div class="text-5xl font-title text-leather/20 leading-none -mt-2 mb-3 select-none">"</div>
+                        <p class="text-dark-brown/80 italic leading-relaxed mb-5">
+                            El maestro tiene una paciencia infinita y se nota que ama lo que hace. Un taller 100% recomendable.
                         </p>
-                        <p class="font-semibold text-walnut-deep">- Carlos R.</p>
+                        <p class="text-sm font-semibold text-walnut-deep">— Carlos R.</p>
                     </div>
 
-                    <div class="bg-cream p-6 rounded-2xl shadow-lg">
-                        <div class="flex items-center gap-2 mb-4">
-                            <div class="text-3xl">⭐⭐⭐⭐⭐</div>
-                        </div>
-                        <p class="text-dark-brown/80 italic mb-4">
-                            "Lo regalé para una despedida y fue un éxito total. Todos disfrutamos muchísimo creando nuestras piezas."
+                    <div class="bg-cream p-8 rounded-2xl shadow">
+                        <div class="text-5xl font-title text-leather/20 leading-none -mt-2 mb-3 select-none">"</div>
+                        <p class="text-dark-brown/80 italic leading-relaxed mb-5">
+                            Lo regalé para una despedida y fue un éxito total. Todos disfrutamos muchísimo creando nuestras piezas.
                         </p>
-                        <p class="font-semibold text-walnut-deep">- Laura M.</p>
+                        <p class="text-sm font-semibold text-walnut-deep">— Laura M.</p>
                     </div>
                 </div>
             </section>
 
-            <!-- Información práctica -->
+            <!-- Información Práctica -->
             <section class="max-w-4xl mx-auto px-6 mb-16">
-                <div class="bg-gradient-to-br from-wood-light to-cream p-8 rounded-3xl shadow-2xl">
-                    <h2 class="text-3xl font-title font-bold text-walnut-deep mb-8 text-center">
-                        📋 Información Práctica
+                <div class="bg-cream p-8 rounded-2xl shadow">
+                    <h2 class="text-3xl font-title font-bold text-walnut-deep mb-8">
+                        Información Práctica
                     </h2>
-                    
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <div>
-                            <h3 class="font-bold text-walnut-deep mb-3 flex items-center gap-2">
-                                <span>📍</span> Ubicación
-                            </h3>
-                            <p class="text-dark-brown/80 mb-6">
-                                Los talleres se realizan en nuestro taller de Asturias. 
-                                Te daremos la ubicación exacta al confirmar tu reserva.
-                            </p>
 
-                            <h3 class="font-bold text-walnut-deep mb-3 flex items-center gap-2">
-                                <span>👕</span> ¿Qué necesito?
-                            </h3>
-                            <p class="text-dark-brown/80 mb-6">
-                                Solo ganas de aprender y ropa cómoda. Nosotros ponemos 
-                                todo lo demás: materiales, herramientas y delantal.
-                            </p>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="space-y-6">
+                            <div class="flex items-start gap-4">
+                                <div class="w-9 h-9 bg-leather/10 rounded-xl flex items-center justify-center flex-shrink-0 text-leather">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                        <circle cx="12" cy="10" r="3"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-walnut-deep mb-1">Ubicación</h3>
+                                    <p class="text-sm text-dark-brown/70">
+                                        Los talleres se realizan en nuestro taller de Asturias.
+                                        Te daremos la ubicación exacta al confirmar tu reserva.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4">
+                                <div class="w-9 h-9 bg-leather/10 rounded-xl flex items-center justify-center flex-shrink-0 text-leather">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="10"/>
+                                        <line x1="12" y1="8" x2="12" y2="12"/>
+                                        <line x1="12" y1="16" x2="12.01" y2="16"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-walnut-deep mb-1">Qué necesitas</h3>
+                                    <p class="text-sm text-dark-brown/70">
+                                        Solo ganas de aprender y ropa cómoda. Nosotros ponemos
+                                        todo lo demás: materiales, herramientas y delantal.
+                                    </p>
+                                </div>
+                            </div>
                         </div>
 
-                        <div>
-                            <h3 class="font-bold text-walnut-deep mb-3 flex items-center gap-2">
-                                <span>📅</span> Fechas
-                            </h3>
-                            <p class="text-dark-brown/80 mb-6">
-                                Organizamos talleres cada mes. Consúltanos disponibilidad 
-                                o reserva para grupos privados en la fecha que prefieras.
-                            </p>
+                        <div class="space-y-6">
+                            <div class="flex items-start gap-4">
+                                <div class="w-9 h-9 bg-leather/10 rounded-xl flex items-center justify-center flex-shrink-0 text-leather">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                        <line x1="16" y1="2" x2="16" y2="6"/>
+                                        <line x1="8" y1="2" x2="8" y2="6"/>
+                                        <line x1="3" y1="10" x2="21" y2="10"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-walnut-deep mb-1">Fechas</h3>
+                                    <p class="text-sm text-dark-brown/70">
+                                        Organizamos talleres cada mes. Consúltanos disponibilidad
+                                        o reserva para grupos privados en la fecha que prefieras.
+                                    </p>
+                                </div>
+                            </div>
 
-                            <h3 class="font-bold text-walnut-deep mb-3 flex items-center gap-2">
-                                <span>🎫</span> Reservas
-                            </h3>
-                            <p class="text-dark-brown/80">
-                                Es necesario reservar con al menos una semana de antelación. 
-                                Plazas limitadas para garantizar calidad.
-                            </p>
+                            <div class="flex items-start gap-4">
+                                <div class="w-9 h-9 bg-leather/10 rounded-xl flex items-center justify-center flex-shrink-0 text-leather">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-walnut-deep mb-1">Reservas</h3>
+                                    <p class="text-sm text-dark-brown/70">
+                                        Es necesario reservar con al menos una semana de antelación.
+                                        Plazas limitadas para garantizar calidad.
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -326,26 +404,26 @@ import Header from "../components/Header.astro";
 
             <!-- CTA Final -->
             <section class="max-w-4xl mx-auto px-6 mb-16">
-                <div class="bg-gradient-to-r from-leather to-walnut-deep text-cream p-12 rounded-3xl shadow-2xl text-center">
+                <div class="bg-leather text-cream p-10 md:p-14 rounded-2xl text-center">
                     <h2 class="text-4xl font-title font-bold mb-4">
                         ¿Listo para crear tu primera pieza?
                     </h2>
-                    <p class="text-xl mb-8 text-cream/90 max-w-2xl mx-auto">
-                        Reserva tu plaza en el próximo taller o consúltanos 
-                        para organizar una sesión privada para tu grupo.
+                    <p class="text-lg mb-8 text-cream/85 max-w-xl mx-auto">
+                        Reserva tu plaza en el próximo taller o consúltanos
+                        para organizar una sesión privada.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center">
                         <a
                             href="/contacto"
-                            class="inline-block bg-cream text-walnut-deep px-10 py-4 rounded-xl font-bold text-lg hover:bg-wood-light transition-colors duration-300 shadow-lg"
+                            class="inline-block bg-cream text-leather px-8 py-3 rounded-full font-semibold hover:bg-wood-light transition-colors duration-200"
                         >
                             Reservar Taller
                         </a>
                         <a
                             href="/contacto"
-                            class="inline-block bg-transparent border-2 border-cream text-cream px-10 py-4 rounded-xl font-bold text-lg hover:bg-cream/10 transition-colors duration-300"
+                            class="inline-block border border-cream/50 text-cream px-8 py-3 rounded-full font-semibold hover:border-cream hover:bg-cream/10 transition-colors duration-200"
                         >
-                            Más Información
+                            Más información
                         </a>
                     </div>
                 </div>

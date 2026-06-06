@@ -1,15 +1,19 @@
-import React from 'react';
 import { Eye } from 'lucide-react';
 
 export interface Props {
   id: number;
+  artisan: string;
+  artisanName: string;
+  category: string;
+  categoryLabel: string;
   title: string;
   description: string;
   images: string[];
   longDescription: string;
 }
 
-export default function ItemCard({ id, title, description, images, longDescription }: Props) {
+export default function ItemCard({ id, artisan, artisanName, categoryLabel, title, description, images, longDescription }: Props) {
+  const isCollaborator = artisan !== 'sablon';
   const handleViewDetails = () => {
     const event = new CustomEvent("openModal", {
       detail: { id, title, longDescription, images },
@@ -20,104 +24,82 @@ export default function ItemCard({ id, title, description, images, longDescripti
   return (
     <article
       onClick={handleViewDetails}
-      className="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 cursor-pointer"
+      className="group relative bg-cream rounded-2xl overflow-hidden shadow hover:shadow-md transition-shadow duration-200 cursor-pointer"
     >
-      {/* Imagen Container */}
-      <div className="relative h-80 overflow-hidden bg-gradient-to-br from-amber-50 to-stone-100">
+      {/* Imagen */}
+      <div className="relative h-80 overflow-hidden bg-surface-low">
         <img
           src={images[0]}
           alt={title}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
-        
-        {/* Overlay gradiente */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-        
-        {/* Badge de "Artesanal" */}
-        <div className="absolute top-4 left-4 bg-amber-900/90 backdrop-blur-sm text-amber-50 px-3 py-1.5 rounded-full text-xs font-semibold tracking-wide shadow-lg">
-          🔨 HECHO A MANO
+
+        {/* Overlay sutil en hover */}
+        <div className="absolute inset-0 bg-walnut-deep/0 group-hover:bg-walnut-deep/20 transition-colors duration-300" />
+
+        {/* Badge */}
+        <div className="absolute top-4 left-4 bg-leather/90 text-cream px-3 py-1.5 rounded-full text-xs font-semibold tracking-wide flex items-center gap-1.5">
+          <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/>
+            <line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/>
+            <line x1="8.12" y1="8.12" x2="12" y2="12"/>
+          </svg>
+          HECHO A MANO
         </div>
-        
-        {/* Botón de ver */}
-        <div className="absolute top-4 right-4">
-          <div className="w-10 h-10 rounded-full bg-white/90 backdrop-blur-md text-stone-700 flex items-center justify-center hover:bg-white hover:scale-110 transition-all duration-300 shadow-lg">
-            <Eye size={18} />
+
+        {/* Botón ver */}
+        <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+          <div className="w-9 h-9 rounded-full bg-cream/95 text-leather flex items-center justify-center shadow">
+            <Eye size={16} />
           </div>
         </div>
 
-        {/* Indicador de múltiples imágenes */}
+        {/* Indicador múltiples imágenes */}
         {images.length > 1 && (
-          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-1.5">
+          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
             {images.slice(0, 4).map((_, i) => (
-              <div
-                key={i}
-                className="w-2 h-2 rounded-full bg-white/60 backdrop-blur-sm shadow-sm"
-              />
+              <div key={i} className="w-1.5 h-1.5 rounded-full bg-cream/70" />
             ))}
             {images.length > 4 && (
-              <span className="text-white/80 text-xs ml-1 font-medium">+{images.length - 4}</span>
+              <span className="text-cream/70 text-xs ml-1">+{images.length - 4}</span>
             )}
           </div>
         )}
-
-        {/* Texto "Ver detalles" en hover */}
-        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-          <div className="bg-white/95 backdrop-blur-sm px-6 py-3 rounded-full shadow-2xl">
-            <span className="text-amber-900 font-bold flex items-center gap-2">
-              Ver Detalles
-              <span className="transform group-hover:translate-x-1 transition-transform duration-300">→</span>
-            </span>
-          </div>
-        </div>
       </div>
 
       {/* Contenido */}
       <div className="p-6">
-        {/* Categoría/Tag */}
-        <p className="text-amber-700 text-sm font-medium mb-2 tracking-wide">
-          ARTESANÍA EN CUERO
-        </p>
-        
-        {/* Título */}
-        <h3 className="text-2xl font-bold text-stone-900 mb-2 group-hover:text-amber-900 transition-colors duration-300">
+        <div className="flex items-center gap-2 mb-2">
+          <p className="text-terra-cotta text-xs font-semibold tracking-wider uppercase">
+            {categoryLabel}
+          </p>
+          {isCollaborator && (
+            <span className="text-moss-green text-xs font-semibold">· {artisanName}</span>
+          )}
+        </div>
+
+        <h3 className="text-xl font-title font-bold text-walnut-deep mb-2 group-hover:text-leather transition-colors duration-200">
           {title}
         </h3>
-        
-        {/* Descripción */}
-        <p className="text-stone-600 text-sm leading-relaxed mb-4 line-clamp-2">
+
+        <p className="text-dark-brown/60 text-sm leading-relaxed mb-4 line-clamp-2">
           {description}
         </p>
 
-        {/* Características */}
-        <div className="flex items-center gap-4 text-xs text-stone-500 mb-4">
-          <div className="flex items-center gap-1">
-            <span className="font-semibold">✓</span>
-            <span>100% Natural</span>
-          </div>
-          <div className="flex items-center gap-1">
-            <span className="font-semibold">✓</span>
-            <span>Duradero</span>
-          </div>
-          <div className="flex items-center gap-1">
-            <span className="font-semibold">✓</span>
-            <span>Único</span>
-          </div>
+        <div className="flex items-center gap-4 text-xs text-dark-brown/50 mb-4">
+          <span>100% Natural</span>
+          <span className="w-px h-3 bg-dark-brown/20" />
+          <span>Duradero</span>
+          <span className="w-px h-3 bg-dark-brown/20" />
+          <span>Único</span>
         </div>
 
-        {/* Separador decorativo */}
-        <div className="h-px bg-gradient-to-r from-transparent via-amber-200 to-transparent mb-4" />
+        <div className="h-px bg-leather/15 mb-4" />
 
-        {/* Footer */}
-        <div className="text-center">
-          <p className="text-sm text-stone-500 mb-1">Pieza artesanal única</p>
-          <p className="text-lg font-bold text-amber-900">
-            Consultar disponibilidad
-          </p>
-        </div>
+        <p className="text-sm font-semibold text-leather text-center">
+          Consultar disponibilidad
+        </p>
       </div>
-
-      {/* Efecto de brillo al hover */}
-      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 pointer-events-none" />
     </article>
   );
 }

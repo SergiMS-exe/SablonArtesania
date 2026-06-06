@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { X, ChevronLeft, ChevronRight, Maximize2 } from 'lucide-react';
 
 interface Producto {
@@ -18,7 +18,7 @@ export default function ModalCarousel() {
         setCurrentIndex(0);
         setFullscreen(false);
     };
-    
+
     const closeModal = () => setProducto(null);
 
     const prev = (e?: React.MouseEvent<HTMLButtonElement>) => {
@@ -26,7 +26,7 @@ export default function ModalCarousel() {
         if (!producto) return;
         setCurrentIndex((i) => (i - 1 + producto.images.length) % producto.images.length);
     };
-    
+
     const next = (e?: React.MouseEvent<HTMLButtonElement>) => {
         e?.stopPropagation();
         if (!producto) return;
@@ -45,11 +45,8 @@ export default function ModalCarousel() {
             if (ev.key === 'ArrowRight') next();
             if (ev.key === 'ArrowLeft') prev();
             if (ev.key === 'Escape') {
-                if (fullscreen) {
-                    setFullscreen(false);
-                } else {
-                    closeModal();
-                }
+                if (fullscreen) setFullscreen(false);
+                else closeModal();
             }
         };
         window.addEventListener('keydown', onKey);
@@ -62,78 +59,71 @@ export default function ModalCarousel() {
 
     return (
         <div
-            className="fixed inset-0 bg-black/85 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4"
             onClick={closeModal}
         >
-            {/* Modal principal */}
+            {/* Modal */}
             <div
-                className="relative w-full max-w-5xl max-h-[90vh] bg-gradient-to-br from-amber-50 to-stone-100 rounded-3xl shadow-2xl flex flex-col overflow-hidden"
+                className="relative w-full max-w-5xl max-h-[90vh] bg-cream rounded-2xl shadow-2xl flex flex-col overflow-hidden"
                 onClick={(e) => e.stopPropagation()}
             >
-                {/* Header decorativo */}
-                <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-amber-700 via-amber-500 to-amber-700" />
-
                 {/* Botón cerrar */}
                 <button
                     onClick={closeModal}
-                    className="absolute top-6 right-6 z-10 bg-white/90 hover:bg-white p-2.5 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl group"
+                    className="absolute top-5 right-5 z-10 bg-surface-low hover:bg-surface-container p-2 rounded-xl transition-colors duration-200 shadow"
+                    aria-label="Cerrar"
                 >
-                    <X className="w-6 h-6 text-stone-700 group-hover:rotate-90 transition-transform duration-300" />
+                    <X className="w-5 h-5 text-walnut-deep" />
                 </button>
 
                 <div className="flex flex-col md:flex-row overflow-y-auto">
-                    {/* Columna izquierda - Imágenes */}
-                    <div className="md:w-1/2 p-8">
-                        {/* Imagen principal */}
-                        <div className="relative mb-4 group">
-                            <div className="aspect-square bg-white rounded-2xl overflow-hidden shadow-xl">
+                    {/* Imágenes */}
+                    <div className="md:w-1/2 p-7">
+                        <div className="relative mb-3 group">
+                            <div className="aspect-square bg-surface-low rounded-xl overflow-hidden">
                                 <img
                                     src={images[currentIndex]}
                                     alt={`${title} - imagen ${currentIndex + 1}`}
                                     className="w-full h-full object-cover"
                                 />
-                                
-                                {/* Overlay para zoom */}
-                                <div 
+                                <div
                                     onClick={() => setFullscreen(true)}
-                                    className="absolute inset-0 bg-black/0 hover:bg-black/20 transition-colors duration-300 cursor-zoom-in flex items-center justify-center"
+                                    className="absolute inset-0 bg-black/0 hover:bg-black/15 transition-colors duration-200 cursor-zoom-in flex items-center justify-center"
                                 >
-                                    <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/90 backdrop-blur-sm rounded-full p-3 shadow-lg">
-                                        <Maximize2 className="w-6 h-6 text-stone-700" />
+                                    <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-cream/90 rounded-xl p-2.5 shadow">
+                                        <Maximize2 className="w-5 h-5 text-walnut-deep" />
                                     </div>
                                 </div>
                             </div>
 
-                            {/* Flechas de navegación */}
                             {images.length > 1 && (
                                 <>
                                     <button
                                         onClick={prev}
-                                        className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110"
+                                        className="absolute left-3 top-1/2 -translate-y-1/2 bg-cream/90 hover:bg-cream p-2.5 rounded-xl shadow transition-colors duration-200"
                                     >
-                                        <ChevronLeft className="w-6 h-6 text-stone-700" />
+                                        <ChevronLeft className="w-5 h-5 text-walnut-deep" />
                                     </button>
                                     <button
                                         onClick={next}
-                                        className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110"
+                                        className="absolute right-3 top-1/2 -translate-y-1/2 bg-cream/90 hover:bg-cream p-2.5 rounded-xl shadow transition-colors duration-200"
                                     >
-                                        <ChevronRight className="w-6 h-6 text-stone-700" />
+                                        <ChevronRight className="w-5 h-5 text-walnut-deep" />
                                     </button>
                                 </>
                             )}
                         </div>
 
-                        {/* Miniaturas */}
                         {images.length > 1 && (
-                            <div className="flex gap-2 overflow-x-auto pb-2">
+                            <div className="flex gap-2 overflow-x-auto pb-1">
                                 {images.map((img, i) => (
                                     <button
                                         key={i}
                                         onClick={() => setCurrentIndex(i)}
-                                        className={`flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden transition-all duration-300 ${
-                                            i === currentIndex 
-                                                ? 'ring-4 ring-amber-600 scale-105' 
-                                                : 'ring-2 ring-stone-300 hover:ring-amber-400 opacity-70 hover:opacity-100'
+                                        className={`flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden transition-all duration-200 ${
+                                            i === currentIndex
+                                                ? 'ring-2 ring-leather'
+                                                : 'ring-1 ring-dark-brown/20 opacity-60 hover:opacity-100'
                                         }`}
                                     >
                                         <img
@@ -147,57 +137,54 @@ export default function ModalCarousel() {
                         )}
                     </div>
 
-                    {/* Columna derecha - Información */}
-                    <div className="md:w-1/2 p-8 flex flex-col">
-                        {/* Badge artesanal */}
-                        <div className="inline-flex items-center gap-2 bg-amber-900/10 text-amber-900 px-4 py-2 rounded-full text-sm font-semibold w-fit mb-4">
-                            <span>🔨</span>
-                            <span>PIEZA ARTESANAL</span>
+                    {/* Información */}
+                    <div className="md:w-1/2 p-7 flex flex-col">
+                        {/* Badge */}
+                        <div className="inline-flex items-center gap-2 bg-leather/10 text-leather px-3 py-1.5 rounded-full text-xs font-semibold w-fit mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/>
+                                <line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/>
+                                <line x1="8.12" y1="8.12" x2="12" y2="12"/>
+                            </svg>
+                            PIEZA ARTESANAL
                         </div>
 
-                        {/* Título */}
-                        <h2 className="text-4xl font-bold text-stone-900 mb-4 font-serif">
+                        <h2 className="text-3xl font-bold text-walnut-deep mb-3 font-title">
                             {title}
                         </h2>
 
-                        {/* Separador decorativo */}
-                        <div className="h-1 w-24 bg-gradient-to-r from-amber-700 to-amber-500 rounded-full mb-6" />
+                        <div className="h-0.5 w-16 bg-leather/40 rounded-full mb-5" />
 
-                        {/* Descripción */}
-                        <div className="flex-1 overflow-y-auto mb-6">
-                            <p className="text-stone-700 text-lg leading-relaxed">
+                        <div className="flex-1 overflow-y-auto mb-5">
+                            <p className="text-dark-brown/80 leading-relaxed">
                                 {longDescription}
                             </p>
 
-                            {/* Características adicionales */}
-                            <div className="mt-8 space-y-3">
-                                <div className="flex items-start gap-3">
-                                    <span className="text-amber-700 text-xl">✓</span>
-                                    <span className="text-stone-600">Fabricado íntegramente a mano</span>
-                                </div>
-                                <div className="flex items-start gap-3">
-                                    <span className="text-amber-700 text-xl">✓</span>
-                                    <span className="text-stone-600">Materiales naturales de primera calidad</span>
-                                </div>
-                                <div className="flex items-start gap-3">
-                                    <span className="text-amber-700 text-xl">✓</span>
-                                    <span className="text-stone-600">Personalizable bajo pedido</span>
-                                </div>
-                                <div className="flex items-start gap-3">
-                                    <span className="text-amber-700 text-xl">✓</span>
-                                    <span className="text-stone-600">Cada pieza es única e irrepetible</span>
-                                </div>
+                            <div className="mt-6 space-y-2.5">
+                                {[
+                                    'Fabricado íntegramente a mano',
+                                    'Materiales naturales de primera calidad',
+                                    'Personalizable bajo pedido',
+                                    'Cada pieza es única e irrepetible',
+                                ].map((feat) => (
+                                    <div key={feat} className="flex items-start gap-2.5">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" className="text-leather flex-shrink-0 mt-0.5">
+                                            <polyline points="20 6 9 17 4 12"/>
+                                        </svg>
+                                        <span className="text-sm text-dark-brown/70">{feat}</span>
+                                    </div>
+                                ))}
                             </div>
                         </div>
 
-                        {/* Call to action */}
-                        <div className="bg-white rounded-2xl p-6 shadow-lg border-2 border-amber-200">
-                            <p className="text-stone-700 text-center mb-4">
+                        {/* CTA */}
+                        <div className="bg-surface-low rounded-2xl p-5 border border-leather/15">
+                            <p className="text-dark-brown/70 text-sm text-center mb-3">
                                 ¿Te interesa esta pieza?
                             </p>
                             <a
                                 href="/contacto"
-                                className="block w-full bg-gradient-to-r from-amber-700 to-amber-600 hover:from-amber-800 hover:to-amber-700 text-white text-center py-4 rounded-xl font-bold text-lg transition-all duration-300 shadow-md hover:shadow-xl"
+                                className="block w-full bg-leather hover:bg-walnut-deep text-cream text-center py-3 rounded-full font-semibold transition-colors duration-200"
                             >
                                 Consultar Disponibilidad
                             </a>
@@ -206,7 +193,7 @@ export default function ModalCarousel() {
                 </div>
             </div>
 
-            {/* Fullscreen Overlay */}
+            {/* Fullscreen */}
             {fullscreen && (
                 <div
                     className="fixed inset-0 bg-black/95 flex items-center justify-center z-[60]"
@@ -216,41 +203,35 @@ export default function ModalCarousel() {
                         <img
                             src={images[currentIndex]}
                             alt={`${title} fullscreen`}
-                            className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+                            className="max-w-full max-h-full object-contain rounded-xl"
                         />
-                        
-                        {/* Botón cerrar fullscreen */}
+
                         <button
-                            onClick={(e) => {
-                                e.stopPropagation();
-                                setFullscreen(false);
-                            }}
-                            className="absolute top-8 right-8 bg-white/90 hover:bg-white p-3 rounded-full transition-all duration-300 shadow-lg"
+                            onClick={(e) => { e.stopPropagation(); setFullscreen(false); }}
+                            className="absolute top-6 right-6 bg-cream/90 hover:bg-cream p-2.5 rounded-xl transition-colors duration-200 shadow"
                         >
-                            <X className="w-8 h-8 text-stone-700" />
+                            <X className="w-6 h-6 text-walnut-deep" />
                         </button>
 
-                        {/* Navegación en fullscreen */}
                         {images.length > 1 && (
                             <>
                                 <button
                                     onClick={prev}
-                                    className="absolute left-8 bg-white/90 hover:bg-white p-4 rounded-full transition-all duration-300 shadow-lg"
+                                    className="absolute left-6 bg-cream/90 hover:bg-cream p-3 rounded-xl transition-colors duration-200 shadow"
                                 >
-                                    <ChevronLeft className="w-8 h-8 text-stone-700" />
+                                    <ChevronLeft className="w-6 h-6 text-walnut-deep" />
                                 </button>
                                 <button
                                     onClick={next}
-                                    className="absolute right-8 bg-white/90 hover:bg-white p-4 rounded-full transition-all duration-300 shadow-lg"
+                                    className="absolute right-6 bg-cream/90 hover:bg-cream p-3 rounded-xl transition-colors duration-200 shadow"
                                 >
-                                    <ChevronRight className="w-8 h-8 text-stone-700" />
+                                    <ChevronRight className="w-6 h-6 text-walnut-deep" />
                                 </button>
                             </>
                         )}
 
-                        {/* Contador de imágenes */}
-                        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg">
-                            <span className="text-stone-700 font-medium">
+                        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-cream/90 px-4 py-1.5 rounded-full shadow">
+                            <span className="text-walnut-deep text-sm font-medium">
                                 {currentIndex + 1} / {images.length}
                             </span>
                         </div>
