@@ -14,6 +14,7 @@ import "../styles/global.css";
 	<body class="home-page">
 		<Header />
 		<main>
+			<!-- Hero -->
 			<div
 				class="h-screen bg-cover bg-center bg-no-repeat relative"
 				style="background-image: url('/sablon.webp');"
@@ -28,7 +29,6 @@ import "../styles/global.css";
 				<div
 					class="absolute sm:top-50 top-70 sm:right-[10%] sm:left-10 right-4 left-4 z-10"
 				>
-					<!-- "El Sablon" gigante -->
 					<h1
 						class="sm:text-9xl text-[75px] leading-none font-artesanal sm:mr-20 mr-10 text-yellow-300 font-title sm:text-right text-left"
 						style="text-shadow: 2px 4px 4px rgba(0, 0, 0, 0.6);"
@@ -36,7 +36,6 @@ import "../styles/global.css";
 						El Sablón
 					</h1>
 
-					<!-- "Artesanía" debajo, más a la derecha -->
 					<h3
 						class="sm:text-6xl text-5xl font-medium text-white text-right"
 						style="text-shadow: 2px 4px 4px rgba(0, 0, 0, 0.6); font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif"
@@ -45,16 +44,17 @@ import "../styles/global.css";
 					</h3>
 				</div>
 				<a
-					class="absolute right-0 bottom-10 left-0 m-auto w-[fit-content] rounded-full border bg-leather p-3 text-cream hover:bg-wood-light transition-colors z-10"
+					class="absolute right-0 bottom-10 left-0 m-auto w-[fit-content] rounded-full bg-leather px-6 py-3 text-cream font-semibold hover:bg-walnut-deep transition-colors duration-200 z-10"
 					href="#conocenos"
 				>
 					Conócenos
 				</a>
 			</div>
+
 			<!-- Sección Conócenos -->
 			<section
 				id="conocenos"
-				class="scroll-mt-18 py-20 px-6 bg-gradient-to-b from-wood-light to-cream"
+				class="scroll-mt-18 py-20 px-6 bg-surface-low"
 			>
 				<div class="max-w-5xl mx-auto">
 					<!-- Encabezado -->
@@ -65,7 +65,7 @@ import "../styles/global.css";
 							Sobre Nosotros
 						</h2>
 						<div
-							class="w-32 h-1 bg-gradient-to-r from-terra-cotta via-leather to-terra-cotta mx-auto rounded-full"
+							class="w-16 h-0.5 bg-leather mx-auto"
 						>
 						</div>
 					</div>
@@ -73,177 +73,195 @@ import "../styles/global.css";
 					<!-- Contenido principal -->
 					<div class="grid md:grid-cols-2 gap-12 items-center mb-16">
 						<!-- Texto -->
-						<div class="space-y-6 font-body">
-							<p
-								class="text-2xl leading-relaxed text-walnut-deep"
-							>
-								En <span class="font-bold text-leather"
-									>El Sablón</span
-								>, cada pieza cuenta una historia. Una historia
-								de tradición, paciencia y amor por el trabajo
-								bien hecho.
+						<div class="space-y-6">
+							<p class="text-2xl leading-relaxed text-walnut-deep font-title">
+								En <span class="font-bold text-leather">El Sablón</span>,
+								cada pieza cuenta una historia. Una historia de tradición,
+								paciencia y amor por el trabajo bien hecho.
 							</p>
 
-							<p
-								class="text-lg leading-relaxed text-dark-brown/80"
-							>
-								Nuestro taller es un lugar donde el tiempo se
-								toma con calma, donde las manos experimentadas
-								de artesanos asturianos transforman los
-								materiales básicos en objetos únicos, llenos de
+							<p class="text-lg leading-relaxed text-dark-brown/80">
+								Nuestro taller es un lugar donde el tiempo se toma con calma,
+								donde las manos experimentadas de artesanos asturianos
+								transforman materiales básicos en objetos únicos, llenos de
 								carácter y calidad.
 							</p>
 
-							<p
-								class="text-lg leading-relaxed text-dark-brown/80"
-							>
-								No fabricamos en serie, cada pieza es un modelo
-								único y exclusivo. Cada cinturón, cada bolso,
-								cada pieza decorativa nace del cuidado minucioso
-								y la dedicación de quien conoce su oficio desde
-								hace décadas. Utilizamos técnicas ancestrales
-								combinadas con diseños contemporáneos,
-								respetando siempre la esencia de la artesanía
+							<p class="text-lg leading-relaxed text-dark-brown/80">
+								No fabricamos en serie, cada pieza es única y exclusiva.
+								Utilizamos técnicas ancestrales combinadas con diseños
+								contemporáneos, respetando siempre la esencia de la artesanía
 								tradicional.
 							</p>
 
-							<div
-								class="bg-leather/10 border-l-4 border-leather p-6 rounded-r-xl"
+							<blockquote
+								class="border-l-4 border-leather pl-6 py-2"
 							>
-								<p
-									class="text-lg italic text-walnut-deep font-medium"
-								>
-									"Lo que hacemos no es solo artesanía, es
-									preservar un legado, mantener vivas las
-									técnicas que nuestros abuelos nos enseñaron,
-									y crear piezas únicas que puedan acompañarte
-									toda la vida."
+								<p class="text-lg italic text-walnut-deep">
+									"Lo que hacemos no es solo artesanía, es preservar un legado
+									y crear piezas que puedan acompañarte toda la vida."
 								</p>
-							</div>
+							</blockquote>
 						</div>
 
-						<!-- Imagen ilustrativa -->
+						<!-- Imagen -->
 						<div class="relative">
-							<div
-								class="absolute -inset-4 bg-gradient-to-r from-terra-cotta to-leather rounded-3xl opacity-20 blur-2xl"
-							>
-							</div>
-							<div
-								class="relative bg-cream p-8 rounded-3xl shadow-2xl"
-							>
-								<div
-									class="aspect-square bg-gradient-to-br from-wood-light to-cream rounded-2xl flex items-center justify-center"
-								>
-									<div class="text-center">
-										<div class="text-8xl mb-4">🔨</div>
-										<p
-											class="text-xl font-title font-bold text-walnut-deep"
-										>
-											Artesanía
-										</p>
-										<p
-											class="text-lg font-title text-leather"
-										>
-											Asturiana
-										</p>
-									</div>
-								</div>
-							</div>
+							<img
+								src="/sablon.webp"
+								alt="Artesanía El Sablón"
+								class="w-full aspect-square object-cover rounded-2xl shadow-md"
+							/>
 						</div>
 					</div>
 
 					<!-- Valores -->
-					<div class="grid md:grid-cols-3 gap-8 mb-16">
-						<div
-							class="bg-cream p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
-						>
-							<div class="text-5xl mb-4">🌿</div>
-							<h3
-								class="text-2xl font-title font-bold text-walnut-deep mb-3"
-							>
-								Sostenibilidad
-							</h3>
-							<p class="text-dark-brown/80 leading-relaxed">
-								Trabajamos con materiales naturales y
-								sostenibles. La materia prima que utilizamos
-								proviene de empresas locales responsables con el
-								medio ambiente.
+					<div class="grid md:grid-cols-3 gap-6 mb-16">
+						<!-- Sostenibilidad -->
+						<div class="bg-cream p-8 rounded-2xl shadow hover:shadow-md transition-shadow duration-200">
+							<div class="w-11 h-11 bg-moss-green/10 rounded-xl flex items-center justify-center mb-5 text-moss-green">
+								<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+									<path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+									<path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+								</svg>
+							</div>
+							<h3 class="text-xl font-title font-bold text-walnut-deep mb-3">Sostenibilidad</h3>
+							<p class="text-dark-brown/70 leading-relaxed text-sm">
+								Trabajamos con materiales naturales y sostenibles. La materia
+								prima proviene de empresas locales responsables con el medio ambiente.
 							</p>
 						</div>
 
-						<div
-							class="bg-cream p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
-						>
-							<div class="text-5xl mb-4">👐</div>
-							<h3
-								class="text-2xl font-title font-bold text-walnut-deep mb-3"
-							>
-								Hecho a Mano
-							</h3>
-							<p class="text-dark-brown/80 leading-relaxed">
-								Cada pieza es única porque está hecha con las
-								manos, no con máquinas. El proceso artesanal
-								garantiza calidad, atención al detalle y
-								personalidad.
+						<!-- Hecho a Mano -->
+						<div class="bg-cream p-8 rounded-2xl shadow hover:shadow-md transition-shadow duration-200">
+							<div class="w-11 h-11 bg-terra-cotta/10 rounded-xl flex items-center justify-center mb-5 text-terra-cotta">
+								<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+									<circle cx="6" cy="6" r="3"/>
+									<circle cx="6" cy="18" r="3"/>
+									<line x1="20" y1="4" x2="8.12" y2="15.88"/>
+									<line x1="14.47" y1="14.48" x2="20" y2="20"/>
+									<line x1="8.12" y1="8.12" x2="12" y2="12"/>
+								</svg>
+							</div>
+							<h3 class="text-xl font-title font-bold text-walnut-deep mb-3">Hecho a Mano</h3>
+							<p class="text-dark-brown/70 leading-relaxed text-sm">
+								Cada pieza es única porque está hecha con las manos, no con
+								máquinas. El proceso artesanal garantiza calidad y atención al detalle.
 							</p>
 						</div>
 
-						<div
-							class="bg-cream p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
-						>
-							<div class="text-5xl mb-4">❤️</div>
-							<h3
-								class="text-2xl font-title font-bold text-walnut-deep mb-3"
-							>
-								Tradición
-							</h3>
-							<p class="text-dark-brown/80 leading-relaxed">
-								Mantenemos vivas las técnicas tradicionales
-								asturianas, transmitiéndolas en nuestros
-								talleres para que las nuevas generaciones puedan
-								continuar el legado.
+						<!-- Tradición -->
+						<div class="bg-cream p-8 rounded-2xl shadow hover:shadow-md transition-shadow duration-200">
+							<div class="w-11 h-11 bg-leather/10 rounded-xl flex items-center justify-center mb-5 text-leather">
+								<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+									<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+									<path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+								</svg>
+							</div>
+							<h3 class="text-xl font-title font-bold text-walnut-deep mb-3">Tradición</h3>
+							<p class="text-dark-brown/70 leading-relaxed text-sm">
+								Mantenemos vivas las técnicas tradicionales asturianas,
+								transmitiéndolas en nuestros talleres para las nuevas generaciones.
 							</p>
 						</div>
 					</div>
 
 					<!-- Ubicación -->
-					<div class="mt-16 text-center">
-						<p class="text-xl text-dark-brown mb-6">
-							Nos encontrarás en <span
-								class="font-bold text-leather">Oviñana</span
-							> (primer domingo de mes) y <span
-								class="font-bold text-leather">Somao</span
-							> (tercer domingo de mes)
+					<div class="text-center">
+						<p class="text-lg text-dark-brown mb-6">
+							Nos encontrarás en <span class="font-bold text-leather">Oviñana</span>
+							(primer domingo de mes) y <span class="font-bold text-leather">Somao</span>
+							(tercer domingo de mes)
 						</p>
 						<a
 							href="/encuentranos"
-							class="inline-flex items-center gap-2 text-leather font-bold text-lg hover:gap-4 transition-all duration-300"
+							class="inline-flex items-center gap-2 text-leather font-semibold hover:text-walnut-deep transition-colors duration-200"
 						>
 							<span>Ver dónde estamos</span>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								class="w-6 h-6"
-								fill="none"
-								viewBox="0 0 24 24"
-								stroke="currentColor"
-							>
-								<path
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									stroke-width="2"
-									d="M17.657 16.657L13.414 12.414a8 8 0 1 0-1.414 1.414l4.243 4.243a2 2 0 0 0 2.828 0l.707-.707a2 2 0 0 0 0-2.828z"
-								></path>
-								<path
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									stroke-width="2"
-									d="M15 11a4 4 0 1 1-8 0 4 4 0 0 1 8 0z"
-								></path>
+							<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
 							</svg>
 						</a>
 					</div>
 				</div>
 			</section>
+			<!-- Cómo funciona -->
+			<section class="py-20 px-6 bg-surface-container">
+				<div class="max-w-4xl mx-auto">
+					<div class="text-center mb-14">
+						<h2 class="text-4xl md:text-5xl font-title font-bold text-walnut-deep mb-4">
+							¿Cómo conseguir una pieza?
+						</h2>
+						<div class="w-16 h-0.5 bg-leather mx-auto"></div>
+					</div>
+
+					<div class="grid md:grid-cols-3 gap-10">
+						<!-- Paso 1 -->
+						<div class="flex flex-col items-center text-center">
+							<div class="w-14 h-14 bg-leather/10 rounded-2xl flex items-center justify-center mb-4 text-leather">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+									<circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+								</svg>
+							</div>
+							<p class="text-4xl font-title font-bold text-leather/15 mb-3 leading-none">01</p>
+							<h3 class="text-lg font-title font-bold text-walnut-deep mb-2">Explora el catálogo</h3>
+							<p class="text-dark-brown/60 text-sm leading-relaxed mb-4">
+								Echa un vistazo a nuestras piezas. Cada una es única y hecha a mano.
+							</p>
+							<a
+								href="/productos"
+								class="text-leather font-semibold text-sm hover:text-walnut-deep transition-colors duration-200 inline-flex items-center gap-1"
+							>
+								<span>Ver productos</span>
+								<svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+									<path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+								</svg>
+							</a>
+						</div>
+
+						<!-- Paso 2 -->
+						<div class="flex flex-col items-center text-center">
+							<div class="w-14 h-14 bg-leather/10 rounded-2xl flex items-center justify-center mb-4 text-leather">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+									<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+								</svg>
+							</div>
+							<p class="text-4xl font-title font-bold text-leather/15 mb-3 leading-none">02</p>
+							<h3 class="text-lg font-title font-bold text-walnut-deep mb-2">Contáctanos</h3>
+							<p class="text-dark-brown/60 text-sm leading-relaxed mb-4">
+								Escríbenos por Instagram o por correo. Te respondemos y resolvemos cualquier duda.
+							</p>
+							<div class="flex items-center gap-3">
+								<a
+									href="https://www.instagram.com/elsablonartesania"
+									target="_blank"
+									rel="noopener noreferrer"
+									class="text-leather font-semibold text-sm hover:text-walnut-deep transition-colors duration-200"
+								>Instagram</a>
+								<span class="w-px h-3.5 bg-leather/30"></span>
+								<a
+									href="/contacto"
+									class="text-leather font-semibold text-sm hover:text-walnut-deep transition-colors duration-200"
+								>Correo</a>
+							</div>
+						</div>
+
+						<!-- Paso 3 -->
+						<div class="flex flex-col items-center text-center">
+							<div class="w-14 h-14 bg-leather/10 rounded-2xl flex items-center justify-center mb-4 text-leather">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+									<rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v4h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
+								</svg>
+							</div>
+							<p class="text-4xl font-title font-bold text-leather/15 mb-3 leading-none">03</p>
+							<h3 class="text-lg font-title font-bold text-walnut-deep mb-2">La recibes</h3>
+							<p class="text-dark-brown/60 text-sm leading-relaxed">
+								Te la enviamos a casa o, si prefieres, nos vemos en el mercado en Oviñana o Somao. Sin complicaciones.
+							</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
 			<Footer />
 		</main>
 	</body>

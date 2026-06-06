@@ -12,11 +12,10 @@ import Title from "../components/Title.astro";
             description="Visítanos en los mercados artesanales de Asturias"
         />
     </head>
-    <body class="bg-gradient-to-b from-wood-light to-cream">
+    <body class="bg-surface-low">
         <main>
             <Header />
 
-            <!-- Hero Section -->
             <section class="max-w-6xl mx-auto pt-16 pb-8 px-6 text-center">
                 <Title title="Dónde Encontrarnos">
                     Cada mes nos instalamos en diferentes mercados artesanales
@@ -26,157 +25,123 @@ import Title from "../components/Title.astro";
             </section>
 
             <!-- Calendario Visual -->
-            <section class="max-w-6xl mx-auto px-6 mb-12">
-                <div class="bg-cream p-8 rounded-3xl shadow-2xl">
-                    <h2
-                        class="text-3xl font-title font-bold text-walnut-deep mb-8 text-center"
-                    >
-                        📅 Calendario de Mercados
+            <section class="max-w-6xl mx-auto px-6 mb-10">
+                <div class="bg-cream p-8 rounded-2xl shadow">
+                    <h2 class="text-2xl font-title font-bold text-walnut-deep mb-6 flex items-center gap-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-leather">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                            <line x1="16" y1="2" x2="16" y2="6"/>
+                            <line x1="8" y1="2" x2="8" y2="6"/>
+                            <line x1="3" y1="10" x2="21" y2="10"/>
+                        </svg>
+                        Calendario de Mercados
                     </h2>
 
-                    <div class="grid md:grid-cols-2 gap-6">
+                    <div class="grid md:grid-cols-2 gap-5">
                         <!-- Primer domingo -->
-                        <div
-                            class="bg-gradient-to-br from-terra-cotta/10 to-leather/10 p-6 rounded-2xl border-2 border-terra-cotta/30"
-                        >
+                        <div class="bg-surface-low p-6 rounded-2xl border border-terra-cotta/20">
                             <div class="flex items-center gap-4 mb-4">
-                                <div
-                                    class="bg-terra-cotta text-cream w-16 h-16 rounded-xl flex flex-col items-center justify-center font-bold shadow-lg"
-                                >
-                                    <span class="text-xs">1er</span>
-                                    <span class="text-2xl">D</span>
+                                <div class="bg-terra-cotta text-cream w-14 h-14 rounded-xl flex flex-col items-center justify-center font-bold flex-shrink-0">
+                                    <span class="text-xs leading-none">1er</span>
+                                    <span class="text-xl leading-tight">D</span>
                                 </div>
                                 <div>
-                                    <p
-                                        class="text-sm text-dark-brown/60 font-semibold"
-                                    >
-                                        Primer Domingo
-                                    </p>
-                                    <p
-                                        class="text-2xl font-title font-bold text-walnut-deep"
-                                    >
-                                        Oviñana
-                                    </p>
+                                    <p class="text-xs text-dark-brown/50 font-semibold uppercase tracking-wider">Primer Domingo</p>
+                                    <p class="text-2xl font-title font-bold text-walnut-deep">Oviñana</p>
                                 </div>
                             </div>
-                            <p class="text-dark-brown/80 mb-2">
-                                Un mercado familiar en pleno corazón de
-                                Asturias, perfecto para disfrutar de la mañana
-                                con productos locales y artesanía tradicional en
-                                un entorno cerca del mar con unas vistas
-                                impresionantes a la costa asturiana.
+                            <p class="text-sm text-dark-brown/70 leading-relaxed">
+                                Un mercado familiar en pleno corazón de Asturias, perfecto para
+                                disfrutar de la mañana con productos locales y artesanía
+                                tradicional, con unas vistas impresionantes a la costa asturiana.
                             </p>
                         </div>
 
                         <!-- Tercer domingo -->
-                        <div
-                            class="bg-gradient-to-br from-moss-green/10 to-walnut-deep/10 p-6 rounded-2xl border-2 border-moss-green/30"
-                        >
+                        <div class="bg-surface-low p-6 rounded-2xl border border-moss-green/20">
                             <div class="flex items-center gap-4 mb-4">
-                                <div
-                                    class="bg-moss-green text-cream w-16 h-16 rounded-xl flex flex-col items-center justify-center font-bold shadow-lg"
-                                >
-                                    <span class="text-xs">3er</span>
-                                    <span class="text-2xl">D</span>
+                                <div class="bg-moss-green text-cream w-14 h-14 rounded-xl flex flex-col items-center justify-center font-bold flex-shrink-0">
+                                    <span class="text-xs leading-none">3er</span>
+                                    <span class="text-xl leading-tight">D</span>
                                 </div>
                                 <div>
-                                    <p
-                                        class="text-sm text-dark-brown/60 font-semibold"
-                                    >
-                                        Tercer Domingo
-                                    </p>
-                                    <p
-                                        class="text-2xl font-title font-bold text-walnut-deep"
-                                    >
-                                        Somao
-                                    </p>
+                                    <p class="text-xs text-dark-brown/50 font-semibold uppercase tracking-wider">Tercer Domingo</p>
+                                    <p class="text-2xl font-title font-bold text-walnut-deep">Somao</p>
                                 </div>
                             </div>
-                            <p class="text-dark-brown/80 mb-2">
-                                El encanto de un pueblo asturiano repleto de
-                                casas de indianos con ambiente acogedor. Este
-                                pueblo conmemorado con el premio al Pueblo
-                                Ejemplar de Asturias alberga un mercado ideal
-                                para pasar una mañana entre artesanos,
-                                productores locales y música en directo.
+                            <p class="text-sm text-dark-brown/70 leading-relaxed">
+                                El encanto de un pueblo asturiano repleto de casas de indianos,
+                                premiado como Pueblo Ejemplar de Asturias. Artesanos, productores
+                                locales y música en directo.
                             </p>
                         </div>
                     </div>
 
                     <!-- Horario -->
-                    <div class="mt-8 text-center bg-white p-6 rounded-2xl">
-                        <p class="text-lg text-dark-brown/80">
-                            <span class="font-bold text-walnut-deep"
-                                >⏰ Horario:</span
-                            >
-                            Normalmente de 11:00h a 15:00h
-                        </p>
-                        <p class="text-sm text-dark-brown/60 mt-2">
-                            * Confirma siempre en nuestras redes sociales por
-                            posibles cambios
-                        </p>
+                    <div class="mt-5 bg-surface-low p-5 rounded-xl flex items-center gap-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-leather flex-shrink-0">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                        <div>
+                            <span class="font-semibold text-walnut-deep text-sm">Horario: </span>
+                            <span class="text-sm text-dark-brown/70">Normalmente de 11:00h a 15:00h</span>
+                            <span class="text-xs text-dark-brown/50 ml-2">— Confirma siempre en nuestras redes sociales</span>
+                        </div>
                     </div>
                 </div>
             </section>
 
             <!-- Ubicaciones Detalladas -->
-            <div class="max-w-6xl mx-auto px-6 mb-12 grid md:grid-cols-2 gap-8">
+            <div class="max-w-6xl mx-auto px-6 mb-12 grid md:grid-cols-2 gap-7">
                 <!-- Oviñana -->
-                <article
-                    class="bg-cream rounded-3xl shadow-2xl overflow-hidden"
-                >
-                    <div
-                        class="bg-gradient-to-r from-terra-cotta to-leather p-6 text-cream"
-                    >
-                        <h2 class="text-3xl font-title font-bold mb-2">
-                            Oviñana
-                        </h2>
-                        <p class="text-cream/90">Primer domingo de cada mes</p>
+                <article class="bg-cream rounded-2xl shadow overflow-hidden">
+                    <div class="bg-terra-cotta p-6 text-cream">
+                        <h2 class="text-3xl font-title font-bold mb-1">Oviñana</h2>
+                        <p class="text-cream/80 text-sm">Primer domingo de cada mes</p>
                     </div>
 
                     <div class="p-6">
                         <img
-                            src="/oviñana-plaza.jpg"
+                            src="/plaza_ovinana.webp"
                             alt="Plaza de Oviñana"
-                            class="w-full h-64 object-cover rounded-2xl shadow-lg mb-6"
+                            class="w-full h-56 object-cover rounded-xl shadow mb-6"
                         />
 
                         <div class="space-y-4 mb-6">
                             <div class="flex items-start gap-3">
-                                <span class="text-2xl">📍</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-leather flex-shrink-0 mt-0.5">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                    <circle cx="12" cy="10" r="3"/>
+                                </svg>
                                 <div>
-                                    <p class="font-semibold text-walnut-deep">
-                                        Ubicación
-                                    </p>
-                                    <p class="text-dark-brown/80">
-                                        Plaza principal de Oviñana
+                                    <p class="font-semibold text-walnut-deep text-sm">Ubicación</p>
+                                    <p class="text-xs text-dark-brown/70">Plaza principal de Oviñana</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-leather flex-shrink-0 mt-0.5">
+                                    <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/>
+                                    <line x1="4" y1="22" x2="4" y2="15"/>
+                                </svg>
+                                <div>
+                                    <p class="font-semibold text-walnut-deep text-sm">Ambiente</p>
+                                    <p class="text-xs text-dark-brown/70">
+                                        Mercado artesanal con productos locales y ambiente muy
+                                        familiar. Perfecto para toda la familia.
                                     </p>
                                 </div>
                             </div>
 
                             <div class="flex items-start gap-3">
-                                <span class="text-2xl">🎪</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-leather flex-shrink-0 mt-0.5">
+                                    <polygon points="3 11 22 2 13 21 11 13 3 11"/>
+                                </svg>
                                 <div>
-                                    <p class="font-semibold text-walnut-deep">
-                                        Ambiente
-                                    </p>
-                                    <p class="text-dark-brown/80">
-                                        Mercado artesanal con productos locales
-                                        y ambiente muy familiar. Perfecto para
-                                        toda la familia.
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="flex items-start gap-3">
-                                <span class="text-2xl">🚗</span>
-                                <div>
-                                    <p class="font-semibold text-walnut-deep">
-                                        Cómo llegar
-                                    </p>
-                                    <p class="text-dark-brown/80">
-                                        Aparcamiento gratuito cerca de la plaza.
-                                        Bien comunicado por carretera.
+                                    <p class="font-semibold text-walnut-deep text-sm">Cómo llegar</p>
+                                    <p class="text-xs text-dark-brown/70">
+                                        Aparcamiento gratuito cerca de la plaza. Bien comunicado por carretera.
                                     </p>
                                 </div>
                             </div>
@@ -187,80 +152,76 @@ import Title from "../components/Title.astro";
                                 href="https://www.google.com/maps/place/Plaza+de+Oviñana,+33156+Oviñana,+Asturias"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                class="block w-full bg-terra-cotta hover:bg-terra-cotta/90 text-cream py-3 rounded-xl font-semibold text-center transition-all duration-300 shadow-md hover:shadow-xl"
+                                class="flex items-center justify-center gap-2 w-full bg-terra-cotta hover:bg-terra-cotta/85 text-cream py-3 rounded-full font-semibold text-sm transition-colors duration-200"
                             >
-                                📍 Ver en Google Maps
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                    <circle cx="12" cy="10" r="3"/>
+                                </svg>
+                                Ver en Google Maps
                             </a>
 
                             <iframe
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2922.393314583816!2d-6.237123684528927!3d43.56922197912327!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd36f7e7e6b2b8e1%3A0x7e2e6e6e6e6e6e6e!2sPlaza%20de%20Ovi%C3%B1ana%2C%2033156%20Ovi%C3%B1ana%2C%20Asturias!5e0!3m2!1ses!2ses!4v1686754321000!5m2!1ses!2ses"
                                 width="100%"
-                                height="250"
+                                height="240"
                                 style="border:0;"
                                 allowfullscreen=""
                                 loading="lazy"
                                 referrerpolicy="no-referrer-when-downgrade"
-                                class="rounded-2xl shadow-lg mt-4"></iframe>
+                                class="rounded-xl mt-3"></iframe>
                         </div>
                     </div>
                 </article>
 
                 <!-- Somao -->
-                <article
-                    class="bg-cream rounded-3xl shadow-2xl overflow-hidden"
-                >
-                    <div
-                        class="bg-gradient-to-r from-moss-green to-walnut-deep p-6 text-cream"
-                    >
-                        <h2 class="text-3xl font-title font-bold mb-2">
-                            Somao
-                        </h2>
-                        <p class="text-cream/90">Tercer domingo de cada mes</p>
+                <article class="bg-cream rounded-2xl shadow overflow-hidden">
+                    <div class="bg-moss-green p-6 text-cream">
+                        <h2 class="text-3xl font-title font-bold mb-1">Somao</h2>
+                        <p class="text-cream/80 text-sm">Tercer domingo de cada mes</p>
                     </div>
 
                     <div class="p-6">
                         <img
-                            src="/somao-plaza.jpg"
+                            src="/plaza_somao.webp"
                             alt="Plaza de Somao"
-                            class="w-full h-64 object-cover rounded-2xl shadow-lg mb-6"
+                            class="w-full h-56 object-cover rounded-xl shadow mb-6"
                         />
 
                         <div class="space-y-4 mb-6">
                             <div class="flex items-start gap-3">
-                                <span class="text-2xl">📍</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-leather flex-shrink-0 mt-0.5">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                    <circle cx="12" cy="10" r="3"/>
+                                </svg>
                                 <div>
-                                    <p class="font-semibold text-walnut-deep">
-                                        Ubicación
-                                    </p>
-                                    <p class="text-dark-brown/80">
-                                        Plaza principal de Somao
+                                    <p class="font-semibold text-walnut-deep text-sm">Ubicación</p>
+                                    <p class="text-xs text-dark-brown/70">Plaza principal de Somao</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-leather flex-shrink-0 mt-0.5">
+                                    <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/>
+                                    <line x1="4" y1="22" x2="4" y2="15"/>
+                                </svg>
+                                <div>
+                                    <p class="font-semibold text-walnut-deep text-sm">Ambiente</p>
+                                    <p class="text-xs text-dark-brown/70">
+                                        Mercado acogedor en un pueblo con encanto. Artesanos
+                                        locales, productores de la zona y música en vivo.
                                     </p>
                                 </div>
                             </div>
 
                             <div class="flex items-start gap-3">
-                                <span class="text-2xl">🎪</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-leather flex-shrink-0 mt-0.5">
+                                    <polygon points="3 11 22 2 13 21 11 13 3 11"/>
+                                </svg>
                                 <div>
-                                    <p class="font-semibold text-walnut-deep">
-                                        Ambiente
-                                    </p>
-                                    <p class="text-dark-brown/80">
-                                        Mercado acogedor en un pueblo con
-                                        encanto. Artesanos locales, productores
-                                        de la zona y música en vivo.
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="flex items-start gap-3">
-                                <span class="text-2xl">🚗</span>
-                                <div>
-                                    <p class="font-semibold text-walnut-deep">
-                                        Cómo llegar
-                                    </p>
-                                    <p class="text-dark-brown/80">
-                                        Fácil acceso desde Gijón y Avilés.
-                                        Parking disponible en el pueblo.
+                                    <p class="font-semibold text-walnut-deep text-sm">Cómo llegar</p>
+                                    <p class="text-xs text-dark-brown/70">
+                                        Fácil acceso desde Gijón y Avilés. Parking disponible en el pueblo.
                                     </p>
                                 </div>
                             </div>
@@ -271,42 +232,44 @@ import Title from "../components/Title.astro";
                                 href="https://www.google.com/maps/place/Somao,+33139,+Asturias"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                class="block w-full bg-moss-green hover:bg-moss-green/90 text-cream py-3 rounded-xl font-semibold text-center transition-all duration-300 shadow-md hover:shadow-xl"
+                                class="flex items-center justify-center gap-2 w-full bg-moss-green hover:bg-moss-green/85 text-cream py-3 rounded-full font-semibold text-sm transition-colors duration-200"
                             >
-                                📍 Ver en Google Maps
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                    <circle cx="12" cy="10" r="3"/>
+                                </svg>
+                                Ver en Google Maps
                             </a>
 
                             <iframe
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2923.036457769463!2d-6.181370684529326!3d43.5816249791227!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd36f7e2b7e6b8e1%3A0x7e2e6e6e6e6e6e6e!2sSomao%2C%2033139%20Pravia%2C%20Asturias!5e0!3m2!1ses!2ses!4v1686754321001!5m2!1ses!2ses"
                                 width="100%"
-                                height="250"
+                                height="240"
                                 style="border:0;"
                                 allowfullscreen=""
                                 loading="lazy"
                                 referrerpolicy="no-referrer-when-downgrade"
-                                class="rounded-2xl shadow-lg mt-4"></iframe>
+                                class="rounded-xl mt-3"></iframe>
                         </div>
                     </div>
                 </article>
             </div>
 
-            <!-- Call to action -->
+            <!-- CTA -->
             <section class="max-w-4xl mx-auto px-6 mb-16">
-                <div
-                    class="bg-gradient-to-r from-leather to-walnut-deep text-cream p-12 rounded-3xl shadow-2xl text-center"
-                >
-                    <h2 class="text-4xl font-title font-bold mb-4">
+                <div class="bg-leather text-cream p-10 md:p-12 rounded-2xl text-center">
+                    <h2 class="text-3xl font-title font-bold mb-3">
                         ¿No puedes venir al mercado?
                     </h2>
-                    <p class="text-xl mb-8 text-cream/90">
-                        Contacta con nosotros para coordinar una visita al
-                        taller o consultar disponibilidad de productos.
+                    <p class="text-lg mb-7 text-cream/85 max-w-xl mx-auto">
+                        Contacta con nosotros para coordinar una visita al taller
+                        o consultar disponibilidad de productos.
                     </p>
                     <a
                         href="/contacto"
-                        class="inline-block bg-cream text-walnut-deep px-10 py-4 rounded-xl font-bold text-lg hover:bg-wood-light transition-colors duration-300 shadow-lg"
+                        class="inline-block bg-cream text-leather px-8 py-3 rounded-full font-semibold hover:bg-wood-light transition-colors duration-200"
                     >
-                        Contáctanos →
+                        Contáctanos
                     </a>
                 </div>
             </section>

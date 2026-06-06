@@ -21,6 +21,7 @@ const isRootPage = pathname === "";
 		<div class="internal-links hidden md:flex gap-6">
 			<HeaderLink href="/">Inicio</HeaderLink>
 			<HeaderLink href="/productos">Productos</HeaderLink>
+			<HeaderLink href="/artesanos">Artesanos</HeaderLink>
 			<HeaderLink href="/encuentranos">Dónde Encontrarnos</HeaderLink>
 			<HeaderLink href="/contacto">Contacto</HeaderLink>
 		</div>
@@ -90,6 +91,9 @@ const isRootPage = pathname === "";
 			<a href="/productos" class="text-3xl font-title font-bold text-walnut-deep hover:text-leather transition-colors mobile-menu-link">
 				Productos
 			</a>
+			<a href="/artesanos" class="text-3xl font-title font-bold text-walnut-deep hover:text-leather transition-colors mobile-menu-link">
+				Artesanos
+			</a>
 			<a href="/encuentranos" class="text-3xl font-title font-bold text-walnut-deep hover:text-leather transition-colors mobile-menu-link">
 				Dónde Encontrarnos
 			</a>
@@ -115,7 +119,7 @@ const isRootPage = pathname === "";
 		</div>
 	</div>
 
-	<script type="module" define:vars={{ pathname, isRootPage }}>
+	<script is:inline define:vars={{ pathname, isRootPage }}>
 		document.addEventListener("DOMContentLoaded", () => {
 			const header = document.getElementById("site-header");
 			const sentinel = document.getElementById("header-sentinel");

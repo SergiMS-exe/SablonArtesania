@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "name": "Nombre de la Artesana",
+    "specialty": "Fieltro",
+    "location": "Asturias",
+    "description": "Descripción breve de la artesana y su trabajo.",
+    "longDescription": "Descripción completa del trabajo artesanal con fieltro. Aquí puedes detallar la técnica que utiliza, los materiales, la inspiración y lo que hace únicas a sus piezas.",
+    "instagram": "https://www.instagram.com/",
+    "image": "/sablon.webp"
+  }
+]

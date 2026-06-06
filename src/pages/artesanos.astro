@@ -1,0 +1,96 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import Title from "../components/Title.astro";
+import collaborators from "../data/collaborators.json";
+---
+
+<html lang="es">
+  <head>
+    <BaseHead
+      title="Artesanos Amigos"
+      description="Artesanos asturianos de confianza que comparten nuestra filosofía de trabajo artesanal y respeto por los materiales."
+    />
+  </head>
+  <body class="bg-surface-low">
+    <Header />
+    <main>
+      <section class="max-w-6xl mx-auto pt-13 pb-8 px-6 text-center">
+        <Title title="Artesanos Amigos">
+          Un espacio para artesanos asturianos de confianza que comparten nuestra
+          filosofía: trabajo hecho a mano, materiales de calidad y piezas únicas.
+        </Title>
+      </section>
+
+      <!-- Introducción -->
+      <section class="max-w-3xl mx-auto px-6 mb-14 text-center">
+        <p class="text-dark-brown/60 leading-relaxed">
+          En El Sablón creemos en la artesanía como forma de vida. Por eso, además de
+          nuestras propias piezas, damos espacio a otros artesanos de la zona que
+          trabajan con el mismo cuidado y dedicación. Cada uno con su oficio, su historia y su sello propio.
+        </p>
+      </section>
+
+      <!-- Grid de artesanos -->
+      <section class="max-w-screen-xl mx-auto px-4 md:px-8 lg:px-12 pb-20">
+        {collaborators.length === 0 ? (
+          <div class="text-center py-20 text-dark-brown/50">
+            <p>Próximamente presentaremos a nuestros artesanos amigos.</p>
+          </div>
+        ) : (
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {collaborators.map((artisan) => (
+              <article class="bg-cream rounded-2xl overflow-hidden shadow hover:shadow-md transition-shadow duration-200">
+                <!-- Foto -->
+                <div class="relative h-64 overflow-hidden bg-surface-low">
+                  <img
+                    src={artisan.image}
+                    alt={artisan.name}
+                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div class="absolute inset-0 bg-gradient-to-t from-walnut-deep/60 to-transparent" />
+                  <div class="absolute bottom-4 left-4 right-4">
+                    <span class="inline-block bg-terra-cotta/90 text-cream text-xs font-semibold px-3 py-1 rounded-full tracking-wide uppercase">
+                      {artisan.specialty}
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Contenido -->
+                <div class="p-6">
+                  <h2 class="text-xl font-title font-bold text-walnut-deep mb-1">
+                    {artisan.name}
+                  </h2>
+                  <p class="text-terra-cotta text-xs font-semibold tracking-wider uppercase mb-3">
+                    {artisan.location}
+                  </p>
+
+                  <p class="text-dark-brown/70 text-sm leading-relaxed mb-5">
+                    {artisan.longDescription}
+                  </p>
+
+                  <div class="h-px bg-leather/10 mb-4" />
+
+                  <a
+                    href={artisan.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-2 text-sm font-semibold text-leather hover:text-walnut-deep transition-colors duration-200"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="14" height="14" class="fill-current">
+                      <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/>
+                    </svg>
+                    Ver en Instagram
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
+        )}
+      </section>
+
+    </main>
+    <Footer />
+  </body>
+</html>

@@ -1,30 +1,134 @@
 [
-    {
-        "id": 1,
-        "title": "Product A",
-        "description": "Description of Product A",
-        "longDescription": "Lorem ipsum dolor items",
-        "images": ["/blog-placeholder-1.jpg", "/blog-placeholder-2.jpg", "/blog-placeholder-3.jpg", "/blog-placeholder-4.jpg"]
-    },
-    {
-        "id": 2,
-        "title": "Product B",
-        "description": "Description of Product B",
-        "longDescription": "Lorem ipsum dolor items",
-        "images": ["/blog-placeholder-2.jpg"]
-    },
-    {
-        "id": 3,
-        "title": "Product C",
-        "description": "Description of Product C",
-        "longDescription": "Lorem ipsum dolor items",
-        "images": ["/blog-placeholder-3.jpg"]
-    },
-    {
-        "id": 4,
-        "title": "Product D",
-        "description": "Description of Product D",
-        "longDescription": "Lorem ipsum dolor items",
-        "images": ["/blog-placeholder-4.jpg"]
-    }
+  {
+    "id": 1,
+    "artisan": "sablon",
+    "artisanName": "El Sablón",
+    "category": "cuero",
+    "categoryLabel": "Bolso",
+    "title": "Bolso de Cuero Clásico",
+    "description": "Bolso de hombro hecho a mano en cuero curtido al vegetal.",
+    "longDescription": "Bolso de cuero fabricado íntegramente a mano con cuero curtido al vegetal, seleccionado por su calidad y durabilidad. Cuenta con compartimento principal con cierre, bolsillo interior y correa regulable. Con el uso, el cuero adquiere una pátina única que hace cada pieza irrepetible.",
+    "images": ["/sablon.webp"]
+  },
+  {
+    "id": 2,
+    "artisan": "sablon",
+    "artisanName": "El Sablón",
+    "category": "cuero",
+    "categoryLabel": "Bolso",
+    "title": "Bolso Mensajero",
+    "description": "Bandolera amplia, ideal para el día a día.",
+    "longDescription": "Bolso mensajero de cuero natural con solapa y cierre de hebilla artesanal. Amplio compartimento principal con organizador interior. Correa regulable de cuero trenzado. Una pieza robusta pensada para acompañarte a diario durante años.",
+    "images": ["/sablon.webp"]
+  },
+  {
+    "id": 3,
+    "artisan": "sablon",
+    "artisanName": "El Sablón",
+    "category": "cuero",
+    "categoryLabel": "Cartera",
+    "title": "Cartera Billetera",
+    "description": "Cartera clásica con múltiples compartimentos para tarjetas.",
+    "longDescription": "Cartera bifold fabricada en cuero de primera calidad. Dispone de compartimento para billetes, cuatro ranuras para tarjetas y bolsillo con cierre para monedas. El cuero natural se ablanda con el uso adaptándose perfectamente al bolsillo.",
+    "images": ["/sablon.webp"]
+  },
+  {
+    "id": 4,
+    "artisan": "sablon",
+    "artisanName": "El Sablón",
+    "category": "cuero",
+    "categoryLabel": "Cartera",
+    "title": "Cartera Larga",
+    "description": "Cartera de sobre para llevar el móvil y la documentación.",
+    "longDescription": "Cartera de tipo sobre en cuero liso con capacidad para smartphone de hasta 6.7 pulgadas. Múltiples ranuras para tarjetas, compartimento para billetes y bolsillo exterior. Cierre con broche de presión. Perfecta para salidas sin bolso.",
+    "images": ["/plaza_ovinana.webp"]
+  },
+  {
+    "id": 5,
+    "artisan": "sablon",
+    "artisanName": "El Sablón",
+    "category": "cuero",
+    "categoryLabel": "Monedero",
+    "title": "Monedero Redondo",
+    "description": "Monedero compacto con cremallera, cabe en cualquier bolsillo.",
+    "longDescription": "Monedero de cuero con forma ovalada y cierre de cremallera de latón. Sencillo, funcional y duradero. Su tamaño compacto lo hace ideal para llevarlo solo o junto a la cartera. Disponible en cuero natural o teñido en varios tonos.",
+    "images": ["/sablon.webp"]
+  },
+  {
+    "id": 6,
+    "artisan": "sablon",
+    "artisanName": "El Sablón",
+    "category": "cuero",
+    "categoryLabel": "Monedero",
+    "title": "Monedero con Tarjetero",
+    "description": "Monedero funcional con ranuras para tarjetas de uso frecuente.",
+    "longDescription": "Pequeño monedero multifunción que combina porta-monedas con cremallera y dos ranuras exteriores para tarjetas. Fabricado en cuero liso, cosido a mano con hilo encerado de alta resistencia.",
+    "images": ["/plaza_somao.webp"]
+  },
+  {
+    "id": 7,
+    "artisan": "sablon",
+    "artisanName": "El Sablón",
+    "category": "cuero",
+    "categoryLabel": "Cinturón",
+    "title": "Cinturón Clásico",
+    "description": "Cinturón liso con hebilla de latón, elegante y duradero.",
+    "longDescription": "Cinturón fabricado en una sola pieza de cuero plena flor de 3.5 cm de ancho. Hebilla de latón macizo intercambiable. Se puede hacer a medida indicando la talla al realizar el pedido. Un cinturón que mejora con los años.",
+    "images": ["/sablon.webp"]
+  },
+  {
+    "id": 8,
+    "artisan": "sablon",
+    "artisanName": "El Sablón",
+    "category": "cuero",
+    "categoryLabel": "Cinturón",
+    "title": "Cinturón Trenzado",
+    "description": "Cinturón artesanal trenzado a mano, una pieza singular.",
+    "longDescription": "Cinturón realizado con técnica de trenzado artesanal sobre tira de cuero central. Cada trenzado se hace a mano, lo que hace que ninguno sea exactamente igual. Hebilla de latón envejecido. Disponible en varios anchos y colores de cuero.",
+    "images": ["/plaza_ovinana.webp"]
+  },
+  {
+    "id": 9,
+    "artisan": "sablon",
+    "artisanName": "El Sablón",
+    "category": "cuero",
+    "categoryLabel": "Funda de Libreta",
+    "title": "Funda para Libreta A5",
+    "description": "Funda de cuero para libretas A5 con portabolígrafo.",
+    "longDescription": "Funda diseñada para libretas estándar A5 (15x21 cm). Fabricada en cuero curtido al vegetal con bolsillo interior para tarjetas o notas sueltas y elástico portabolígrafo. La libreta no está incluida pero caben la mayoría de marcas habituales.",
+    "images": ["/sablon.webp"]
+  },
+  {
+    "id": 10,
+    "artisan": "sablon",
+    "artisanName": "El Sablón",
+    "category": "cuero",
+    "categoryLabel": "Funda de Libreta",
+    "title": "Funda para Cuaderno A4",
+    "description": "Funda de cuero para cuadernos A4, perfecta para el trabajo.",
+    "longDescription": "Funda de cuero natural para cuadernos tamaño A4 (21x29.7 cm). Interior con bolsillo y elástico sujetador. El cuero envejece de forma natural ganando carácter con el uso diario.",
+    "images": ["/plaza_somao.webp"]
+  },
+  {
+    "id": 11,
+    "artisan": "sablon",
+    "artisanName": "El Sablón",
+    "category": "cuero",
+    "categoryLabel": "Funda de Navaja",
+    "title": "Funda para Navaja de Monte",
+    "description": "Funda artesanal para navajas con clip de cinturón.",
+    "longDescription": "Funda para navaja fabricada en cuero de curtición vegetal de 3 mm de grosor. Incluye clip o pasador para cinturón cosido doble. Se puede adaptar a distintos tamaños. El cuero grueso protege la hoja y con el uso adquiere la forma exacta de la navaja.",
+    "images": ["/sablon.webp"]
+  },
+  {
+    "id": 12,
+    "artisan": "sablon",
+    "artisanName": "El Sablón",
+    "category": "cuero",
+    "categoryLabel": "Funda de Navaja",
+    "title": "Estuche para Navaja de Bolsillo",
+    "description": "Estuche compacto para navajas pequeñas o multiusos.",
+    "longDescription": "Estuche de cuero para navajas de bolsillo de hasta 10 cm cerradas. Cierre con botón de presión y lazo para llavero opcional. Cosido a mano con hilo encerado. Una forma elegante de llevar la navaja en el bolsillo sin que dañe la ropa.",
+    "images": ["/plaza_ovinana.webp"]
+  }
 ]
