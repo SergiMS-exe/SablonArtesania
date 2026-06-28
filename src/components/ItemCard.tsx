@@ -12,8 +12,9 @@ export interface Props {
   longDescription: string;
 }
 
-export default function ItemCard({ id, artisan, artisanName, categoryLabel, title, description, images, longDescription }: Props) {
+export default function ItemCard({ id, artisan, artisanName, category, categoryLabel, title, description, images, longDescription }: Props) {
   const isCollaborator = artisan !== 'sablon';
+  const materialLabel = category.charAt(0).toUpperCase() + category.slice(1);
   const handleViewDetails = () => {
     const event = new CustomEvent("openModal", {
       detail: { id, title, longDescription, images },
@@ -37,14 +38,9 @@ export default function ItemCard({ id, artisan, artisanName, categoryLabel, titl
         {/* Overlay sutil en hover */}
         <div className="absolute inset-0 bg-walnut-deep/0 group-hover:bg-walnut-deep/20 transition-colors duration-300" />
 
-        {/* Badge */}
-        <div className="absolute top-4 left-4 bg-leather/90 text-cream px-3 py-1.5 rounded-full text-xs font-semibold tracking-wide flex items-center gap-1.5">
-          <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/>
-            <line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/>
-            <line x1="8.12" y1="8.12" x2="12" y2="12"/>
-          </svg>
-          HECHO A MANO
+        {/* Badge material */}
+        <div className="absolute top-4 left-4 bg-leather/90 text-cream px-3 py-1.5 rounded-full text-xs font-semibold tracking-wide uppercase">
+          {materialLabel}
         </div>
 
         {/* Botón ver */}

@@ -141,7 +141,7 @@ export default function ModalCarousel() {
                     <div className="md:w-1/2 p-7 flex flex-col">
                         {/* Badge */}
                         <div className="inline-flex items-center gap-2 bg-leather/10 text-leather px-3 py-1.5 rounded-full text-xs font-semibold w-fit mb-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                 <circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/>
                                 <line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/>
                                 <line x1="8.12" y1="8.12" x2="12" y2="12"/>
@@ -168,7 +168,7 @@ export default function ModalCarousel() {
                                     'Cada pieza es única e irrepetible',
                                 ].map((feat) => (
                                     <div key={feat} className="flex items-start gap-2.5">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" className="text-leather flex-shrink-0 mt-0.5">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-leather flex-shrink-0 mt-0.5">
                                             <polyline points="20 6 9 17 4 12"/>
                                         </svg>
                                         <span className="text-sm text-dark-brown/70">{feat}</span>

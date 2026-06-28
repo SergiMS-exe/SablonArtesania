@@ -3,6 +3,8 @@ import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import Title from "../components/Title.astro";
+
+const contactEndpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? "";
 ---
 
 <html lang="es">
@@ -28,7 +30,7 @@ import Title from "../components/Title.astro";
                 <div class="grid md:grid-cols-2 gap-8">
                     <!-- Formulario -->
                     <div class="bg-cream p-8 rounded-2xl shadow">
-                        <form id="contactForm" class="space-y-5">
+                        <form id="contactForm" class="space-y-5" data-endpoint={contactEndpoint}>
                             <div>
                                 <label
                                     for="nombre"
@@ -189,7 +191,7 @@ import Title from "../components/Title.astro";
                                     </svg>
                                     <div>
                                         <p class="font-semibold text-walnut-deep text-sm">Oviñana</p>
-                                        <p class="text-xs">Plaza principal — Primer domingo de mes</p>
+                                        <p class="text-xs">Plaza principal — Mercado mensual</p>
                                     </div>
                                 </div>
 
@@ -200,7 +202,7 @@ import Title from "../components/Title.astro";
                                     </svg>
                                     <div>
                                         <p class="font-semibold text-walnut-deep text-sm">Somao</p>
-                                        <p class="text-xs">Plaza principal — Tercer domingo de mes</p>
+                                        <p class="text-xs">Plaza principal — Mercado mensual</p>
                                     </div>
                                 </div>
                             </div>
@@ -222,26 +224,62 @@ import Title from "../components/Title.astro";
         <script>
             const form = document.getElementById("contactForm") as HTMLFormElement;
             const formMessage = document.getElementById("formMessage") as HTMLDivElement;
+            const submitBtn = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+            const endpoint = form.dataset.endpoint?.trim();
+
+            const showMessage = (text: string, kind: "ok" | "err") => {
+                formMessage.textContent = text;
+                formMessage.className =
+                    "p-4 rounded-xl text-center font-semibold text-sm " +
+                    (kind === "ok"
+                        ? "bg-green-100 text-green-800"
+                        : "bg-red-100 text-red-800");
+                formMessage.classList.remove("hidden");
+            };
 
             form.addEventListener("submit", async (e) => {
                 e.preventDefault();
-                const formData = new FormData(form);
+
+                if (!endpoint) {
+                    showMessage(
+                        "El formulario aún no está configurado. Escríbenos por Instagram o Facebook mientras tanto.",
+                        "err"
+                    );
+                    return;
+                }
+
+                const payload = Object.fromEntries(new FormData(form).entries());
+
+                submitBtn.disabled = true;
+                submitBtn.textContent = "Enviando…";
 
                 try {
-                    await new Promise((resolve) => setTimeout(resolve, 1000));
+                    const res = await fetch(endpoint, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            ...payload,
+                            origin: "sablon-artesania-web",
+                            submittedAt: new Date().toISOString(),
+                        }),
+                    });
 
-                    formMessage.textContent = "¡Mensaje enviado! Nos pondremos en contacto contigo pronto.";
-                    formMessage.className = "p-4 rounded-xl text-center font-semibold bg-green-100 text-green-800 text-sm";
-                    formMessage.classList.remove("hidden");
+                    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+                    showMessage(
+                        "¡Mensaje enviado! Nos pondremos en contacto contigo pronto.",
+                        "ok"
+                    );
                     form.reset();
-
-                    setTimeout(() => {
-                        formMessage.classList.add("hidden");
-                    }, 5000);
-                } catch (error) {
-                    formMessage.textContent = "Ha ocurrido un error. Por favor, inténtalo de nuevo.";
-                    formMessage.className = "p-4 rounded-xl text-center font-semibold bg-red-100 text-red-800 text-sm";
-                    formMessage.classList.remove("hidden");
+                    setTimeout(() => formMessage.classList.add("hidden"), 5000);
+                } catch (err) {
+                    showMessage(
+                        "No hemos podido enviar el mensaje. Inténtalo de nuevo en un rato.",
+                        "err"
+                    );
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = "Enviar Mensaje";
                 }
             });
         </script>

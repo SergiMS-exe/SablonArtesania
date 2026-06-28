@@ -1,0 +1,99 @@
+---
+type ColorKey = "terra-cotta" | "moss-green" | "leather";
+
+interface Props {
+    name: string;
+    subtitle: string;
+    color: ColorKey;
+    image: string;
+    imageAlt: string;
+    locationLabel: string;
+    description: string;
+    mapsUrl: string;
+    embedSrc: string;
+}
+
+const {
+    name,
+    subtitle,
+    color,
+    image,
+    imageAlt,
+    locationLabel,
+    description,
+    mapsUrl,
+    embedSrc,
+} = Astro.props;
+
+const colorMap: Record<ColorKey, { header: string; button: string }> = {
+    "terra-cotta": {
+        header: "bg-terra-cotta",
+        button: "bg-terra-cotta hover:bg-terra-cotta/85",
+    },
+    "moss-green": {
+        header: "bg-moss-green",
+        button: "bg-moss-green hover:bg-moss-green/85",
+    },
+    leather: {
+        header: "bg-leather",
+        button: "bg-leather hover:bg-leather/85",
+    },
+};
+
+const c = colorMap[color];
+---
+
+<article class="bg-cream rounded-2xl shadow overflow-hidden">
+    <div class={`${c.header} p-6 text-cream`}>
+        <h3 class="text-2xl font-title font-bold mb-1">{name}</h3>
+        <p class="text-cream/80 text-sm">{subtitle}</p>
+    </div>
+
+    <div class="p-6">
+        <img
+            src={image}
+            alt={imageAlt}
+            class="w-full h-48 object-cover rounded-xl shadow mb-5"
+        />
+
+        <div class="space-y-3 mb-5">
+            <div class="flex items-start gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-leather flex-shrink-0 mt-0.5">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                    <circle cx="12" cy="10" r="3"/>
+                </svg>
+                <p class="text-sm text-dark-brown/80">{locationLabel}</p>
+            </div>
+            <div class="flex items-start gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-leather flex-shrink-0 mt-0.5">
+                    <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/>
+                    <line x1="4" y1="22" x2="4" y2="15"/>
+                </svg>
+                <p class="text-sm text-dark-brown/80">{description}</p>
+            </div>
+        </div>
+
+        <a
+            href={mapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class={`flex items-center justify-center gap-2 w-full ${c.button} text-cream py-2.5 rounded-full font-semibold text-sm transition-colors duration-200 mb-3`}
+        >
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+            </svg>
+            Ver en Google Maps
+        </a>
+
+        <iframe
+            src={embedSrc}
+            width="100%"
+            height="200"
+            style="border:0;"
+            allowfullscreen
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            class="rounded-xl"></iframe>
+    </div>
+</article>

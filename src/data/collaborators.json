@@ -1,12 +1,12 @@
 [
   {
     "id": 1,
-    "name": "Nombre de la Artesana",
-    "specialty": "Fieltro",
+    "name": "La tiendina de Car",
+    "specialty": "Atrapasueños y tapices",
     "location": "Asturias",
-    "description": "Descripción breve de la artesana y su trabajo.",
-    "longDescription": "Descripción completa del trabajo artesanal con fieltro. Aquí puedes detallar la técnica que utiliza, los materiales, la inspiración y lo que hace únicas a sus piezas.",
-    "instagram": "https://www.instagram.com/",
+    "description": "Atrapasueños y tapices hechos a mano por Carmen, pieza a pieza.",
+    "longDescription": "Carmen elabora atrapasueños y tapices artesanales, cada uno único en colores y composición. Trabaja con materiales naturales y dedica el tiempo que cada pieza necesita. Si te interesa alguna de sus piezas, contacta con nosotros y te ponemos en contacto con ella.",
+    "instagram": "",
     "image": "/sablon.webp"
   }
 ]
