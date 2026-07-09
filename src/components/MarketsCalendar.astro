@@ -1,0 +1,503 @@
+---
+import marketsData from "../data/markets.json";
+
+type Market = {
+    startDate: string;
+    endDate: string;
+    location: string;
+    schedule: string;
+    instagramUrl?: string;
+};
+
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+const todayIso = today.toISOString().slice(0, 10);
+
+const upcomingMarkets: Market[] = (marketsData as Market[])
+    .filter((m) => m.endDate >= todayIso)
+    .sort((a, b) => a.startDate.localeCompare(b.startDate));
+
+const colorByLocation: Record<string, string> = {
+    Oviñana: "terra-cotta",
+    Somao: "moss-green",
+};
+
+const colorClasses: Record<string, { cell: string; cellHover: string; dot: string; chip: string }> = {
+    "terra-cotta": {
+        cell: "bg-terra-cotta text-cream",
+        cellHover: "hover:bg-terra-cotta/85",
+        dot: "bg-terra-cotta",
+        chip: "bg-terra-cotta text-cream",
+    },
+    "moss-green": {
+        cell: "bg-moss-green text-cream",
+        cellHover: "hover:bg-moss-green/85",
+        dot: "bg-moss-green",
+        chip: "bg-moss-green text-cream",
+    },
+    leather: {
+        cell: "bg-leather text-cream",
+        cellHover: "hover:bg-leather/85",
+        dot: "bg-leather",
+        chip: "bg-leather text-cream",
+    },
+};
+
+const colorFor = (location: string) =>
+    colorClasses[colorByLocation[location] ?? "leather"];
+
+const isoFor = (year: number, monthIndex: number, day: number) =>
+    `${year}-${String(monthIndex + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+
+type Cell = {
+    day: number | null;
+    market: Market | null;
+    isToday: boolean;
+    isPast: boolean;
+};
+
+type MonthView = {
+    year: number;
+    monthIndex: number;
+    label: string;
+    cells: Cell[];
+    markets: Market[];
+};
+
+const monthFormatter = new Intl.DateTimeFormat("es-ES", {
+    month: "long",
+    year: "numeric",
+});
+
+const buildMonth = (year: number, monthIndex: number): MonthView => {
+    const firstDay = new Date(year, monthIndex, 1);
+    const lastDayDate = new Date(year, monthIndex + 1, 0).getDate();
+    const startWeekday = (firstDay.getDay() + 6) % 7;
+
+    const cells: Cell[] = [];
+    for (let i = 0; i < startWeekday; i++) {
+        cells.push({ day: null, market: null, isToday: false, isPast: false });
+    }
+    for (let d = 1; d <= lastDayDate; d++) {
+        const dateIso = isoFor(year, monthIndex, d);
+        const market =
+            upcomingMarkets.find(
+                (m) => dateIso >= m.startDate && dateIso <= m.endDate,
+            ) ?? null;
+        cells.push({
+            day: d,
+            market,
+            isToday: dateIso === todayIso,
+            isPast: dateIso < todayIso,
+        });
+    }
+    while (cells.length % 7 !== 0) {
+        cells.push({ day: null, market: null, isToday: false, isPast: false });
+    }
+
+    return {
+        year,
+        monthIndex,
+        label: monthFormatter.format(firstDay),
+        cells,
+        markets: [],
+    };
+};
+
+const monthsToShow: MonthView[] = [];
+
+if (upcomingMarkets.length === 0) {
+    monthsToShow.push(buildMonth(today.getFullYear(), today.getMonth()));
+} else {
+    const firstStart = new Date(upcomingMarkets[0].startDate);
+    const lastEndIso = upcomingMarkets.reduce(
+        (acc, m) => (m.endDate > acc ? m.endDate : acc),
+        upcomingMarkets[0].endDate,
+    );
+    const lastEnd = new Date(lastEndIso);
+    let cursor = new Date(firstStart.getFullYear(), firstStart.getMonth(), 1);
+    const endCursor = new Date(lastEnd.getFullYear(), lastEnd.getMonth(), 1);
+    while (cursor <= endCursor) {
+        monthsToShow.push(buildMonth(cursor.getFullYear(), cursor.getMonth()));
+        cursor = new Date(cursor.getFullYear(), cursor.getMonth() + 1, 1);
+    }
+
+    for (const m of upcomingMarkets) {
+        const start = new Date(m.startDate);
+        const end = new Date(m.endDate);
+        for (const view of monthsToShow) {
+            const monthStart = new Date(view.year, view.monthIndex, 1);
+            const monthEnd = new Date(view.year, view.monthIndex + 1, 0);
+            if (start <= monthEnd && end >= monthStart) {
+                view.markets.push(m);
+            }
+        }
+    }
+}
+
+const rangeInMonth = (m: Market, year: number, monthIndex: number) => {
+    const monthStart = new Date(year, monthIndex, 1);
+    const monthEnd = new Date(year, monthIndex + 1, 0);
+    const start = new Date(m.startDate);
+    const end = new Date(m.endDate);
+    const effectiveStart = start < monthStart ? monthStart : start;
+    const effectiveEnd = end > monthEnd ? monthEnd : end;
+    const sd = effectiveStart.getDate();
+    const ed = effectiveEnd.getDate();
+    return sd === ed ? `${sd}` : `${sd}–${ed}`;
+};
+
+const formatFullRange = (m: Market) => {
+    const fmt = new Intl.DateTimeFormat("es-ES", { day: "numeric", month: "long" });
+    const start = new Date(m.startDate);
+    const end = new Date(m.endDate);
+    if (m.startDate === m.endDate) return fmt.format(start);
+    if (start.getMonth() === end.getMonth()) {
+        return `${start.getDate()}–${end.getDate()} de ${new Intl.DateTimeFormat("es-ES", { month: "long" }).format(start)}`;
+    }
+    return `${fmt.format(start)} – ${fmt.format(end)}`;
+};
+
+const weekdayLabels = ["L", "M", "X", "J", "V", "S", "D"];
+const hasAnyMarket = upcomingMarkets.length > 0;
+const totalMonths = monthsToShow.length;
+---
+
+<div class="bg-cream p-6 md:p-8 rounded-2xl shadow">
+    <h2 class="text-2xl font-title font-bold text-walnut-deep mb-6 flex items-center gap-3">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-leather">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+            <line x1="16" y1="2" x2="16" y2="6"/>
+            <line x1="8" y1="2" x2="8" y2="6"/>
+            <line x1="3" y1="10" x2="21" y2="10"/>
+        </svg>
+        Próximos mercados
+    </h2>
+
+    {!hasAnyMarket ? (
+        <div class="bg-surface-low p-8 rounded-2xl text-center">
+            <p class="text-walnut-deep font-semibold mb-2">
+                De momento no tenemos fechas confirmadas
+            </p>
+            <p class="text-sm text-dark-brown/70 mb-5">
+                Estamos preparando la próxima salida. Síguenos en redes
+                para enterarte el primero.
+            </p>
+            <a
+                href="https://www.instagram.com/elsablonartesania"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 bg-leather hover:bg-walnut-deep text-cream px-6 py-2.5 rounded-full font-semibold text-sm transition-colors duration-200"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="14" height="14" class="fill-current">
+                    <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/>
+                </svg>
+                Síguenos en Instagram
+            </a>
+        </div>
+    ) : (
+        <div class="markets-calendar" data-total={totalMonths}>
+            <div class="flex items-center justify-between mb-5 gap-3">
+                <button
+                    type="button"
+                    class="calendar-prev w-10 h-10 rounded-full bg-leather/10 text-walnut-deep hover:bg-leather hover:text-cream transition-colors flex items-center justify-center disabled:opacity-25 disabled:cursor-not-allowed disabled:hover:bg-leather/10 disabled:hover:text-walnut-deep"
+                    aria-label="Mes anterior"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"/>
+                    </svg>
+                </button>
+
+                <div class="text-center flex-1 min-w-0">
+                    {monthsToShow.map((m, idx) => (
+                        <h3
+                            data-month-label={idx}
+                            class:list={[
+                                "text-xl md:text-2xl font-title font-bold text-walnut-deep capitalize truncate",
+                                idx !== 0 && "hidden",
+                            ]}
+                        >
+                            {m.label}
+                        </h3>
+                    ))}
+                    <p class="text-xs text-dark-brown/50 mt-0.5">
+                        <span data-current-position>1</span> de {totalMonths}
+                    </p>
+                </div>
+
+                <button
+                    type="button"
+                    class="calendar-next w-10 h-10 rounded-full bg-leather/10 text-walnut-deep hover:bg-leather hover:text-cream transition-colors flex items-center justify-center disabled:opacity-25 disabled:cursor-not-allowed disabled:hover:bg-leather/10 disabled:hover:text-walnut-deep"
+                    aria-label="Mes siguiente"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"/>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="max-w-md mx-auto">
+                {monthsToShow.map((month, idx) => (
+                    <div
+                        data-month-body={idx}
+                        class:list={[idx !== 0 && "hidden"]}
+                    >
+                        <div class="grid grid-cols-7 gap-1 mb-2">
+                            {weekdayLabels.map((d) => (
+                                <div class="text-center text-xs font-semibold text-dark-brown/50 uppercase py-1">
+                                    {d}
+                                </div>
+                            ))}
+                        </div>
+
+                        <div class="grid grid-cols-7 gap-1">
+                            {month.cells.map((cell) => {
+                                if (cell.day === null) {
+                                    return <div class="aspect-square" />;
+                                }
+                                const baseClasses = "aspect-square flex items-center justify-center text-sm rounded-lg transition-all relative";
+                                if (cell.market) {
+                                    const color = colorFor(cell.market.location);
+                                    const hasIg = !!cell.market.instagramUrl;
+                                    const titleText = hasIg
+                                        ? `${cell.market.location} · ${cell.market.schedule} · Pulsa para ver el cartel`
+                                        : `${cell.market.location} · ${cell.market.schedule}`;
+                                    if (hasIg) {
+                                        return (
+                                            <button
+                                                type="button"
+                                                class={`${baseClasses} ${color.cell} ${color.cellHover} font-bold shadow-sm cursor-pointer hover:scale-105 hover:shadow market-trigger`}
+                                                data-market-location={cell.market.location}
+                                                data-market-range={formatFullRange(cell.market)}
+                                                data-market-schedule={cell.market.schedule}
+                                                data-market-instagram={cell.market.instagramUrl}
+                                                data-market-color={colorByLocation[cell.market.location] ?? "leather"}
+                                                title={titleText}
+                                            >
+                                                {cell.day}
+                                                <span class="absolute top-0.5 right-0.5 w-1.5 h-1.5 bg-cream/90 rounded-full" />
+                                            </button>
+                                        );
+                                    }
+                                    return (
+                                        <div
+                                            class={`${baseClasses} ${color.cell} font-bold shadow-sm`}
+                                            title={titleText}
+                                        >
+                                            {cell.day}
+                                        </div>
+                                    );
+                                }
+                                const stateClasses = cell.isToday
+                                    ? "ring-2 ring-leather text-walnut-deep font-bold"
+                                    : cell.isPast
+                                      ? "text-dark-brown/30"
+                                      : "text-dark-brown/70";
+                                return (
+                                    <div class={`${baseClasses} ${stateClasses}`}>
+                                        {cell.day}
+                                    </div>
+                                );
+                            })}
+                        </div>
+
+                        {month.markets.length > 0 ? (
+                            <ul class="mt-5 space-y-2.5">
+                                {month.markets.map((m) => {
+                                    const color = colorFor(m.location);
+                                    const hasIg = !!m.instagramUrl;
+                                    const baseLegend = "flex items-center gap-3 text-sm bg-surface-low rounded-xl px-3 py-2.5 w-full text-left";
+                                    const content = (
+                                        <>
+                                            <span class={`w-2.5 h-2.5 rounded-full ${color.dot} flex-shrink-0`} />
+                                            <span class="font-bold text-walnut-deep min-w-[2.5rem]">
+                                                {rangeInMonth(m, month.year, month.monthIndex)}
+                                            </span>
+                                            <span class="text-dark-brown/80 font-semibold flex-1 truncate">
+                                                {m.location}
+                                            </span>
+                                            <span class="text-dark-brown/60 text-xs whitespace-nowrap">
+                                                {m.schedule}
+                                            </span>
+                                            {hasIg && (
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="14" height="14" class="fill-current text-leather flex-shrink-0">
+                                                    <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/>
+                                                </svg>
+                                            )}
+                                        </>
+                                    );
+                                    if (hasIg) {
+                                        return (
+                                            <li>
+                                                <button
+                                                    type="button"
+                                                    class={`${baseLegend} hover:bg-surface-container transition-colors cursor-pointer market-trigger`}
+                                                    data-market-location={m.location}
+                                                    data-market-range={formatFullRange(m)}
+                                                    data-market-schedule={m.schedule}
+                                                    data-market-instagram={m.instagramUrl}
+                                                    data-market-color={colorByLocation[m.location] ?? "leather"}
+                                                >
+                                                    {content}
+                                                </button>
+                                            </li>
+                                        );
+                                    }
+                                    return <li class={baseLegend}>{content}</li>;
+                                })}
+                            </ul>
+                        ) : (
+                            <p class="mt-5 text-sm text-dark-brown/60 italic text-center bg-surface-low rounded-xl px-3 py-3">
+                                Sin mercados confirmados este mes
+                            </p>
+                        )}
+                    </div>
+                ))}
+            </div>
+        </div>
+    )}
+
+    <p class="text-xs text-dark-brown/60 mt-7 text-center border-t border-leather/10 pt-5">
+        Las fechas pueden cambiar por motivos meteorológicos u organizativos.
+        Confírmalas siempre en <a href="https://www.instagram.com/elsablonartesania" target="_blank" rel="noopener noreferrer" class="text-leather font-semibold hover:text-walnut-deep">nuestro Instagram</a>.
+    </p>
+</div>
+
+<div
+    id="market-popover"
+    popover="auto"
+    class="bg-cream rounded-2xl shadow-lg w-80 max-w-[90vw] p-0 m-auto border-0 backdrop:bg-walnut-deep/40"
+>
+    <div data-popover-header class="px-6 py-5 text-cream rounded-t-2xl bg-leather">
+        <p class="text-xs uppercase tracking-wider text-cream/70 font-semibold mb-1">
+            Mercado
+        </p>
+        <p data-popover-location class="text-2xl font-title font-bold leading-tight">
+            —
+        </p>
+    </div>
+    <div class="p-6 space-y-3">
+        <div class="flex items-start gap-3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-leather flex-shrink-0 mt-0.5">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                <line x1="16" y1="2" x2="16" y2="6"/>
+                <line x1="8" y1="2" x2="8" y2="6"/>
+                <line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+            <p data-popover-range class="text-sm text-walnut-deep font-semibold capitalize">—</p>
+        </div>
+        <div class="flex items-start gap-3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-leather flex-shrink-0 mt-0.5">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+            </svg>
+            <p data-popover-schedule class="text-sm text-dark-brown/80">—</p>
+        </div>
+
+        <a
+            data-popover-link
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="mt-4 flex items-center justify-center gap-2 w-full bg-leather hover:bg-walnut-deep text-cream py-2.5 rounded-full font-semibold text-sm transition-colors"
+        >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="14" height="14" class="fill-current">
+                <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/>
+            </svg>
+            Ver cartel en Instagram
+        </a>
+
+        <button
+            type="button"
+            popovertarget="market-popover"
+            popovertargetaction="hide"
+            class="w-full text-xs text-dark-brown/60 hover:text-walnut-deep transition-colors mt-1 py-1"
+        >
+            Cerrar
+        </button>
+    </div>
+</div>
+
+<script>
+    type MarketColor = "terra-cotta" | "moss-green" | "leather";
+
+    const headerColorMap: Record<MarketColor, string> = {
+        "terra-cotta": "bg-terra-cotta",
+        "moss-green": "bg-moss-green",
+        leather: "bg-leather",
+    };
+    const allHeaderClasses = Object.values(headerColorMap);
+
+    const calendars = document.querySelectorAll<HTMLElement>(".markets-calendar");
+    calendars.forEach((cal) => {
+        const total = Number(cal.dataset.total ?? "0");
+        if (!total) return;
+        const prev = cal.querySelector<HTMLButtonElement>(".calendar-prev");
+        const next = cal.querySelector<HTMLButtonElement>(".calendar-next");
+        const labels = cal.querySelectorAll<HTMLElement>("[data-month-label]");
+        const bodies = cal.querySelectorAll<HTMLElement>("[data-month-body]");
+        const positionEl = cal.querySelector<HTMLElement>("[data-current-position]");
+        let current = 0;
+
+        const render = () => {
+            labels.forEach((el) =>
+                el.classList.toggle("hidden", Number(el.dataset.monthLabel) !== current),
+            );
+            bodies.forEach((el) =>
+                el.classList.toggle("hidden", Number(el.dataset.monthBody) !== current),
+            );
+            if (positionEl) positionEl.textContent = String(current + 1);
+            if (prev) prev.disabled = current === 0;
+            if (next) next.disabled = current === total - 1;
+        };
+
+        prev?.addEventListener("click", () => {
+            if (current > 0) {
+                current--;
+                render();
+            }
+        });
+        next?.addEventListener("click", () => {
+            if (current < total - 1) {
+                current++;
+                render();
+            }
+        });
+        render();
+    });
+
+    const popover = document.getElementById("market-popover") as
+        | (HTMLElement & { showPopover?: () => void; hidePopover?: () => void })
+        | null;
+
+    if (popover) {
+        const header = popover.querySelector<HTMLElement>("[data-popover-header]");
+        const locationEl = popover.querySelector<HTMLElement>("[data-popover-location]");
+        const rangeEl = popover.querySelector<HTMLElement>("[data-popover-range]");
+        const scheduleEl = popover.querySelector<HTMLElement>("[data-popover-schedule]");
+        const linkEl = popover.querySelector<HTMLAnchorElement>("[data-popover-link]");
+
+        const open = (trigger: HTMLElement) => {
+            const { marketLocation, marketRange, marketSchedule, marketInstagram, marketColor } =
+                trigger.dataset;
+            if (!marketInstagram) return;
+
+            if (locationEl) locationEl.textContent = marketLocation ?? "";
+            if (rangeEl) rangeEl.textContent = marketRange ?? "";
+            if (scheduleEl) scheduleEl.textContent = marketSchedule ?? "";
+            if (linkEl) linkEl.href = marketInstagram;
+
+            if (header) {
+                header.classList.remove(...allHeaderClasses);
+                const colorKey = (marketColor as MarketColor) ?? "leather";
+                header.classList.add(headerColorMap[colorKey] ?? headerColorMap.leather);
+            }
+
+            popover.showPopover?.();
+        };
+
+        document.querySelectorAll<HTMLElement>(".market-trigger").forEach((trigger) => {
+            trigger.addEventListener("click", () => open(trigger));
+        });
+    }
+</script>

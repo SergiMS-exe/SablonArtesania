@@ -7,13 +7,18 @@ import ModalCarousel from "../components/ModalCarousel";
 import Title from "../components/Title.astro";
 import products from "../data/products.json";
 
-// Categorías de material: las activas se derivan de los productos, las "coming soon" se añaden manualmente
-const activeCategories = [...new Set(products.map((p) => p.category))];
+// Filtros por material
+const categoryOrder = ["cuero", "hilo"] as const;
+const categoryLabels: Record<string, string> = {
+  cuero: "Cuero",
+  hilo: "Hilo",
+};
+const activeCategories = categoryOrder.filter((c) =>
+  products.some((p) => p.category === c)
+);
 const allCategories = [
-  { id: "all", label: "Todos", comingSoon: false },
-  { id: "cuero", label: "Cuero", comingSoon: false },
-  { id: "fieltro", label: "Fieltro", comingSoon: !activeCategories.includes("fieltro") },
-  { id: "madera", label: "Madera", comingSoon: !activeCategories.includes("madera") },
+  { id: "all", label: "Todos" },
+  ...activeCategories.map((c) => ({ id: c, label: categoryLabels[c] })),
 ];
 ---
 
@@ -40,39 +45,13 @@ const allCategories = [
             <button
               data-filter={cat.id}
               class:list={[
-                "filter-btn px-5 py-2 rounded-full text-sm font-medium transition-colors duration-200 border",
-                cat.comingSoon
-                  ? "border-dark-brown/15 text-dark-brown/35 cursor-default"
-                  : "border-leather/20 text-dark-brown/70 hover:border-leather hover:text-leather",
+                "filter-btn px-5 py-2 rounded-full text-sm font-medium transition-colors duration-200 border border-leather/20 text-dark-brown/70 hover:border-leather hover:text-leather",
                 cat.id === "all" ? "active-filter" : "",
               ]}
-              disabled={cat.comingSoon}
-              title={cat.comingSoon ? "Próximamente" : undefined}
             >
               {cat.label}
-              {cat.comingSoon && (
-                <span class="ml-1.5 text-xs opacity-60 font-normal">Próx.</span>
-              )}
             </button>
           ))}
-        </div>
-      </div>
-
-      <!-- Aviso material sin productos -->
-      <div
-        id="coming-soon-notice"
-        class="hidden max-w-screen-xl mx-auto px-4 md:px-8 lg:px-12 mb-8"
-      >
-        <div class="bg-cream rounded-2xl border border-leather/15 p-12 text-center">
-          <div class="w-12 h-12 bg-leather/10 rounded-xl flex items-center justify-center mx-auto mb-4 text-leather">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
-            </svg>
-          </div>
-          <h3 class="text-xl font-title font-bold text-walnut-deep mb-2" id="coming-soon-title">Próximamente</h3>
-          <p class="text-dark-brown/60 text-sm max-w-md mx-auto" id="coming-soon-text">
-            Estamos trabajando en esta colección. Muy pronto disponible.
-          </p>
         </div>
       </div>
 
@@ -104,24 +83,9 @@ const allCategories = [
 </style>
 
 <script>
-  const comingSoonLabels: Record<string, { title: string; text: string }> = {
-    madera: {
-      title: "Colección de Madera — Próximamente",
-      text: "Estamos trabajando en nuestra colección de artesanía en madera. Muy pronto disponible.",
-    },
-    fieltro: {
-      title: "Colección de Fieltro — Próximamente",
-      text: "Pronto incorporaremos piezas de fieltro de nuestros artesanos amigos.",
-    },
-  };
-
   document.addEventListener("DOMContentLoaded", () => {
-    const filterBtns = document.querySelectorAll<HTMLButtonElement>(".filter-btn:not([disabled])");
+    const filterBtns = document.querySelectorAll<HTMLButtonElement>(".filter-btn");
     const wrappers = document.querySelectorAll<HTMLElement>(".product-wrapper");
-    const comingSoonNotice = document.getElementById("coming-soon-notice");
-    const comingSoonTitle = document.getElementById("coming-soon-title");
-    const comingSoonText = document.getElementById("coming-soon-text");
-    const productsGrid = document.getElementById("products-grid");
 
     filterBtns.forEach((btn) => {
       btn.addEventListener("click", () => {
@@ -129,19 +93,6 @@ const allCategories = [
 
         filterBtns.forEach((b) => b.classList.remove("active-filter"));
         btn.classList.add("active-filter");
-
-        // Filtro sin productos => mostrar aviso coming soon
-        const hasProducts = cat === "all" || [...wrappers].some((w) => w.dataset.category === cat);
-        if (!hasProducts && comingSoonLabels[cat]) {
-          comingSoonNotice?.classList.remove("hidden");
-          if (productsGrid) productsGrid.style.display = "none";
-          if (comingSoonTitle) comingSoonTitle.textContent = comingSoonLabels[cat].title;
-          if (comingSoonText) comingSoonText.textContent = comingSoonLabels[cat].text;
-          return;
-        }
-
-        comingSoonNotice?.classList.add("hidden");
-        if (productsGrid) productsGrid.style.display = "";
 
         wrappers.forEach((wrapper) => {
           wrapper.style.display =

@@ -1,0 +1,22 @@
+[
+  {
+    "startDate": "2026-07-04",
+    "endDate": "2026-07-05",
+    "location": "Oviñana",
+    "schedule": "11:00 — 15:00",
+    "instagramUrl": "https://www.instagram.com/p/EJEMPLO_OVINANA/"
+  },
+  {
+    "startDate": "2026-07-18",
+    "endDate": "2026-07-19",
+    "location": "Somao",
+    "schedule": "11:00 — 15:00"
+  },
+  {
+    "startDate": "2026-08-01",
+    "endDate": "2026-08-02",
+    "location": "Oviñana",
+    "schedule": "11:00 — 15:00",
+    "instagramUrl": "https://www.instagram.com/p/EJEMPLO_AGOSTO/"
+  }
+]
