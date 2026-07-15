@@ -8,7 +8,14 @@
     "title": "Bolso de Cuero",
     "description": "Bolso hecho a mano en cuero curtido al vegetal.",
     "longDescription": "Bolso de cuero fabricado íntegramente a mano con cuero curtido al vegetal, seleccionado por su calidad y durabilidad. Cuenta con compartimento principal con cierre, bolsillo interior y correa regulable. Con el uso, el cuero adquiere una pátina única que hace cada pieza irrepetible.",
-    "images": ["/sablon.webp"]
+    "images": [
+      "/productos/bolso-morado.webp",
+      "/productos/bolso-rosa.webp",
+      "/productos/bolso-verde.webp",
+      "/productos/bolso-gris-croc.webp",
+      "/productos/bolso-blanco.webp",
+      "/productos/bolso-tote-fieltro.webp"
+    ]
   },
   {
     "id": 2,
@@ -19,7 +26,13 @@
     "title": "Cartera de Cuero",
     "description": "Cartera clásica con compartimentos para tarjetas y billetes.",
     "longDescription": "Cartera fabricada en cuero de primera calidad. Dispone de compartimento para billetes, ranuras para tarjetas y bolsillo para monedas. El cuero natural se ablanda con el uso adaptándose perfectamente al bolsillo.",
-    "images": ["/sablon.webp"]
+    "images": [
+      "/productos/cartera-celta.webp",
+      "/productos/cartera-celta-interior.webp",
+      "/productos/cartera-serpiente-roja.webp",
+      "/productos/cartera-serpiente.webp",
+      "/productos/cartera-marron-interior.webp"
+    ]
   },
   {
     "id": 3,
@@ -29,8 +42,12 @@
     "categoryLabel": "Monedero",
     "title": "Monedero de Cuero",
     "description": "Monedero compacto con cremallera, cabe en cualquier bolsillo.",
-    "longDescription": "Monedero de cuero con cierre de cremallera de latón. Sencillo, funcional y duradero. Su tamaño compacto lo hace ideal para llevarlo solo o junto a la cartera. Disponible en cuero natural o teñido en varios tonos.",
-    "images": ["/sablon.webp"]
+    "longDescription": "Monedero de cuero con cierre de broche. Sencillo, funcional y duradero. Su tamaño compacto lo hace ideal para llevarlo solo o junto a la cartera. Disponible en cuero natural o teñido en varios tonos.",
+    "images": [
+      "/productos/monedero-negro.webp",
+      "/productos/monedero-negro-interior.webp",
+      "/productos/tarjetero-serpiente.webp"
+    ]
   },
   {
     "id": 4,
@@ -41,7 +58,14 @@
     "title": "Cinturón de Cuero",
     "description": "Cinturón liso con hebilla de latón, elegante y duradero.",
     "longDescription": "Cinturón fabricado en una sola pieza de cuero plena flor. Hebilla de latón macizo intercambiable. Se puede hacer a medida indicando la talla al realizar el pedido. Un cinturón que mejora con los años.",
-    "images": ["/sablon.webp"]
+    "images": [
+      "/productos/cinturon-laton.webp",
+      "/productos/cinturon-negro-martillado.webp",
+      "/productos/cinturon-garra.webp",
+      "/productos/cinturon-serpiente.webp",
+      "/productos/cinturon-rojo.webp",
+      "/productos/cinturon-claro.webp"
+    ]
   },
   {
     "id": 5,
@@ -51,8 +75,13 @@
     "categoryLabel": "Funda de Libreta",
     "title": "Funda de Libreta",
     "description": "Funda de cuero para libretas con portabolígrafo.",
-    "longDescription": "Funda de cuero curtido al vegetal para libretas, con bolsillo interior para tarjetas o notas sueltas y elástico portabolígrafo. Disponible en distintos tamaños bajo pedido. La libreta no está incluida.",
-    "images": ["/sablon.webp"]
+    "longDescription": "Funda de cuero para libretas, cosida a mano y con cierre de cordón o botón. Cada una combina cueros y colores distintos, por lo que no hay dos iguales. Disponible en distintos tamaños bajo pedido.",
+    "images": [
+      "/productos/libreta-croc-verde.webp",
+      "/productos/libreta-turquesa.webp",
+      "/productos/libreta-fucsia.webp",
+      "/productos/libreta-naranja.webp"
+    ]
   },
   {
     "id": 6,
@@ -62,8 +91,11 @@
     "categoryLabel": "Varios",
     "title": "Pieza de Cuero a Medida",
     "description": "Otras piezas artesanales en cuero hechas bajo encargo.",
-    "longDescription": "Además de las piezas habituales, también elaboramos otros artículos en cuero bajo encargo: fundas para navajas, llaveros, brazaletes, accesorios a medida. Cuéntanos qué necesitas y vemos cómo hacerlo.",
-    "images": ["/sablon.webp"]
+    "longDescription": "Además de las piezas habituales, también elaboramos otros artículos en cuero bajo encargo: juegos tradicionales, fundas para navajas, llaveros, brazaletes, accesorios a medida. Cuéntanos qué necesitas y vemos cómo hacerlo.",
+    "images": [
+      "/productos/tres-en-raya.webp",
+      "/productos/tres-en-raya-2.webp"
+    ]
   },
   {
     "id": 7,
@@ -74,7 +106,11 @@
     "title": "Atrapasueños",
     "description": "Atrapasueños hecho a mano con materiales naturales.",
     "longDescription": "Atrapasueños artesanal elaborado a mano con aro de madera, hilo encerado y plumas naturales. Cada pieza es única, diferente en colores y combinaciones. Una decoración con tradición que da un toque cálido a cualquier rincón.",
-    "images": ["/sablon.webp"]
+    "images": [
+      "/productos/atrapasuenos-blanco.webp",
+      "/productos/atrapasuenos-gris.webp",
+      "/productos/atrapasuenos-boho.webp"
+    ]
   },
   {
     "id": 8,
@@ -85,6 +121,12 @@
     "title": "Tapiz",
     "description": "Tapiz hecho a mano para vestir paredes con calidez.",
     "longDescription": "Tapiz tejido a mano con fibras naturales y acabado artesanal. Pensado para añadir textura y calidez a cualquier estancia. Cada tapiz es una pieza única en composición y tonos. Disponible en varios tamaños bajo pedido.",
-    "images": ["/sablon.webp"]
+    "images": [
+      "/productos/tapiz-coral.webp",
+      "/productos/tapiz-rosa.webp",
+      "/productos/tapiz-media-luna.webp",
+      "/productos/tapiz-encaje.webp",
+      "/productos/tapiz-encaje-rama.webp"
+    ]
   }
 ]
