@@ -6,6 +6,9 @@ dist/
 # dependencies
 node_modules/
 
+# Local SQLite database and write-ahead log files
+data/*.sqlite*
+
 # logs
 npm-debug.log*
 yarn-debug.log*

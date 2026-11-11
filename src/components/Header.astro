@@ -3,6 +3,7 @@ import HeaderLink from "./HeaderLink.astro";
 import "../styles/global.css";
 const pathname = Astro.url.pathname.replace(import.meta.env.BASE_URL, "");
 const isRootPage = pathname === "";
+const isAdmin = !!Astro.locals.user;
 ---
 
 <header
@@ -24,6 +25,7 @@ const isRootPage = pathname === "";
 			<HeaderLink href="/artesanos">Artesanos</HeaderLink>
 			<HeaderLink href="/encuentranos">Dónde Encontrarnos</HeaderLink>
 			<HeaderLink href="/contacto">Contacto</HeaderLink>
+			{isAdmin && <HeaderLink href="/admin">Admin</HeaderLink>}
 		</div>
 
 		<!-- Botón hamburguesa (solo móvil) -->
@@ -100,6 +102,11 @@ const isRootPage = pathname === "";
 			<a href="/contacto" class="text-3xl font-title font-bold text-walnut-deep hover:text-leather transition-colors mobile-menu-link">
 				Contacto
 			</a>
+			{isAdmin && (
+				<a href="/admin" class="text-3xl font-title font-bold text-walnut-deep hover:text-leather transition-colors mobile-menu-link">
+					Admin
+				</a>
+			)}
 
 			<!-- Redes sociales en móvil -->
 			<div class="flex gap-6 mt-8">

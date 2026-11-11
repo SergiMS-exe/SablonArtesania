@@ -1,0 +1,122 @@
+---
+import AdminShell from "../../layouts/AdminShell.astro";
+import { db, schema } from "../../lib/db/client.ts";
+import { asc } from "drizzle-orm";
+
+if (!db) return Astro.redirect("/admin/login?error=db_unavailable");
+
+const categories = await db
+  .select()
+  .from(schema.categories)
+  .orderBy(asc(schema.categories.sortOrder), asc(schema.categories.id));
+---
+
+<AdminShell title="Categorías">
+  <div class="grid md:grid-cols-2 gap-6">
+    <form id="new-category" class="bg-cream p-6 rounded-2xl shadow space-y-4 h-fit">
+      <h2 class="text-lg font-title font-bold text-walnut-deep">Nueva categoría</h2>
+      <div>
+        <label class="block text-sm font-semibold text-walnut-deep mb-1" for="cat-name">Nombre</label>
+        <input id="cat-name" name="name" required class="w-full px-3 py-2 rounded-xl border border-wood-light bg-surface-low focus:border-leather focus:outline-none text-sm" placeholder="Cerámica" />
+      </div>
+      <div>
+        <label class="block text-sm font-semibold text-walnut-deep mb-1" for="cat-order">Orden</label>
+        <input id="cat-order" name="sortOrder" type="number" value="0" class="w-full px-3 py-2 rounded-xl border border-wood-light bg-surface-low focus:border-leather focus:outline-none text-sm" />
+      </div>
+      <label class="flex items-center gap-2 text-sm text-walnut-deep">
+        <input name="active" type="checkbox" checked class="accent-leather" /> Activa en el escaparate
+      </label>
+      <button class="w-full bg-leather hover:bg-walnut-deep text-cream py-2.5 rounded-full font-semibold transition-colors">
+        Crear
+      </button>
+      <p id="cat-msg" class="text-sm hidden"></p>
+    </form>
+
+    <div class="bg-cream p-6 rounded-2xl shadow">
+      <h2 class="text-lg font-title font-bold text-walnut-deep mb-4">Listado ({categories.length})</h2>
+      {categories.length === 0 ? (
+        <p class="text-sm text-dark-brown/60">Aún no hay categorías.</p>
+      ) : (
+        <ul id="cat-list" class="divide-y divide-wood-light/40">
+          {categories.map((c) => (
+            <li class="py-3 flex flex-wrap items-center gap-3" data-id={c.id} data-deleted={c.deletedAt ? 'true' : 'false'}>
+              <span class="font-semibold text-walnut-deep flex-1">{c.name}</span>
+              <span class="text-xs text-dark-brown/50">/{c.slug}</span>
+              {c.deletedAt && <span class="text-xs bg-red-100 text-red-800 px-2 py-1 rounded-full">Eliminada</span>}
+              <label class="flex items-center gap-1 text-xs"><input type="checkbox" data-active checked={c.active} class="accent-leather" /> Activa</label>
+              <input type="number" value={c.sortOrder} data-sort class="w-16 px-2 py-1 text-sm rounded-lg border border-wood-light bg-surface-low" />
+              <button data-save class="text-xs text-leather hover:underline">Guardar</button>
+              {c.deletedAt ? (
+                <button data-restore class="text-xs text-green-800 hover:underline">Restaurar</button>
+              ) : (
+                <button data-del class="text-xs text-red-700 hover:underline">Eliminar</button>
+              )}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  </div>
+</AdminShell>
+
+<script>
+  const form = document.getElementById("new-category") as HTMLFormElement;
+  const msg = document.getElementById("cat-msg") as HTMLParagraphElement;
+
+  form?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    msg.classList.add("hidden");
+    const fd = new FormData(form);
+    const res = await fetch("/api/admin/categories", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: fd.get("name"),
+        sortOrder: Number(fd.get("sortOrder") ?? 0),
+        active: fd.has("active"),
+      }),
+    });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      msg.textContent = "Error: " + (err.error ?? res.status);
+      msg.className = "text-sm text-red-700";
+      return;
+    }
+    location.reload();
+  });
+
+  document.querySelectorAll<HTMLLIElement>("#cat-list li").forEach((li) => {
+    const id = li.dataset.id!;
+    const sortInput = li.querySelector<HTMLInputElement>("[data-sort]")!;
+    const activeInput = li.querySelector<HTMLInputElement>("[data-active]")!;
+    li.querySelector<HTMLButtonElement>("[data-save]")?.addEventListener("click", async () => {
+      const res = await fetch(`/api/admin/categories/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ sortOrder: Number(sortInput.value), active: activeInput.checked }),
+      });
+      if (res.ok) {
+        sortInput.classList.add("ring-2", "ring-green-300");
+        setTimeout(() => sortInput.classList.remove("ring-2", "ring-green-300"), 600);
+      }
+    });
+    li.querySelector<HTMLButtonElement>("[data-del]")?.addEventListener("click", async () => {
+      if (!confirm("¿Eliminar esta categoría del escaparate? Se podrá restaurar después.")) return;
+      const res = await fetch(`/api/admin/categories/${id}`, { method: "DELETE" });
+      if (res.ok) location.reload();
+      else {
+        const err = await res.json().catch(() => ({}));
+        alert("No se pudo eliminar: " + (err.message ?? err.error ?? res.status));
+      }
+    });
+    li.querySelector<HTMLButtonElement>("[data-restore]")?.addEventListener("click", async () => {
+      const res = await fetch(`/api/admin/categories/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ deletedAt: null, active: true }),
+      });
+      if (res.ok) location.reload();
+      else alert("No se pudo restaurar la categoría.");
+    });
+  });
+</script>

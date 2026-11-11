@@ -1,5 +1,6 @@
 ---
-import marketsData from "../data/markets.json";
+import { and, asc, eq, gte } from "drizzle-orm";
+import { db, schema } from "../lib/db/client.ts";
 
 type Market = {
     startDate: string;
@@ -13,9 +14,17 @@ const today = new Date();
 today.setHours(0, 0, 0, 0);
 const todayIso = today.toISOString().slice(0, 10);
 
-const upcomingMarkets: Market[] = (marketsData as Market[])
-    .filter((m) => m.endDate >= todayIso)
-    .sort((a, b) => a.startDate.localeCompare(b.startDate));
+const upcomingMarkets: Market[] = await db
+    .select({
+        startDate: schema.markets.startDate,
+        endDate: schema.markets.endDate,
+        location: schema.markets.location,
+        schedule: schema.markets.schedule,
+        instagramUrl: schema.markets.instagramUrl,
+    })
+    .from(schema.markets)
+    .where(and(eq(schema.markets.active, true), gte(schema.markets.endDate, todayIso)))
+    .orderBy(asc(schema.markets.startDate), asc(schema.markets.sortOrder));
 
 const colorByLocation: Record<string, string> = {
     Oviñana: "terra-cotta",

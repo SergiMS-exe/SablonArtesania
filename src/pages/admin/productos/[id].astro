@@ -1,0 +1,59 @@
+---
+import AdminShell from "../../../layouts/AdminShell.astro";
+import ProductForm from "../../../components/admin/ProductForm.tsx";
+import { db, schema } from "../../../lib/db/client.ts";
+import { asc, eq } from "drizzle-orm";
+
+if (!db) return Astro.redirect("/admin/login?error=db_unavailable");
+
+const id = parseInt(Astro.params.id ?? '', 10);
+if (!Number.isFinite(id)) return Astro.redirect("/admin/productos");
+
+const rows = await db
+  .select()
+  .from(schema.products)
+  .where(eq(schema.products.id, id))
+  .limit(1);
+
+const product = rows[0];
+if (!product) return Astro.redirect("/admin/productos");
+
+const artisans = await db
+  .select({ id: schema.artisans.id, name: schema.artisans.name })
+  .from(schema.artisans)
+  .orderBy(asc(schema.artisans.sortOrder), asc(schema.artisans.id));
+
+const categories = await db
+  .select({ id: schema.categories.id, name: schema.categories.name })
+  .from(schema.categories)
+  .orderBy(asc(schema.categories.sortOrder), asc(schema.categories.id));
+
+const images = await db
+  .select()
+  .from(schema.productImages)
+  .where(eq(schema.productImages.productId, id))
+  .orderBy(asc(schema.productImages.deletedAt), asc(schema.productImages.sortOrder), asc(schema.productImages.id));
+
+const initial = {
+  id: product.id,
+  name: product.name,
+  shortDescription: product.shortDescription,
+  longDescription: product.longDescription,
+  priceCents: product.priceCents,
+  currency: product.currency,
+  status: product.status as 'disponible' | 'vendido' | 'oculto',
+  active: product.active,
+  deleted: product.deletedAt !== null,
+  artisanId: product.artisanId,
+  categoryId: product.categoryId,
+  sortOrder: product.sortOrder,
+  images: images.map((i) => ({ id: i.id, url: i.url, sortOrder: i.sortOrder, deleted: i.deletedAt !== null })),
+};
+---
+
+<AdminShell title={`Editar: ${product.name}`}>
+  <p class="text-sm text-dark-brown/60 mb-4">
+    Slug: <code class="bg-surface-low px-2 py-0.5 rounded">{product.slug}</code>
+  </p>
+  <ProductForm client:load artisans={artisans} categories={categories} initial={initial} />
+</AdminShell>

@@ -1,0 +1,151 @@
+---
+import AdminShell from "../../layouts/AdminShell.astro";
+import { db, schema } from "../../lib/db/client.ts";
+import { and, count, desc, eq, gte, isNull, sql } from "drizzle-orm";
+
+if (!db) {
+  return Astro.redirect("/admin/login?error=db_unavailable");
+}
+
+const [available] = await db
+  .select({ c: count() })
+  .from(schema.products)
+  .where(and(eq(schema.products.status, "disponible"), isNull(schema.products.deletedAt)));
+const [sold] = await db
+  .select({ c: count() })
+  .from(schema.products)
+  .where(and(eq(schema.products.status, "vendido"), isNull(schema.products.deletedAt)));
+const [hidden] = await db
+  .select({ c: count() })
+  .from(schema.products)
+  .where(and(eq(schema.products.status, "oculto"), isNull(schema.products.deletedAt)));
+const [total] = await db.select({ c: count() }).from(schema.products).where(isNull(schema.products.deletedAt));
+
+const [newInquiries] = await db
+  .select({ c: count() })
+  .from(schema.inquiries)
+  .where(and(eq(schema.inquiries.status, "new"), isNull(schema.inquiries.deletedAt)));
+
+const recent = await db
+  .select({
+    id: schema.inquiries.id,
+    name: schema.inquiries.name,
+    message: schema.inquiries.message,
+    type: schema.inquiries.type,
+    status: schema.inquiries.status,
+    createdAt: schema.inquiries.createdAt,
+  })
+  .from(schema.inquiries)
+  .where(isNull(schema.inquiries.deletedAt))
+  .orderBy(desc(schema.inquiries.createdAt))
+  .limit(5);
+
+const metricsStart = new Date(Date.now() - 6 * 24 * 60 * 60 * 1000)
+  .toISOString()
+  .slice(0, 10);
+const [recentViews] = await db
+  .select({ views: sql<number>`coalesce(sum(${schema.pageViews.views}), 0)` })
+  .from(schema.pageViews)
+  .where(and(gte(schema.pageViews.day, metricsStart), isNull(schema.pageViews.deletedAt)));
+const topPages = await db
+  .select({
+    path: schema.pageViews.path,
+    views: sql<number>`sum(${schema.pageViews.views})`,
+  })
+  .from(schema.pageViews)
+  .where(and(gte(schema.pageViews.day, metricsStart), isNull(schema.pageViews.deletedAt)))
+  .groupBy(schema.pageViews.path)
+  .orderBy(desc(sql`sum(${schema.pageViews.views})`))
+  .limit(5);
+---
+
+<AdminShell title="Dashboard">
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+    <div class="bg-cream p-5 rounded-2xl shadow">
+      <div class="text-sm text-dark-brown/60 font-semibold">Disponibles</div>
+      <div class="text-3xl font-title font-bold text-leather mt-1">{available?.c ?? 0}</div>
+    </div>
+    <div class="bg-cream p-5 rounded-2xl shadow">
+      <div class="text-sm text-dark-brown/60 font-semibold">Vendidos</div>
+      <div class="text-3xl font-title font-bold text-dark-brown/60 mt-1">{sold?.c ?? 0}</div>
+    </div>
+    <div class="bg-cream p-5 rounded-2xl shadow">
+      <div class="text-sm text-dark-brown/60 font-semibold">Ocultos</div>
+      <div class="text-3xl font-title font-bold text-dark-brown/40 mt-1">{hidden?.c ?? 0}</div>
+    </div>
+    <div class="bg-cream p-5 rounded-2xl shadow">
+      <div class="text-sm text-dark-brown/60 font-semibold">Consultas nuevas</div>
+      <div class="text-3xl font-title font-bold text-walnut-deep mt-1">{newInquiries?.c ?? 0}</div>
+    </div>
+  </div>
+
+  <div class="grid md:grid-cols-2 gap-6">
+    <div class="bg-cream p-6 rounded-2xl shadow">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-lg font-title font-bold text-walnut-deep">Últimas consultas</h2>
+        <a href="/admin/consultas" class="text-sm text-leather hover:underline">Ver todas →</a>
+      </div>
+      {recent.length === 0 ? (
+        <p class="text-sm text-dark-brown/60">Todavía no hay consultas.</p>
+      ) : (
+        <ul class="divide-y divide-wood-light/40">
+          {recent.map((inq) => (
+            <li class="py-3 flex items-start justify-between gap-3">
+              <div class="min-w-0">
+                <div class="text-sm font-semibold text-walnut-deep truncate">
+                  {inq.name}
+                  <span class="text-xs font-normal text-dark-brown/60 ml-1">
+                    · {inq.type === "product" ? "pieza" : "general"}
+                  </span>
+                </div>
+                <div class="text-sm text-dark-brown/70 truncate">{inq.message}</div>
+              </div>
+              <div class="text-xs text-dark-brown/50 whitespace-nowrap">
+                {new Date(inq.createdAt).toLocaleDateString("es-ES")}
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+
+    <div class="bg-cream p-6 rounded-2xl shadow">
+      <h2 class="text-lg font-title font-bold text-walnut-deep mb-4">Acciones rápidas</h2>
+      <div class="flex flex-col gap-3">
+        <a href="/admin/productos/nuevo" class="bg-leather hover:bg-walnut-deep text-cream py-3 rounded-xl font-semibold text-center transition-colors">
+          + Añadir pieza
+        </a>
+        <a href="/admin/productos" class="bg-surface-low hover:bg-surface-container text-walnut-deep py-3 rounded-xl font-semibold text-center transition-colors">
+          Gestionar piezas
+        </a>
+        <a href="/admin/artesanos" class="bg-surface-low hover:bg-surface-container text-walnut-deep py-3 rounded-xl font-semibold text-center transition-colors">
+          Gestionar artesanos
+        </a>
+        <a href="/admin/mercados" class="bg-surface-low hover:bg-surface-container text-walnut-deep py-3 rounded-xl font-semibold text-center transition-colors">
+          Gestionar mercados
+        </a>
+      </div>
+      <p class="text-xs text-dark-brown/50 mt-6">Total piezas: {total?.c ?? 0}</p>
+    </div>
+  </div>
+
+  <section class="bg-cream p-6 rounded-2xl shadow mt-6">
+    <div class="flex flex-wrap items-baseline justify-between gap-2 mb-4">
+      <h2 class="text-lg font-title font-bold text-walnut-deep">Visitas</h2>
+      <p class="text-sm text-dark-brown/60">Últimos 7 días · {recentViews?.views ?? 0} páginas vistas</p>
+    </div>
+    {topPages.length === 0 ? (
+      <p class="text-sm text-dark-brown/60">Aún no hay visitas registradas.</p>
+    ) : (
+      <ul class="divide-y divide-wood-light/40">
+        {topPages.map((page) => (
+          <li class="py-2 flex justify-between gap-4 text-sm">
+            <code class="text-walnut-deep break-all">{page.path}</code>
+            <span class="font-semibold text-leather whitespace-nowrap">{page.views}</span>
+          </li>
+        ))}
+      </ul>
+    )}
+    <p class="text-xs text-dark-brown/50 mt-4">Solo se guardan fecha, página y contador agregado; no se almacenan IP, cookies ni datos personales.</p>
+  </section>
+</AdminShell>

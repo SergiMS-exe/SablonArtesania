@@ -3,23 +3,63 @@ import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import ItemCard from "../components/ItemCard";
-import ModalCarousel from "../components/ModalCarousel";
 import Title from "../components/Title.astro";
-import products from "../data/products.json";
+import { db, schema } from "../lib/db/client.ts";
+import { and, asc, eq, isNull } from "drizzle-orm";
 
-// Filtros por material
-const categoryOrder = ["cuero", "hilo"] as const;
-const categoryLabels: Record<string, string> = {
-  cuero: "Cuero",
-  hilo: "Hilo",
-};
-const activeCategories = categoryOrder.filter((c) =>
-  products.some((p) => p.category === c)
-);
-const allCategories = [
-  { id: "all", label: "Todos" },
-  ...activeCategories.map((c) => ({ id: c, label: categoryLabels[c] })),
-];
+let categories: { slug: string; name: string }[] = [];
+let products: any[] = [];
+
+if (db) {
+  categories = await db
+    .select({ slug: schema.categories.slug, name: schema.categories.name })
+    .from(schema.categories)
+    .where(and(eq(schema.categories.active, true), isNull(schema.categories.deletedAt)))
+    .orderBy(asc(schema.categories.sortOrder), asc(schema.categories.id));
+
+  const rows = await db
+    .select({
+      id: schema.products.id,
+      slug: schema.products.slug,
+      name: schema.products.name,
+      shortDescription: schema.products.shortDescription,
+      priceCents: schema.products.priceCents,
+      currency: schema.products.currency,
+      artisan: { slug: schema.artisans.slug, name: schema.artisans.name },
+      category: { slug: schema.categories.slug, name: schema.categories.name },
+    })
+    .from(schema.products)
+    .innerJoin(schema.artisans, eq(schema.products.artisanId, schema.artisans.id))
+    .innerJoin(schema.categories, eq(schema.products.categoryId, schema.categories.id))
+    .where(and(
+      eq(schema.products.status, 'disponible'),
+      eq(schema.products.active, true),
+      isNull(schema.products.deletedAt),
+      eq(schema.categories.active, true),
+      isNull(schema.categories.deletedAt),
+      eq(schema.artisans.active, true),
+      isNull(schema.artisans.deletedAt),
+    ))
+    .orderBy(asc(schema.products.sortOrder), asc(schema.products.id));
+
+  const imagesRows = await db
+    .select()
+    .from(schema.productImages)
+    .where(isNull(schema.productImages.deletedAt))
+    .orderBy(asc(schema.productImages.productId), asc(schema.productImages.sortOrder));
+  const imagesByProduct = new Map<number, typeof imagesRows>();
+  for (const img of imagesRows) {
+    if (!imagesByProduct.has(img.productId)) imagesByProduct.set(img.productId, []);
+    imagesByProduct.get(img.productId)!.push(img);
+  }
+  products = rows.map((r) => ({
+    ...r,
+    images: (imagesByProduct.get(r.id) ?? []).map((i) => i.url),
+  }));
+}
+
+const filterCategories = categories;
+const allCategories = [{ id: "all", label: "Todos" }, ...filterCategories.map((c) => ({ id: c.slug, label: c.name }))];
 ---
 
 <html lang="es">
@@ -38,36 +78,39 @@ const allCategories = [
         </Title>
       </section>
 
-      <!-- Filtro por material -->
-      <div class="max-w-screen-xl mx-auto px-4 md:px-8 lg:px-12 mb-8">
-        <div class="flex flex-wrap gap-2 justify-center">
-          {allCategories.map((cat) => (
-            <button
-              data-filter={cat.id}
-              class:list={[
-                "filter-btn px-5 py-2 rounded-full text-sm font-medium transition-colors duration-200 border border-leather/20 text-dark-brown/70 hover:border-leather hover:text-leather",
-                cat.id === "all" ? "active-filter" : "",
-              ]}
-            >
-              {cat.label}
-            </button>
-          ))}
+      {filterCategories.length > 0 && (
+        <div class="max-w-screen-xl mx-auto px-4 md:px-8 lg:px-12 mb-8">
+          <div class="flex flex-wrap gap-2 justify-center">
+            {allCategories.map((cat) => (
+              <button
+                data-filter={cat.id}
+                class:list={[
+                  "filter-btn px-5 py-2 rounded-full text-sm font-medium transition-colors duration-200 border border-leather/20 text-dark-brown/70 hover:border-leather hover:text-leather",
+                  cat.id === "all" ? "active-filter" : "",
+                ]}
+              >
+                {cat.label}
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
-      <!-- Grid de productos -->
       <div
         id="products-grid"
         class="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4 md:px-8 lg:px-12"
       >
         {products.map((producto) => (
-          <div data-category={producto.category} class="product-wrapper">
-            <ItemCard {...producto} client:load />
+          <div data-category={producto.category.slug} class="product-wrapper">
+            <ItemCard {...producto} client:visible />
           </div>
         ))}
+        {products.length === 0 && (
+          <p class="col-span-full text-center text-dark-brown/60 py-12">
+            El escaparate se está preparando. Vuelve pronto.
+          </p>
+        )}
       </div>
-
-      <ModalCarousel client:only="react" />
 
       <Footer />
     </main>

@@ -1,0 +1,152 @@
+---
+import AdminShell from "../../layouts/AdminShell.astro";
+import { db, schema } from "../../lib/db/client.ts";
+import { and, desc, eq, isNull, isNotNull } from "drizzle-orm";
+
+if (!db) return Astro.redirect("/admin/login?error=db_unavailable");
+
+const url = Astro.url;
+const statusFilter = url.searchParams.get('status');
+const typeFilter = url.searchParams.get('type');
+const showDeleted = url.searchParams.get('deleted') === 'true';
+
+const conditions = [];
+conditions.push(showDeleted ? isNotNull(schema.inquiries.deletedAt) : isNull(schema.inquiries.deletedAt));
+if (statusFilter === 'new' || statusFilter === 'read' || statusFilter === 'archived') {
+  conditions.push(eq(schema.inquiries.status, statusFilter));
+}
+if (typeFilter === 'contact' || typeFilter === 'product') {
+  conditions.push(eq(schema.inquiries.type, typeFilter));
+}
+
+const inquiries = await db
+  .select({
+    id: schema.inquiries.id,
+    name: schema.inquiries.name,
+    email: schema.inquiries.email,
+    phone: schema.inquiries.phone,
+    message: schema.inquiries.message,
+    type: schema.inquiries.type,
+    status: schema.inquiries.status,
+    createdAt: schema.inquiries.createdAt,
+  })
+  .from(schema.inquiries)
+  .where(and(...conditions))
+  .orderBy(desc(schema.inquiries.createdAt));
+---
+
+<AdminShell title="Consultas">
+  <div class="flex flex-wrap gap-2 mb-4 text-sm">
+    <a href="/admin/consultas" class:list={["px-3 py-1.5 rounded-full", !statusFilter && !typeFilter ? "bg-leather text-cream font-semibold" : "bg-cream text-dark-brown/70"]}>
+      Todas
+    </a>
+    <a href="/admin/consultas?status=new" class:list={["px-3 py-1.5 rounded-full", statusFilter === 'new' ? "bg-leather text-cream font-semibold" : "bg-cream text-dark-brown/70"]}>
+      Nuevas
+    </a>
+    <a href="/admin/consultas?status=archived" class:list={["px-3 py-1.5 rounded-full", statusFilter === 'archived' ? "bg-leather text-cream font-semibold" : "bg-cream text-dark-brown/70"]}>
+      Archivadas
+    </a>
+    <a href="/admin/consultas?type=product" class:list={["px-3 py-1.5 rounded-full", typeFilter === 'product' ? "bg-leather text-cream font-semibold" : "bg-cream text-dark-brown/70"]}>
+      De pieza
+    </a>
+    <a href="/admin/consultas?type=contact" class:list={["px-3 py-1.5 rounded-full", typeFilter === 'contact' ? "bg-leather text-cream font-semibold" : "bg-cream text-dark-brown/70"]}>
+      Generales
+    </a>
+    <a href="/admin/consultas?deleted=true" class:list={["px-3 py-1.5 rounded-full", showDeleted ? "bg-red-700 text-cream font-semibold" : "bg-cream text-dark-brown/70"]}>
+      Eliminadas
+    </a>
+  </div>
+
+  {inquiries.length === 0 ? (
+    <div class="bg-cream p-8 rounded-2xl shadow text-center text-sm text-dark-brown/60">
+      No hay consultas con esos filtros.
+    </div>
+  ) : (
+    <ul id="inq-list" class="space-y-3">
+      {inquiries.map((inq) => (
+        <li class="bg-cream p-5 rounded-2xl shadow" data-id={inq.id} data-status={inq.status} data-deleted={showDeleted ? 'true' : 'false'}>
+          <div class="flex items-start justify-between gap-3 mb-2">
+            <div>
+              <div class="font-semibold text-walnut-deep">
+                {inq.name}
+                <span class="text-xs font-normal text-dark-brown/60 ml-2">
+                  · {inq.type === 'product' ? 'Consulta por pieza' : 'General'}
+                </span>
+              </div>
+              <div class="text-xs text-dark-brown/60">
+                <a href={`mailto:${inq.email}`} class="hover:underline">{inq.email}</a>
+                {inq.phone && <span> · {inq.phone}</span>}
+                <span> · {new Date(inq.createdAt).toLocaleString('es-ES')}</span>
+              </div>
+            </div>
+            <span
+              class:list={[
+                "text-xs font-semibold px-2 py-1 rounded-full",
+                inq.status === 'new' ? "bg-leather text-cream" : "bg-surface-low text-dark-brown/60",
+              ]}
+            >
+              {inq.status}
+            </span>
+          </div>
+          <p class="text-sm text-dark-brown whitespace-pre-wrap mb-3">{inq.message}</p>
+          <div class="flex gap-2">
+            {showDeleted ? (
+              <button data-restore class="text-xs bg-green-800 text-cream px-3 py-1.5 rounded-full">Restaurar</button>
+            ) : (
+              <div class="contents">
+                {inq.status !== 'read' && (
+                  <button data-set="read" class="text-xs bg-leather text-cream px-3 py-1.5 rounded-full">
+                    Marcar leída
+                  </button>
+                )}
+                {inq.status !== 'archived' && (
+                  <button data-set="archived" class="text-xs bg-surface-low text-dark-brown/70 px-3 py-1.5 rounded-full">
+                    Archivar
+                  </button>
+                )}
+                {inq.status === 'archived' && (
+                  <button data-set="new" class="text-xs bg-surface-low text-dark-brown/70 px-3 py-1.5 rounded-full">
+                    Reabrir
+                  </button>
+                )}
+                <button data-delete class="text-xs bg-red-700 text-cream px-3 py-1.5 rounded-full">Eliminar</button>
+              </div>
+            )}
+          </div>
+        </li>
+      ))}
+    </ul>
+  )}
+</AdminShell>
+
+<script>
+  document.querySelectorAll<HTMLLIElement>("#inq-list li").forEach((li) => {
+    const id = li.dataset.id!;
+    li.querySelectorAll<HTMLButtonElement>("[data-set]").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        const status = btn.dataset.set!;
+        const res = await fetch(`/api/admin/inquiries/${id}/status`, {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ status }),
+        });
+        if (res.ok) location.reload();
+      });
+    });
+    li.querySelector<HTMLButtonElement>("[data-delete]")?.addEventListener("click", async () => {
+      if (!confirm("¿Eliminar esta consulta? Se podrá restaurar después.")) return;
+      const res = await fetch(`/api/admin/inquiries/${id}`, { method: "DELETE" });
+      if (res.ok) location.reload();
+      else alert("No se pudo eliminar la consulta.");
+    });
+    li.querySelector<HTMLButtonElement>("[data-restore]")?.addEventListener("click", async () => {
+      const res = await fetch(`/api/admin/inquiries/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ restore: true }),
+      });
+      if (res.ok) location.reload();
+      else alert("No se pudo restaurar la consulta.");
+    });
+  });
+</script>

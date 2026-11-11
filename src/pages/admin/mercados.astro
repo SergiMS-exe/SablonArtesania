@@ -1,0 +1,153 @@
+---
+import { asc } from 'drizzle-orm';
+import AdminShell from '../../layouts/AdminShell.astro';
+import { db, schema } from '../../lib/db/client.ts';
+
+const markets = await db
+  .select()
+  .from(schema.markets)
+  .orderBy(asc(schema.markets.startDate), asc(schema.markets.sortOrder));
+---
+
+<AdminShell title="Mercados">
+  <div class="grid lg:grid-cols-[minmax(280px,0.8fr)_minmax(0,1.7fr)] gap-6">
+    <form id="market-form" class="bg-cream p-6 rounded-2xl shadow space-y-4 h-fit">
+      <h2 class="text-lg font-title font-bold text-walnut-deep">Añadir mercado</h2>
+      <label class="block text-sm font-semibold text-walnut-deep">
+        Lugar
+        <input name="location" required maxlength="255" class="mt-1 w-full px-3 py-2 rounded-xl border border-wood-light bg-surface-low" placeholder="Oviñana" />
+      </label>
+      <div class="grid grid-cols-2 gap-3">
+        <label class="block text-sm font-semibold text-walnut-deep">
+          Desde
+          <input name="startDate" type="date" required class="mt-1 w-full px-3 py-2 rounded-xl border border-wood-light bg-surface-low" />
+        </label>
+        <label class="block text-sm font-semibold text-walnut-deep">
+          Hasta
+          <input name="endDate" type="date" required class="mt-1 w-full px-3 py-2 rounded-xl border border-wood-light bg-surface-low" />
+        </label>
+      </div>
+      <label class="block text-sm font-semibold text-walnut-deep">
+        Horario
+        <input name="schedule" maxlength="255" value="11:00 — 15:00" class="mt-1 w-full px-3 py-2 rounded-xl border border-wood-light bg-surface-low" />
+      </label>
+      <label class="block text-sm font-semibold text-walnut-deep">
+        Enlace de Instagram (opcional)
+        <input name="instagramUrl" type="url" class="mt-1 w-full px-3 py-2 rounded-xl border border-wood-light bg-surface-low" placeholder="https://instagram.com/..." />
+      </label>
+      <label class="flex items-center gap-2 text-sm text-walnut-deep">
+        <input name="active" type="checkbox" checked class="accent-leather" /> Publicar en la web
+      </label>
+      <button class="w-full bg-leather hover:bg-walnut-deep text-cream py-2.5 rounded-full font-semibold transition-colors">Añadir mercado</button>
+      <p id="market-message" role="status" class="text-sm hidden"></p>
+    </form>
+
+    <section class="bg-cream p-6 rounded-2xl shadow">
+      <h2 class="text-lg font-title font-bold text-walnut-deep mb-4">Calendario ({markets.length})</h2>
+      {markets.length === 0 ? (
+        <p class="text-sm text-dark-brown/60">Aún no hay mercados guardados.</p>
+      ) : (
+        <ul id="market-list" class="divide-y divide-wood-light/40">
+          {markets.map((market) => (
+            <li class="py-4 space-y-3" data-id={market.id}>
+              <div class="grid sm:grid-cols-2 xl:grid-cols-3 gap-3">
+                <label class="text-xs font-semibold text-dark-brown/70">Lugar
+                  <input data-field="location" value={market.location} class="mt-1 w-full px-2 py-1.5 rounded-lg border border-wood-light bg-surface-low text-sm" />
+                </label>
+                <label class="text-xs font-semibold text-dark-brown/70">Desde
+                  <input data-field="startDate" type="date" value={market.startDate} class="mt-1 w-full px-2 py-1.5 rounded-lg border border-wood-light bg-surface-low text-sm" />
+                </label>
+                <label class="text-xs font-semibold text-dark-brown/70">Hasta
+                  <input data-field="endDate" type="date" value={market.endDate} class="mt-1 w-full px-2 py-1.5 rounded-lg border border-wood-light bg-surface-low text-sm" />
+                </label>
+                <label class="text-xs font-semibold text-dark-brown/70">Horario
+                  <input data-field="schedule" value={market.schedule} class="mt-1 w-full px-2 py-1.5 rounded-lg border border-wood-light bg-surface-low text-sm" />
+                </label>
+                <label class="text-xs font-semibold text-dark-brown/70">Instagram URL
+                  <input data-field="instagramUrl" type="url" value={market.instagramUrl ?? ''} class="mt-1 w-full px-2 py-1.5 rounded-lg border border-wood-light bg-surface-low text-sm" />
+                </label>
+                <label class="text-xs font-semibold text-dark-brown/70">Orden
+                  <input data-field="sortOrder" type="number" value={market.sortOrder} class="mt-1 w-full px-2 py-1.5 rounded-lg border border-wood-light bg-surface-low text-sm" />
+                </label>
+              </div>
+              <div class="flex items-center justify-between gap-3">
+                <label class="flex items-center gap-2 text-sm text-walnut-deep">
+                  <input data-field="active" type="checkbox" checked={market.active} class="accent-leather" /> Visible en la web
+                </label>
+                <div class="flex gap-3">
+                  <button data-save class="text-sm text-leather hover:underline">Guardar</button>
+                  <button data-delete class="text-sm text-red-700 hover:underline">Eliminar</button>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
+  </div>
+</AdminShell>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('#market-form');
+  const message = document.querySelector<HTMLParagraphElement>('#market-message');
+
+  const showMessage = (text: string, error = false) => {
+    if (!message) return;
+    message.textContent = text;
+    message.className = error ? 'text-sm text-red-700' : 'text-sm text-green-800';
+  };
+
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const formData = new FormData(form);
+    const response = await fetch('/api/admin/markets', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        location: formData.get('location'),
+        startDate: formData.get('startDate'),
+        endDate: formData.get('endDate'),
+        schedule: formData.get('schedule'),
+        instagramUrl: formData.get('instagramUrl') || null,
+        active: formData.has('active'),
+      }),
+    });
+    if (!response.ok) {
+      const result = await response.json().catch(() => ({}));
+      showMessage(`No se pudo guardar (${result.error ?? response.status}).`, true);
+      return;
+    }
+    location.reload();
+  });
+
+  document.querySelectorAll<HTMLLIElement>('#market-list li').forEach((item) => {
+    const id = item.dataset.id;
+    item.querySelector<HTMLButtonElement>('[data-save]')?.addEventListener('click', async () => {
+      const value = (name: string) => item.querySelector<HTMLInputElement>(`[data-field="${name}"]`);
+      const response = await fetch(`/api/admin/markets/${id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          location: value('location')?.value,
+          startDate: value('startDate')?.value,
+          endDate: value('endDate')?.value,
+          schedule: value('schedule')?.value,
+          instagramUrl: value('instagramUrl')?.value || null,
+          sortOrder: Number(value('sortOrder')?.value ?? 0),
+          active: value('active')?.checked ?? false,
+        }),
+      });
+      if (response.ok) location.reload();
+      else {
+        const result = await response.json().catch(() => ({}));
+        alert(`No se pudo guardar (${result.error ?? response.status}).`);
+      }
+    });
+    item.querySelector<HTMLButtonElement>('[data-delete]')?.addEventListener('click', async () => {
+      if (!confirm('¿Eliminar este mercado del calendario?')) return;
+      const response = await fetch(`/api/admin/markets/${id}`, { method: 'DELETE' });
+      if (response.ok) location.reload();
+      else alert(`No se pudo eliminar (${response.status}).`);
+    });
+  });
+</script>
