@@ -3,8 +3,6 @@ import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import Title from "../components/Title.astro";
-
-const contactEndpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? "";
 ---
 
 <html lang="es">
@@ -30,7 +28,7 @@ const contactEndpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? "";
                 <div class="grid md:grid-cols-2 gap-8">
                     <!-- Formulario -->
                     <div class="bg-cream p-8 rounded-2xl shadow">
-                        <form id="contactForm" class="space-y-5" data-endpoint={contactEndpoint}>
+                        <form id="contactForm" class="space-y-5">
                             <div>
                                 <label
                                     for="nombre"
@@ -225,7 +223,6 @@ const contactEndpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? "";
             const form = document.getElementById("contactForm") as HTMLFormElement;
             const formMessage = document.getElementById("formMessage") as HTMLDivElement;
             const submitBtn = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
-            const endpoint = form.dataset.endpoint?.trim();
 
             const showMessage = (text: string, kind: "ok" | "err") => {
                 formMessage.textContent = text;
@@ -240,26 +237,17 @@ const contactEndpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? "";
             form.addEventListener("submit", async (e) => {
                 e.preventDefault();
 
-                if (!endpoint) {
-                    showMessage(
-                        "El formulario aún no está configurado. Escríbenos por Instagram o Facebook mientras tanto.",
-                        "err"
-                    );
-                    return;
-                }
-
                 const payload = Object.fromEntries(new FormData(form).entries());
 
                 submitBtn.disabled = true;
                 submitBtn.textContent = "Enviando…";
 
                 try {
-                    const res = await fetch(endpoint, {
+                    const res = await fetch("/api/public/inquiries", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({
                             ...payload,
-                            origin: "sablon-artesania-web",
                             submittedAt: new Date().toISOString(),
                         }),
                     });

@@ -1,0 +1,156 @@
+---
+import BaseHead from "../../components/BaseHead.astro";
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header.astro";
+import ProductInquiryForm from "../../components/ProductInquiryForm.tsx";
+import { db, schema } from "../../lib/db/client.ts";
+import { and, asc, eq, isNull, ne } from "drizzle-orm";
+
+const slug = Astro.params.slug;
+if (!slug) return Astro.redirect("/productos");
+
+let product: any = null;
+let images: { url: string; altText: string | null }[] = [];
+
+if (db) {
+  const rows = await db
+    .select({
+      id: schema.products.id,
+      slug: schema.products.slug,
+      name: schema.products.name,
+      shortDescription: schema.products.shortDescription,
+      longDescription: schema.products.longDescription,
+      priceCents: schema.products.priceCents,
+      currency: schema.products.currency,
+      status: schema.products.status,
+      artisan: { id: schema.artisans.id, slug: schema.artisans.slug, name: schema.artisans.name },
+      category: { id: schema.categories.id, slug: schema.categories.slug, name: schema.categories.name },
+    })
+    .from(schema.products)
+    .innerJoin(schema.artisans, eq(schema.products.artisanId, schema.artisans.id))
+    .innerJoin(schema.categories, eq(schema.products.categoryId, schema.categories.id))
+    .where(and(
+      eq(schema.products.slug, slug),
+      eq(schema.products.active, true),
+      isNull(schema.products.deletedAt),
+      ne(schema.products.status, 'oculto'),
+      eq(schema.categories.active, true),
+      isNull(schema.categories.deletedAt),
+      eq(schema.artisans.active, true),
+      isNull(schema.artisans.deletedAt),
+    ))
+    .limit(1);
+  product = rows[0] ?? null;
+  if (product) {
+    images = await db
+      .select({ url: schema.productImages.url, altText: schema.productImages.altText })
+      .from(schema.productImages)
+      .where(and(eq(schema.productImages.productId, product.id), isNull(schema.productImages.deletedAt)))
+      .orderBy(asc(schema.productImages.sortOrder), asc(schema.productImages.id));
+  }
+}
+
+if (!product) {
+  return Astro.redirect("/productos");
+}
+---
+
+<html lang="es">
+  <head>
+    <BaseHead title={`${product.name} - El Sablón`} description={product.shortDescription} image={images[0]?.url} />
+  </head>
+  <body class="bg-surface-low">
+    <main>
+      <Header />
+
+      <nav class="max-w-screen-xl mx-auto px-4 md:px-8 pt-8 text-sm text-dark-brown/60">
+        <a href="/productos" class="hover:underline">← Volver al escaparate</a>
+      </nav>
+
+      <section class="max-w-screen-xl mx-auto px-4 md:px-8 py-8 grid lg:grid-cols-[1.2fr_1fr] gap-10">
+        <div>
+          <div class="bg-cream rounded-2xl overflow-hidden shadow aspect-square mb-3">
+            {images[0] ? (
+              <img id="main-image" src={images[0].url} alt={product.name} class="w-full h-full object-cover" />
+            ) : (
+              <div class="w-full h-full flex items-center justify-center text-dark-brown/40">Sin imagen</div>
+            )}
+          </div>
+          {images.length > 1 && (
+            <div class="grid grid-cols-5 gap-2">
+              {images.map((img, idx) => (
+                <button
+                  type="button"
+                  data-thumb
+                  data-src={img.url}
+                  class:list={[
+                    "aspect-square overflow-hidden rounded-xl border-2 bg-cream",
+                    idx === 0 ? "border-leather" : "border-transparent hover:border-leather/40",
+                  ]}
+                >
+                  <img src={img.url} alt={img.altText ?? product.name} class="w-full h-full object-cover" />
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <div>
+          <p class="text-terra-cotta text-xs font-semibold tracking-wider uppercase mb-2">
+            {product.category.name}
+          </p>
+          <h1 class="text-4xl font-title font-bold text-walnut-deep mb-2">{product.name}</h1>
+          <p class="text-sm text-dark-brown/60 mb-4">de {product.artisan.name}</p>
+
+          {product.priceCents != null && (
+            <p class="text-2xl font-bold text-leather mb-4">
+              {(product.priceCents / 100).toFixed(2)} {product.currency}
+              <span class="text-xs text-dark-brown/50 font-normal block">Precio orientativo</span>
+            </p>
+          )}
+
+          <div class="h-px bg-leather/15 mb-4" />
+
+          <p class="text-sm text-dark-brown/70 leading-relaxed mb-3">{product.shortDescription}</p>
+          <p class="text-sm text-dark-brown/70 leading-relaxed whitespace-pre-line mb-6">
+            {product.longDescription}
+          </p>
+
+          {product.status === 'vendido' && (
+            <div class="bg-red-100 text-red-800 p-4 rounded-2xl text-sm font-semibold mb-4">
+              Esta pieza ya está vendida. Puedes consultarnos por otras similares.
+            </div>
+          )}
+
+          <div class="bg-cream p-6 rounded-2xl shadow">
+            {product.status === 'disponible' ? (
+              <ProductInquiryForm
+                client:load
+                productName={product.name}
+              />
+            ) : (
+              <p class="text-sm text-dark-brown/70 text-center">
+                Si te interesa una pieza similar, escríbenos por el <a href="/contacto" class="text-leather underline">formulario de contacto</a>.
+              </p>
+            )}
+          </div>
+        </div>
+      </section>
+
+      <Footer />
+    </main>
+  </body>
+</html>
+
+<script>
+  const mainImg = document.getElementById('main-image') as HTMLImageElement | null;
+  document.querySelectorAll<HTMLButtonElement>('[data-thumb]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const src = btn.dataset.src;
+      if (!mainImg || !src) return;
+      mainImg.src = src;
+      document.querySelectorAll('[data-thumb]').forEach((b) => b.classList.replace('border-leather', 'border-transparent'));
+      btn.classList.replace('border-transparent', 'border-leather');
+    });
+  });
+</script>

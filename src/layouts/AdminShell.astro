@@ -1,0 +1,67 @@
+---
+import "../styles/global.css";
+import { SITE_TITLE } from "../consts";
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Panel de administración" } = Astro.props;
+const user = Astro.locals.user;
+const pathname = Astro.url.pathname;
+
+const navItems = [
+  { href: "/admin", label: "Dashboard", match: (p: string) => p === "/admin" },
+  { href: "/admin/productos", label: "Productos", match: (p: string) => p.startsWith("/admin/productos") },
+  { href: "/admin/artesanos", label: "Artesanos", match: (p: string) => p.startsWith("/admin/artesanos") },
+  { href: "/admin/categorias", label: "Categorías", match: (p: string) => p.startsWith("/admin/categorias") },
+  { href: "/admin/mercados", label: "Mercados", match: (p: string) => p.startsWith("/admin/mercados") },
+  { href: "/admin/consultas", label: "Consultas", match: (p: string) => p.startsWith("/admin/consultas") },
+];
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title} · Admin · {SITE_TITLE}</title>
+    <meta name="description" content={description} />
+  </head>
+  <body class="bg-surface-low min-h-screen">
+    <header class="bg-walnut-deep text-cream">
+      <div class="max-w-screen-xl mx-auto px-4 md:px-8 py-4 flex items-center justify-between">
+        <a href="/admin" class="font-title font-bold text-lg">Sablón · Admin</a>
+        <div class="flex items-center gap-4 text-sm">
+          <a href="/" class="opacity-80 hover:opacity-100">Ver web</a>
+          {user && <span class="opacity-70 hidden sm:inline">{user.email}</span>}
+          <form method="POST" action="/api/auth/logout" class="inline">
+            <button class="bg-leather hover:bg-cream hover:text-walnut-deep text-cream px-3 py-1.5 rounded-full text-xs font-semibold transition-colors">
+              Salir
+            </button>
+          </form>
+        </div>
+      </div>
+      <nav class="max-w-screen-xl mx-auto px-4 md:px-8 pb-3 flex flex-wrap gap-2">
+        {navItems.map((item) => (
+          <a
+            href={item.href}
+            class:list={[
+              "px-3 py-1.5 rounded-full text-sm transition-colors",
+              item.match(pathname)
+                ? "bg-cream text-walnut-deep font-semibold"
+                : "text-cream/80 hover:bg-cream/10",
+            ]}
+          >
+            {item.label}
+          </a>
+        ))}
+      </nav>
+    </header>
+    <main class="max-w-screen-xl mx-auto px-4 md:px-8 py-8">
+      <h1 class="text-2xl font-title font-bold text-walnut-deep mb-6">{title}</h1>
+      <slot />
+    </main>
+  </body>
+</html>

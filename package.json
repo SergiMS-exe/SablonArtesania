@@ -4,26 +4,49 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && esbuild scripts/entrypoint.ts --bundle --platform=node --target=node22 --format=esm --packages=external --outfile=dist/entrypoint.mjs",
     "preview": "astro preview",
-    "astro": "astro"
+    "start": "node ./dist/entrypoint.mjs && node ./dist/server/entry.mjs",
+    "start:server": "node ./dist/server/entry.mjs",
+    "astro": "astro",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "tsx scripts/migrate.ts",
+    "db:seed": "tsx scripts/seed.ts",
+    "db:bootstrap": "tsx scripts/bootstrap-admin.ts"
   },
   "dependencies": {
-    "@astrojs/mdx": "^4.2.6",
-    "@astrojs/react": "^4.3.0",
+    "@astrojs/mdx": "^8.1.4",
+    "@astrojs/node": "^11.1.12",
+    "@astrojs/react": "^7.1.7",
     "@astrojs/rss": "^4.0.11",
     "@astrojs/sitemap": "^3.3.1",
-    "astro": "^5.7.10",
+    "@libsql/client": "^0.18.0",
+    "astro": "^7.4.10",
+    "bcryptjs": "^3.0.3",
+    "dotenv": "^18.0.4",
+    "drizzle-orm": "^0.45.3",
+    "iron-session": "^8.0.4",
     "lucide-react": "^0.552.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.5",
+    "@types/bcryptjs": "^2.4.6",
     "@types/react": "^19.1.5",
     "@types/react-dom": "^19.1.5",
     "autoprefixer": "^10.4.21",
+    "drizzle-kit": "^0.31.11",
     "postcss": "^8.5.3",
-    "tailwindcss": "^4.1.5"
+    "tailwindcss": "^4.1.5",
+    "tsx": "^4.23.15"
+  },
+  "allowScripts": {
+    "esbuild@0.18.20": true,
+    "esbuild@0.25.4": true,
+    "esbuild@0.28.2": true
+  },
+  "engines": {
+    "node": ">=22.23.4"
   }
 }

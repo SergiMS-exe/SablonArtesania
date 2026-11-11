@@ -1,0 +1,34 @@
+---
+import AdminShell from "../../../layouts/AdminShell.astro";
+import ProductForm from "../../../components/admin/ProductForm.tsx";
+import { db, schema } from "../../../lib/db/client.ts";
+import { and, asc, eq, isNull } from "drizzle-orm";
+
+if (!db) return Astro.redirect("/admin/login?error=db_unavailable");
+
+const artisans = await db
+  .select({ id: schema.artisans.id, name: schema.artisans.name })
+  .from(schema.artisans)
+  .where(and(eq(schema.artisans.active, true), isNull(schema.artisans.deletedAt)))
+  .orderBy(asc(schema.artisans.sortOrder), asc(schema.artisans.id));
+
+const categories = await db
+  .select({ id: schema.categories.id, name: schema.categories.name })
+  .from(schema.categories)
+  .where(and(eq(schema.categories.active, true), isNull(schema.categories.deletedAt)))
+  .orderBy(asc(schema.categories.sortOrder), asc(schema.categories.id));
+---
+
+<AdminShell title="Nueva pieza">
+  {artisans.length === 0 || categories.length === 0 ? (
+    <div class="bg-yellow-100 text-yellow-900 p-4 rounded-2xl text-sm">
+      Antes de crear una pieza necesitas al menos un <a href="/admin/artesanos" class="underline">artesano</a> y una <a href="/admin/categorias" class="underline">categoría</a>.
+    </div>
+  ) : (
+    <ProductForm
+      client:load
+      artisans={artisans}
+      categories={categories}
+    />
+  )}
+</AdminShell>

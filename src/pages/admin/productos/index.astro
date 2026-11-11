@@ -1,0 +1,79 @@
+---
+import AdminShell from "../../../layouts/AdminShell.astro";
+import { db, schema } from "../../../lib/db/client.ts";
+import { asc, eq } from "drizzle-orm";
+
+if (!db) return Astro.redirect("/admin/login?error=db_unavailable");
+
+const products = await db
+  .select({
+    id: schema.products.id,
+    slug: schema.products.slug,
+    name: schema.products.name,
+    status: schema.products.status,
+    active: schema.products.active,
+    deletedAt: schema.products.deletedAt,
+    priceCents: schema.products.priceCents,
+    currency: schema.products.currency,
+    artisan: schema.artisans.name,
+    category: schema.categories.name,
+    updatedAt: schema.products.updatedAt,
+  })
+  .from(schema.products)
+  .innerJoin(schema.artisans, eq(schema.products.artisanId, schema.artisans.id))
+  .innerJoin(schema.categories, eq(schema.products.categoryId, schema.categories.id))
+  .orderBy(asc(schema.products.sortOrder), asc(schema.products.id));
+---
+
+<AdminShell title="Productos">
+  <div class="flex items-center justify-between mb-4">
+    <p class="text-sm text-dark-brown/70">{products.length} pieza{products.length === 1 ? "" : "s"}.</p>
+    <a href="/admin/productos/nuevo" class="bg-leather hover:bg-walnut-deep text-cream px-4 py-2 rounded-full text-sm font-semibold transition-colors">
+      + Nueva pieza
+    </a>
+  </div>
+
+  <div class="bg-cream rounded-2xl shadow overflow-hidden">
+    {products.length === 0 ? (
+      <p class="p-6 text-sm text-dark-brown/60 text-center">Aún no hay piezas.</p>
+    ) : (
+      <table class="w-full text-sm">
+        <thead class="bg-surface-low text-dark-brown/70">
+          <tr>
+            <th class="text-left px-4 py-3 font-semibold">Pieza</th>
+            <th class="text-left px-4 py-3 font-semibold hidden md:table-cell">Artesano</th>
+            <th class="text-left px-4 py-3 font-semibold hidden md:table-cell">Categoría</th>
+            <th class="text-left px-4 py-3 font-semibold">Estado</th>
+            <th class="text-right px-4 py-3 font-semibold"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {products.map((p) => (
+            <tr class="border-t border-wood-light/40">
+              <td class="px-4 py-3">
+                <div class="font-semibold text-walnut-deep">{p.name}</div>
+                {p.deletedAt && <span class="text-[10px] bg-red-100 text-red-800 px-2 py-0.5 rounded-full">Eliminado</span>}
+                {p.priceCents != null && (
+                  <div class="text-xs text-dark-brown/60">
+                    {(p.priceCents / 100).toFixed(2)} {p.currency}
+                  </div>
+                )}
+              </td>
+              <td class="px-4 py-3 hidden md:table-cell">{p.artisan}</td>
+              <td class="px-4 py-3 hidden md:table-cell">{p.category}</td>
+              <td class="px-4 py-3">
+                {p.status === "disponible" && <span class="bg-green-100 text-green-800 text-xs font-semibold px-2 py-1 rounded-full">Disponible</span>}
+                {p.status === "vendido" && <span class="bg-red-100 text-red-800 text-xs font-semibold px-2 py-1 rounded-full">Vendido</span>}
+                {p.status === "oculto" && <span class="bg-gray-200 text-gray-700 text-xs font-semibold px-2 py-1 rounded-full">Oculto</span>}
+                {!p.active && !p.deletedAt && <span class="ml-1 bg-amber-100 text-amber-800 text-xs font-semibold px-2 py-1 rounded-full">Inactivo</span>}
+              </td>
+              <td class="px-4 py-3 text-right">
+                <a href={`/admin/productos/${p.id}`} class="text-leather hover:underline text-sm">Editar →</a>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    )}
+  </div>
+</AdminShell>

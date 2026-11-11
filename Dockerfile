@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1.7
 
-FROM node:22-alpine AS builder
+FROM node:26-alpine AS build
 WORKDIR /app
 
 COPY package.json package-lock.json ./
@@ -9,26 +9,32 @@ RUN --mount=type=cache,target=/root/.npm \
 
 COPY . .
 
-ARG PUBLIC_CONTACT_ENDPOINT
-ENV PUBLIC_CONTACT_ENDPOINT=$PUBLIC_CONTACT_ENDPOINT
+ARG PUBLIC_SITE_URL
+ENV PUBLIC_SITE_URL=$PUBLIC_SITE_URL
 
 RUN npm run build
+RUN npm prune --omit=dev --no-audit --no-fund
 
-FROM nginx:1.27-alpine AS runner
+# --- runtime ---
+FROM node:26-alpine AS runner
+WORKDIR /app
+RUN apk add --no-cache libstdc++
+ENV NODE_ENV=production \
+    HOST=0.0.0.0 \
+    PORT=4321 \
+    MEDIA_DIR=/app/media \
+    SQLITE_DB_PATH=/app/data/sablon.sqlite
 
-RUN printf '%s\n' \
-    'gzip on;' \
-    'gzip_comp_level 6;' \
-    'gzip_min_length 1024;' \
-    'gzip_proxied any;' \
-    'gzip_vary on;' \
-    'gzip_types text/plain text/css text/xml application/json application/javascript application/xml+rss application/atom+xml image/svg+xml;' \
-    > /etc/nginx/conf.d/gzip.conf
+COPY --from=build /app/dist ./dist
+COPY --from=build /app/node_modules ./node_modules
+COPY package.json ./
+COPY drizzle ./drizzle
 
-COPY --from=builder /app/dist /usr/share/nginx/html
+RUN mkdir -p /app/media /app/data
 
-EXPOSE 80
-HEALTHCHECK --interval=30s --timeout=3s --start-period=5s \
-    CMD wget -qO- http://127.0.0.1/ >/dev/null 2>&1 || exit 1
+EXPOSE 4321
 
-CMD ["nginx", "-g", "daemon off;"]
+HEALTHCHECK --interval=30s --timeout=3s --start-period=30s \
+    CMD wget -qO- http://127.0.0.1:4321/ >/dev/null 2>&1 || exit 1
+
+CMD ["sh", "-c", "node ./dist/entrypoint.mjs && node ./dist/server/entry.mjs"]
